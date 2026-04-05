@@ -493,28 +493,9 @@
       <li><a href="#about">About</a></li>
       <li><a href="#contact">Contact</a></li>
     </ul>
-    <div style="display:flex; align-items:center; gap:6px; min-width:80px; justify-content:flex-end;">
-      <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="#78B464" stroke-width="2" style="flex-shrink:0;"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg>
-      <span id="visit-count" style="font-size:13px; color:#78B464; font-weight:500; letter-spacing:0.02em; transition: opacity 0.4s; opacity:0.4;">...</span>
-    </div>
+
   </div>
 </nav>
-
-<script>
-  fetch('https://api.countapi.xyz/hit/venky2099.github.io/visits')
-    .then(r => r.json())
-    .then(d => {
-      const el = document.getElementById('visit-count');
-      if (el && d.value) {
-        el.textContent = d.value.toLocaleString() + ' visits';
-        el.style.opacity = '1';
-      }
-    })
-    .catch(() => {
-      const el = document.getElementById('visit-count');
-      if (el) el.style.display = 'none';
-    });
-</script>
 
 <!-- HERO -->
 <section id="hero">
