@@ -493,10 +493,7 @@
       <li><a href="#about">About</a></li>
       <li><a href="#contact">Contact</a></li>
     </ul>
-    <div style="display:flex; align-items:center; gap:6px;">
-      <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="#78B464" stroke-width="2" style="flex-shrink:0;"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg>
-      <span id="visit-count" style="font-size:13px; color:#78B464; font-weight:500; letter-spacing:0.02em;">—</span>
-    </div>
+
   </div>
 </nav>
 
@@ -804,24 +801,9 @@
 
 <!-- FOOTER -->
 <footer>
-  <div style="display:flex; align-items:center; justify-content:center; gap:12px; margin-bottom:10px;">
-    <img src="Nexus_Learning_Labs_2.png" alt="NLL" style="height:28px; opacity:0.5; filter:brightness(2);">
-  </div>
   <p>© 2026 Venkatesh Swaminathan · Nexus Learning Labs, Bengaluru · ORCID: 0000-0002-3315-7907</p>
   <p style="margin-top:6px;">Built with intention. Every paper permanent on Zenodo.</p>
 </footer>
 
-<script>
-fetch('https://api.countapi.xyz/hit/venky2099.github.io/visits')
-  .then(r => r.json())
-  .then(d => {
-    const el = document.getElementById('visit-count');
-    if (el && d.value) el.textContent = d.value.toLocaleString() + ' visits';
-  })
-  .catch(() => {
-    const el = document.getElementById('visit-count');
-    if (el) el.textContent = '';
-  });
-</script>
 </body>
 </html>
