@@ -324,6 +324,63 @@
     margin-bottom: 8px;
   }
   .paper-badge.series { background: #DCF0DC; color: var(--gold); }
+
+  /* IMPACT STRIP */
+  .impact-strip {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0;
+    margin-top: 2rem;
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    overflow: hidden;
+    background: var(--surface);
+  }
+  .impact-stat {
+    flex: 1;
+    min-width: 120px;
+    padding: 16px 20px;
+    border-right: 1px solid var(--border);
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+  }
+  .impact-stat:last-child { border-right: none; }
+  .impact-num {
+    font-family: 'DM Serif Display', serif;
+    font-size: 1.6rem;
+    color: var(--ink);
+    line-height: 1;
+  }
+  .impact-label {
+    font-size: 11px;
+    font-weight: 500;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--ink-faint);
+  }
+
+  /* PAPER DOWNLOADS BADGE */
+  .paper-stats {
+    display: flex;
+    gap: 12px;
+    margin-top: auto;
+    padding-top: 12px;
+    border-top: 1px solid var(--border);
+    font-size: 12px;
+    color: var(--ink-faint);
+    align-items: center;
+  }
+  .paper-stat-item {
+    display: flex;
+    align-items: center;
+    gap: 4px;
+  }
+  .paper-stat-item svg {
+    width: 12px; height: 12px;
+    flex-shrink: 0;
+  }
+
   .paper-result {
     font-size: 13px;
     color: var(--ink-muted);
@@ -515,6 +572,24 @@
         <a href="#maya" class="btn-outline">What is Maya?</a>
         <a href="#contact" class="btn-outline">Get in Touch</a>
       </div>
+      <div class="impact-strip">
+        <div class="impact-stat">
+          <span class="impact-num">8</span>
+          <span class="impact-label">Papers Published</span>
+        </div>
+        <div class="impact-stat">
+          <span class="impact-num">355</span>
+          <span class="impact-label">Total Downloads</span>
+        </div>
+        <div class="impact-stat">
+          <span class="impact-num">410</span>
+          <span class="impact-label">Total Views</span>
+        </div>
+        <div class="impact-stat">
+          <span class="impact-num">12</span>
+          <span class="impact-label">Citations</span>
+        </div>
+      </div>
     </div>
     <div>
       <div class="maya-card">
@@ -599,7 +674,11 @@
         <h3 class="paper-title">Nociceptive Metaplasticity and Graceful Decay</h3>
         <p class="paper-vedic">Bhaya · Fear</p>
         <p class="paper-result">66.6% learning velocity elevation under pain signal. Foundation of the series.</p>
-        <div class="paper-meta">DOI: 10.5281/zenodo.19151563 · March 2026</div>
+        <div class="paper-stats">
+          <span class="paper-stat-item"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg>126</span>
+          <span class="paper-stat-item"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4M7 10l5 5 5-5M12 15V3"/></svg>106</span>
+          <span style="margin-left:auto; font-size:11px; color: var(--ink-faint);">DOI: 10.5281/zenodo.19151563</span>
+        </div>
       </a>
 
       <a href="https://doi.org/10.5281/zenodo.19160123" target="_blank" class="paper-card">
@@ -607,7 +686,11 @@
         <h3 class="paper-title">Maya-OS: Affective SNN as OS Arbitration Layer</h3>
         <p class="paper-vedic">Affective State as Priority Signal</p>
         <p class="paper-result">First framing of affective SNN as conversational operating system arbitration.</p>
-        <div class="paper-meta">DOI: 10.5281/zenodo.19160123 · March 2026</div>
+        <div class="paper-stats">
+          <span class="paper-stat-item"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg>102</span>
+          <span class="paper-stat-item"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4M7 10l5 5 5-5M12 15V3"/></svg>89</span>
+          <span style="margin-left:auto; font-size:11px; color: var(--ink-faint);">DOI: 10.5281/zenodo.19160123</span>
+        </div>
       </a>
 
       <a href="https://doi.org/10.5281/zenodo.19201769" target="_blank" class="paper-card">
@@ -616,7 +699,11 @@
         <h3 class="paper-title">Maya-CL: Task-Incremental Continual Learning</h3>
         <p class="paper-vedic">Bhaya + Vairagya + Shraddha + Spanda</p>
         <p class="paper-result">62.38% average accuracy, TIL on Split-CIFAR-10. Series benchmark established.</p>
-        <div class="paper-meta">DOI: 10.5281/zenodo.19201769 · March 2026</div>
+        <div class="paper-stats">
+          <span class="paper-stat-item"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg>69</span>
+          <span class="paper-stat-item"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4M7 10l5 5 5-5M12 15V3"/></svg>61</span>
+          <span style="margin-left:auto; font-size:11px; color: var(--ink-faint);">DOI: 10.5281/zenodo.19201769</span>
+        </div>
       </a>
 
       <a href="https://doi.org/10.5281/zenodo.19228975" target="_blank" class="paper-card">
@@ -624,7 +711,11 @@
         <h3 class="paper-title">Maya-Smriti: Introducing Buddhi</h3>
         <p class="paper-vedic">Buddhi · Wisdom</p>
         <p class="paper-result">AA 31.84% CIL. Buddhi S-curve determinism first observed.</p>
-        <div class="paper-meta">DOI: 10.5281/zenodo.19228975 · March 2026</div>
+        <div class="paper-stats">
+          <span class="paper-stat-item"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg>52</span>
+          <span class="paper-stat-item"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4M7 10l5 5 5-5M12 15V3"/></svg>46</span>
+          <span style="margin-left:auto; font-size:11px; color: var(--ink-faint);">DOI: 10.5281/zenodo.19228975</span>
+        </div>
       </a>
 
       <a href="https://doi.org/10.5281/zenodo.19279002" target="_blank" class="paper-card">
@@ -632,7 +723,11 @@
         <h3 class="paper-title">Maya-Viveka: Discrimination and Identity</h3>
         <p class="paper-vedic">Viveka · Ahamkara</p>
         <p class="paper-result">AA 16.03%. Orthogonal prototype collapse finding — a novel failure mode.</p>
-        <div class="paper-meta">DOI: 10.5281/zenodo.19279002 · April 2026</div>
+        <div class="paper-stats">
+          <span class="paper-stat-item"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg>30</span>
+          <span class="paper-stat-item"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4M7 10l5 5 5-5M12 15V3"/></svg>25</span>
+          <span style="margin-left:auto; font-size:11px; color: var(--ink-faint);">DOI: 10.5281/zenodo.19279002</span>
+        </div>
       </a>
 
       <a href="https://doi.org/10.5281/zenodo.19337041" target="_blank" class="paper-card">
@@ -640,7 +735,11 @@
         <h3 class="paper-title">Maya-Chitta: Retrograde Gradient Mechanism</h3>
         <p class="paper-vedic">Chitta · Samskara · Moha</p>
         <p class="paper-result">AA 14.42%. Emotional memory retroactively reshapes stored impressions.</p>
-        <div class="paper-meta">DOI: 10.5281/zenodo.19337041 · April 2026</div>
+        <div class="paper-stats">
+          <span class="paper-stat-item"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg>16</span>
+          <span class="paper-stat-item"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4M7 10l5 5 5-5M12 15V3"/></svg>9</span>
+          <span style="margin-left:auto; font-size:11px; color: var(--ink-faint);">DOI: 10.5281/zenodo.19337041</span>
+        </div>
       </a>
 
       <a href="https://doi.org/10.5281/zenodo.19363006" target="_blank" class="paper-card">
@@ -648,7 +747,11 @@
         <h3 class="paper-title">Maya-Manas: Oscillatory Thalamo-Cortical Gating</h3>
         <p class="paper-vedic">Manas · O-LIF Mechanism</p>
         <p class="paper-result">AA 15.19%, BWT −50.91%. Rhythmic attention gating introduced.</p>
-        <div class="paper-meta">DOI: 10.5281/zenodo.19363006 · April 2026</div>
+        <div class="paper-stats">
+          <span class="paper-stat-item"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg>5</span>
+          <span class="paper-stat-item"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4M7 10l5 5 5-5M12 15V3"/></svg>3</span>
+          <span style="margin-left:auto; font-size:11px; color: var(--ink-faint);">DOI: 10.5281/zenodo.19363006</span>
+        </div>
       </a>
 
       <a href="https://doi.org/10.5281/zenodo.19397010" target="_blank" class="paper-card">
@@ -657,7 +760,11 @@
         <h3 class="paper-title">Maya-Śūnyatā: Karma-Weighted Synaptic Pruning</h3>
         <p class="paper-vedic">Karma · Śūnyatā</p>
         <p class="paper-result">AA 14.42%. 7-condition ablation. Vairagya-gated Karma = first cross-dimensional affective interaction.</p>
-        <div class="paper-meta">DOI: 10.5281/zenodo.19397010 · April 2026</div>
+        <div class="paper-stats">
+          <span class="paper-stat-item"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg>5</span>
+          <span class="paper-stat-item"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4M7 10l5 5 5-5M12 15V3"/></svg>3</span>
+          <span style="margin-left:auto; font-size:11px; color: var(--ink-faint);">DOI: 10.5281/zenodo.19397010</span>
+        </div>
       </a>
 
       <div class="paper-card" style="border-style: dashed; opacity: 0.7; cursor: default;">
@@ -704,7 +811,7 @@
         <h2 class="section-title" style="margin-bottom:1.5rem;">Researcher. Builder. Founder.</h2>
         <p>Before research, I spent a decade building AI-powered learning systems at scale. At <strong>Accenture</strong>, I led enterprise L&D modernisation — deploying GPT-4 + LangChain pipelines that cut content production time by 30%, and engineering xAPI → Power BI dashboards used by VP-level stakeholders. At <strong>Myntra</strong>, I managed a team of 8 designers and drove a gamified onboarding system that lifted agent NPS from 64 to 78. At <strong>JB Poindexter</strong>, I architected a domain-specific LangChain chatbot for warehouse SOPs that improved first-response accuracy by 28%. These were not academic prototypes — they ran in production, at scale, across global teams. That decade of watching real humans struggle to retain, transfer, and apply knowledge is exactly what drove me to the catastrophic forgetting problem — and to Maya.</p>
         <p>I founded <strong>Nexus Learning Labs</strong> as the institutional home for independent research that does not fit neatly into any single academic department. The Maya series is its flagship output: original, falsifiable, peer-reviewable work produced entirely outside a traditional lab, on a consumer GPU, in Bengaluru.</p>
-        <p>I am pursuing an M.Sc. in Data Science and Artificial Intelligence at <strong>BITS Pilani</strong>, expected December 2027. I am actively seeking research roles and collaborations at labs working on neuromorphic systems, continual learning, and embodied AI.</p>
+        <p>I am completing an M.Sc. in Data Science and Artificial Intelligence at <strong>BITS Pilani</strong> (expected December 2027), and currently building Paper 9 — the full Antahkarana instantiated in a physical robot. The work is ongoing. The next stage is embodied hardware and conference-grade peer review. If your lab works on neuromorphic systems, continual learning, or embodied AI, I am interested in talking.</p>
         <div class="skills-list">
           <span class="skill-tag">Spiking Neural Networks</span>
           <span class="skill-tag">Continual Learning</span>
@@ -755,14 +862,14 @@
     <div class="contact-grid">
       <div>
         <p class="section-label">Get in Touch</p>
-        <h2 class="section-title">Open to research roles &amp; collaboration</h2>
+        <h2 class="section-title">Let's build something that matters</h2>
         <p class="contact-desc">
-          I am actively seeking research positions at labs working on neuromorphic systems, continual learning, embodied AI, and consciousness. I am also open to research collaborations and co-authorship on work that intersects these areas.
+          The Maya series is open, reproducible, and built for collaboration. If your lab works on neuromorphic systems, continual learning, embodied AI, or consciousness research — and you see value in what's been built here — I want to hear from you.
         </p>
         <div class="contact-links">
-          <a href="mailto:venkateshswaminathaniyer@gmail.com" class="contact-link">
+          <a href="/cdn-cgi/l/email-protection#a2d4c7ccc9c3d6c7d1cad1d5c3cfcbccc3d6cac3cccbdbc7d0e2c5cfc3cbce8cc1cdcf" class="contact-link">
             <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
-            venkateshswaminathaniyer@gmail.com
+            <span class="__cf_email__" data-cfemail="275142494c465342544f5450464a4e4946534f46494e5e425567404a464e4b0944484a">[email&#160;protected]</span>
           </a>
           <a href="https://linkedin.com/in/vensimlee" target="_blank" class="contact-link">
             <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M16 8a6 6 0 016 6v7h-4v-7a2 2 0 00-2-2 2 2 0 00-2 2v7h-4v-7a6 6 0 016-6zM2 9h4v12H2z"/><circle cx="4" cy="4" r="2"/></svg>
@@ -805,6 +912,4 @@
   <p style="margin-top:6px;">Built with intention. Every paper permanent on Zenodo.</p>
 </footer>
 
-<!-- Cloudflare Web Analytics --><script defer src='https://static.cloudflareinsights.com/beacon.min.js' data-cf-beacon='{"token": "b8ea2116f48b44b8bc4669cf586c7822"}'></script><!-- End Cloudflare Web Analytics -->
-</body>
-</html>
+<!-- Cloudflare Web Analytics --><script data-cfasync="false" src=
