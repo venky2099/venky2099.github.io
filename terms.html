@@ -1,0 +1,555 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Terms of Use | Nexus Learning Labs</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --cream: #F4F8F4;
+    --ink: #282828;
+    --ink-muted: #4A5A5A;
+    --ink-faint: #8A9E9E;
+    --gold: #3C7850;
+    --gold-light: #DCF0DC;
+    --teal: #3C5050;
+    --teal-light: #D0E4E4;
+    --nll-green: #78B464;
+    --nll-dark: #3C5050;
+    --surface: #FFFFFF;
+    --border: #D8E8D8;
+    --border-strong: #B0C8B0;
+    --max: 860px;
+    --radius: 12px;
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  html { scroll-behavior: smooth; }
+
+  body {
+    font-family: 'DM Sans', sans-serif;
+    font-size: 16px;
+    line-height: 1.8;
+    color: var(--ink);
+    background: var(--cream);
+  }
+
+  /* NAV */
+  nav {
+    position: sticky; top: 0; z-index: 100;
+    background: rgba(244,248,244,0.92);
+    backdrop-filter: blur(8px);
+    border-bottom: 1px solid var(--border);
+    padding: 0 2rem;
+  }
+  .nav-inner {
+    max-width: 1100px;
+    margin: 0 auto;
+    height: 60px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+  .nav-brand {
+    font-family: 'DM Serif Display', serif;
+    font-size: 1.1rem;
+    color: var(--ink);
+    text-decoration: none;
+  }
+  .nav-brand span { color: var(--gold); }
+  .back-link {
+    font-size: 13px;
+    color: var(--ink-muted);
+    text-decoration: none;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    transition: color 0.2s;
+  }
+  .back-link:hover { color: var(--gold); }
+
+  /* HERO */
+  .hero {
+    background: var(--nll-dark);
+    color: #fff;
+    padding: 64px 2rem 48px;
+    text-align: center;
+  }
+  .hero-eyebrow {
+    font-size: 11px;
+    font-weight: 500;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--nll-green);
+    margin-bottom: 16px;
+  }
+  .hero h1 {
+    font-family: 'DM Serif Display', serif;
+    font-size: clamp(2rem, 4vw, 2.8rem);
+    font-weight: 400;
+    line-height: 1.2;
+    margin-bottom: 16px;
+  }
+  .hero-sub {
+    font-size: 15px;
+    color: rgba(255,255,255,0.6);
+    max-width: 540px;
+    margin: 0 auto;
+  }
+  .hero-meta {
+    margin-top: 24px;
+    display: flex;
+    justify-content: center;
+    gap: 24px;
+    flex-wrap: wrap;
+    font-size: 12px;
+    color: rgba(255,255,255,0.45);
+    font-family: 'DM Serif Display', serif;
+    font-style: italic;
+  }
+
+  /* MAIN CONTENT */
+  main {
+    max-width: var(--max);
+    margin: 0 auto;
+    padding: 56px 2rem 80px;
+  }
+
+  /* SECTION BLOCKS */
+  .section {
+    margin-bottom: 48px;
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    overflow: hidden;
+  }
+  .section-header {
+    background: var(--gold-light);
+    border-bottom: 1px solid var(--border);
+    padding: 16px 28px;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+  }
+  .section-num {
+    font-family: 'DM Serif Display', serif;
+    font-size: 1.1rem;
+    color: var(--gold);
+    min-width: 28px;
+  }
+  .section-title {
+    font-family: 'DM Serif Display', serif;
+    font-size: 1.1rem;
+    color: var(--teal);
+    font-weight: 400;
+  }
+  .section-body {
+    padding: 24px 28px;
+  }
+  .section-body p {
+    color: var(--ink-muted);
+    font-size: 15px;
+    margin-bottom: 14px;
+  }
+  .section-body p:last-child { margin-bottom: 0; }
+  .section-body ul {
+    list-style: none;
+    margin: 12px 0;
+  }
+  .section-body ul li {
+    font-size: 15px;
+    color: var(--ink-muted);
+    padding: 6px 0 6px 20px;
+    position: relative;
+    border-bottom: 1px solid var(--gold-light);
+  }
+  .section-body ul li:last-child { border-bottom: none; }
+  .section-body ul li::before {
+    content: "—";
+    position: absolute;
+    left: 0;
+    color: var(--nll-green);
+    font-size: 12px;
+  }
+
+  /* PERMITTED / PROHIBITED BOXES */
+  .rule-box {
+    border-radius: 8px;
+    padding: 16px 20px;
+    margin: 14px 0;
+  }
+  .rule-box.permitted {
+    background: #F0FAF0;
+    border: 1px solid #B8DFB8;
+  }
+  .rule-box.prohibited {
+    background: #FDF6F0;
+    border: 1px solid #E8C8A8;
+  }
+  .rule-box-label {
+    font-size: 10px;
+    font-weight: 500;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    margin-bottom: 10px;
+  }
+  .rule-box.permitted .rule-box-label { color: var(--gold); }
+  .rule-box.prohibited .rule-box-label { color: #B06020; }
+  .rule-box ul { margin: 0; }
+  .rule-box ul li { border-bottom: none; font-size: 14px; }
+  .rule-box.prohibited ul li::before { color: #C07030; }
+
+  /* HIGHLIGHT CALLOUT */
+  .callout {
+    background: var(--teal-light);
+    border: 1px solid var(--border-strong);
+    border-radius: 8px;
+    padding: 18px 22px;
+    margin: 16px 0;
+    font-size: 14px;
+    color: var(--teal);
+    line-height: 1.65;
+  }
+  .callout strong { color: var(--nll-dark); }
+
+  /* PROVENANCE STACK */
+  .prov-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 12px;
+    margin-top: 16px;
+  }
+  .prov-item {
+    background: var(--cream);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 14px 16px;
+  }
+  .prov-item-label {
+    font-size: 10px;
+    font-weight: 500;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--ink-faint);
+    margin-bottom: 4px;
+  }
+  .prov-item-val {
+    font-size: 13px;
+    color: var(--ink);
+    font-family: 'DM Serif Display', serif;
+  }
+
+  /* CONTACT BLOCK */
+  .contact-block {
+    background: var(--nll-dark);
+    border-radius: var(--radius);
+    padding: 32px 28px;
+    text-align: center;
+    margin-top: 48px;
+  }
+  .contact-block h2 {
+    font-family: 'DM Serif Display', serif;
+    font-size: 1.4rem;
+    color: #fff;
+    font-weight: 400;
+    margin-bottom: 10px;
+  }
+  .contact-block p {
+    font-size: 14px;
+    color: rgba(255,255,255,0.55);
+    margin-bottom: 20px;
+  }
+  .contact-btn {
+    display: inline-block;
+    background: var(--nll-green);
+    color: var(--nll-dark);
+    font-size: 13px;
+    font-weight: 500;
+    padding: 10px 28px;
+    border-radius: 6px;
+    text-decoration: none;
+    transition: opacity 0.2s;
+  }
+  .contact-btn:hover { opacity: 0.85; }
+
+  /* FOOTER */
+  footer {
+    background: var(--nll-dark);
+    padding: 24px 2rem;
+    text-align: center;
+    font-size: 12px;
+    color: rgba(255,255,255,0.35);
+    margin-top: 0;
+  }
+  footer a { color: var(--nll-green); text-decoration: none; }
+
+  @media (max-width: 640px) {
+    .prov-grid { grid-template-columns: 1fr; }
+    .section-body { padding: 18px 18px; }
+    .section-header { padding: 14px 18px; }
+  }
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <div class="nav-inner">
+    <a href="index.html" class="nav-brand">Nexus <span>Learning Labs</span></a>
+    <a href="index.html" class="back-link">← Back to Research</a>
+  </div>
+</nav>
+
+<!-- HERO -->
+<div class="hero">
+  <div class="hero-eyebrow">Nexus Learning Labs · Bengaluru</div>
+  <h1>Terms of Use</h1>
+  <p class="hero-sub">
+    This website, its research content, dashboards, and tools are the original
+    work of Venkatesh Swaminathan, Nexus Learning Labs.
+  </p>
+  <div class="hero-meta">
+    <span>Effective: April 2026</span>
+    <span>UDYAM-KR-02-0122422</span>
+    <span>ORCID 0000-0002-3315-7907</span>
+  </div>
+</div>
+
+<!-- MAIN -->
+<main>
+
+  <!-- 1. Ownership -->
+  <div class="section">
+    <div class="section-header">
+      <span class="section-num">01</span>
+      <span class="section-title">Ownership & Authorship</span>
+    </div>
+    <div class="section-body">
+      <p>
+        All content on this website — including but not limited to research papers,
+        interactive dashboards, FAQ pages, visualisations, code, architectural diagrams,
+        experimental results, written text, and the Maya Research Series in its entirety —
+        is the sole original work of <strong>Venkatesh Swaminathan</strong>, founder of
+        Nexus Learning Labs, Bengaluru (UDYAM-KR-02-0122422).
+      </p>
+      <p>
+        The Maya Research Series (Papers P1–P11 and associated tools) was conceived,
+        designed, implemented, and published independently, on personal hardware,
+        without institutional affiliation, external funding, or co-authorship.
+      </p>
+      <div class="callout">
+        <strong>ORCID:</strong> 0000-0002-3315-7907 &nbsp;·&nbsp;
+        <strong>Business:</strong> Nexus Learning Labs, Bengaluru, Karnataka, India &nbsp;·&nbsp;
+        <strong>UDYAM:</strong> UDYAM-KR-02-0122422
+      </div>
+    </div>
+  </div>
+
+  <!-- 2. Permitted Use -->
+  <div class="section">
+    <div class="section-header">
+      <span class="section-num">02</span>
+      <span class="section-title">Permitted Use</span>
+    </div>
+    <div class="section-body">
+      <p>The following uses of this website and its content are explicitly permitted:</p>
+      <div class="rule-box permitted">
+        <div class="rule-box-label">✓ Permitted</div>
+        <ul>
+          <li>Reading, viewing, and sharing links to this website</li>
+          <li>Citing research papers with full attribution (see Citation Requirements below)</li>
+          <li>Using code from GitHub repositories under the MIT License terms</li>
+          <li>Referencing findings in academic work with proper citation</li>
+          <li>Educational discussion of the Maya Research Series methodology</li>
+          <li>Contacting the author for legitimate research collaboration</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <!-- 3. Prohibited Use -->
+  <div class="section">
+    <div class="section-header">
+      <span class="section-num">03</span>
+      <span class="section-title">Prohibited Use</span>
+    </div>
+    <div class="section-body">
+      <p>The following are explicitly prohibited without prior written permission:</p>
+      <div class="rule-box prohibited">
+        <div class="rule-box-label">✗ Prohibited</div>
+        <ul>
+          <li>Scraping, crawling, or automated harvesting of any content on this website</li>
+          <li>Reproducing dashboard HTML, FAQ content, or visualisations on other platforms</li>
+          <li>Using research findings, results, or architectural descriptions in publications without citation</li>
+          <li>Training machine learning models on content scraped from this website</li>
+          <li>Commercial use of any content, branding, or research outputs without written agreement</li>
+          <li>Claiming authorship or co-authorship of any work presented on this website</li>
+          <li>Reproducing the "Nexus Learning Labs" name, logo, or branding in any context</li>
+          <li>Mirroring or hosting copies of this website or its dashboards</li>
+          <li>Removing or obscuring attribution notices from any reproduced content</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <!-- 4. Citation Requirements -->
+  <div class="section">
+    <div class="section-header">
+      <span class="section-num">04</span>
+      <span class="section-title">Citation Requirements</span>
+    </div>
+    <div class="section-body">
+      <p>
+        Any academic publication, preprint, thesis, report, blog post, or other
+        research output that references, builds upon, reproduces, or is inspired by
+        the Maya Research Series <strong>must</strong> cite the relevant paper(s) with
+        full attribution including author name, DOI, and year.
+      </p>
+      <p>
+        Uncited use of research findings, architectural designs, experimental protocols,
+        or results constitutes a violation of these Terms and of academic integrity standards.
+      </p>
+      <div class="callout">
+        Each repository on <a href="https://github.com/venky2099" target="_blank" style="color:var(--gold)">github.com/venky2099</a>
+        contains a <strong>CITATION.cff</strong> file. GitHub displays a one-click
+        "Cite this repository" button — use it. BibTeX entries are also available
+        in each paper's README.
+      </div>
+      <p>
+        All papers are permanently archived on Zenodo with immutable DOI timestamps.
+        These timestamps constitute verifiable proof of prior authorship for all
+        findings in the Maya Research Series.
+      </p>
+    </div>
+  </div>
+
+  <!-- 5. Code Repositories -->
+  <div class="section">
+    <div class="section-header">
+      <span class="section-num">05</span>
+      <span class="section-title">Code Repositories & Software</span>
+    </div>
+    <div class="section-body">
+      <p>
+        All code repositories are released under the <strong>MIT License with mandatory
+        attribution</strong>. The MIT License permits use, modification, and redistribution
+        provided the copyright notice and attribution to Venkatesh Swaminathan /
+        Nexus Learning Labs is preserved in all copies.
+      </p>
+      <p>
+        All repositories contain embedded provenance signatures that are
+        independently verifiable and constitute tamper-evident proof of original authorship:
+      </p>
+      <div class="prov-grid">
+        <div class="prov-item">
+          <div class="prov-item-label">ORCID Magic Number</div>
+          <div class="prov-item-val">0.002315 in all configs</div>
+        </div>
+        <div class="prov-item">
+          <div class="prov-item-label">LSB Steganography</div>
+          <div class="prov-item-val">All figures signed</div>
+        </div>
+        <div class="prov-item">
+          <div class="prov-item-label">Canary String</div>
+          <div class="prov-item-val">All run scripts</div>
+        </div>
+        <div class="prov-item">
+          <div class="prov-item-label">Runtime Verification</div>
+          <div class="prov-item-val">verify_provenance.py</div>
+        </div>
+        <div class="prov-item">
+          <div class="prov-item-label">Zenodo Timestamps</div>
+          <div class="prov-item-val">Immutable, public</div>
+        </div>
+        <div class="prov-item">
+          <div class="prov-item-label">Document Watermarks</div>
+          <div class="prov-item-val">All PDF exports</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 6. No Warranty -->
+  <div class="section">
+    <div class="section-header">
+      <span class="section-num">06</span>
+      <span class="section-title">No Warranty & Liability</span>
+    </div>
+    <div class="section-body">
+      <p>
+        This website and all associated research content, code, and tools are provided
+        "as is" without warranty of any kind. Nexus Learning Labs makes no representations
+        regarding the accuracy, completeness, or fitness for any particular purpose of
+        any content on this website.
+      </p>
+      <p>
+        Nexus Learning Labs shall not be liable for any direct, indirect, incidental,
+        or consequential damages arising from the use of this website or its content.
+      </p>
+    </div>
+  </div>
+
+  <!-- 7. Governing Law -->
+  <div class="section">
+    <div class="section-header">
+      <span class="section-num">07</span>
+      <span class="section-title">Governing Law</span>
+    </div>
+    <div class="section-body">
+      <p>
+        These Terms of Use are governed by the laws of India. Any disputes arising
+        from the use of this website or its content shall be subject to the exclusive
+        jurisdiction of the courts of Bengaluru, Karnataka, India.
+      </p>
+      <p>
+        Copyright protection for all research works, software, and original content
+        on this website is asserted under the Copyright Act, 1957 (India) and
+        applicable international copyright treaties.
+      </p>
+    </div>
+  </div>
+
+  <!-- 8. Changes -->
+  <div class="section">
+    <div class="section-header">
+      <span class="section-num">08</span>
+      <span class="section-title">Changes to These Terms</span>
+    </div>
+    <div class="section-body">
+      <p>
+        Nexus Learning Labs reserves the right to update these Terms of Use at any time.
+        The effective date at the top of this page will reflect the most recent revision.
+        Continued use of this website following any changes constitutes acceptance of
+        the revised terms.
+      </p>
+    </div>
+  </div>
+
+  <!-- CONTACT -->
+  <div class="contact-block">
+    <h2>Questions or Licensing Inquiries?</h2>
+    <p>
+      For collaboration requests, licensing, or any questions about permitted use
+      of research content — reach out directly.
+    </p>
+    <a href="mailto:venkateshswaminathaniyer@gmail.com" class="contact-btn">
+      venkateshswaminathaniyer@gmail.com
+    </a>
+  </div>
+
+</main>
+
+<!-- FOOTER -->
+<footer>
+  <p>
+    © 2026 Venkatesh Swaminathan · Nexus Learning Labs, Bengaluru ·
+    UDYAM-KR-02-0122422 · ORCID
+    <a href="https://orcid.org/0000-0002-3315-7907" target="_blank">0000-0002-3315-7907</a>
+    · <a href="LICENSE">MIT License</a>
+  </p>
+</footer>
+
+</body>
+</html>
