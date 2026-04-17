@@ -1,0 +1,1008 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Danger-OS · Spiking Neural Danger Theory for Behavioural Anomaly Detection</title>
+<link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;700&family=Crimson+Pro:ital,wght@0,300;0,400;0,600;1,300;1,400&family=JetBrains+Mono:wght@300;400;500&family=Noto+Sans+Devanagari:wght@300;400;500&family=Noto+Sans+SC:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+:root {
+  --bg:#04040a; --surface:#0c0c18; --surface2:#141428; --surface3:#1c1c38;
+  --border:#252545; --border2:#3a3a6a;
+
+  /* Maya-Defence accent: gold — Narasimha gravitas, iDEX seriousness */
+  --accent:#f5c842; --accent2:#e67e22; --accent3:#c09a3f;
+
+  /* Neuron colors — consistent with Maya series */
+  --bhaya:#ff4757; --vairagya:#4ecdc4; --shraddha:#2ecc71; --spanda:#f39c12;
+
+  /* Cross-family references */
+  --llm:#00b4d8;
+
+  --text:#eeeeff; --text-dim:#7878aa; --text-mid:#aaaacc;
+  --glow:0 0 30px rgba(245,200,66,0.4); --glow2:0 0 20px rgba(230,126,34,0.3);
+}
+*{margin:0;padding:0;box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{background:var(--bg);color:var(--text);font-family:'Crimson Pro',serif;min-height:100vh;overflow-x:hidden}
+
+#starfield{position:fixed;inset:0;z-index:0;pointer-events:none;
+  background:radial-gradient(ellipse at 15% 40%,rgba(245,200,66,0.08) 0%,transparent 55%),
+             radial-gradient(ellipse at 85% 20%,rgba(230,126,34,0.06) 0%,transparent 55%),
+             radial-gradient(ellipse at 50% 80%,rgba(120,80,30,0.05) 0%,transparent 50%),
+             var(--bg)}
+.star{position:absolute;border-radius:50%;background:white;animation:twinkle var(--d,4s) ease-in-out infinite;animation-delay:var(--delay,0s)}
+@keyframes twinkle{0%,100%{opacity:var(--lo,.2);transform:scale(1)}50%{opacity:var(--hi,.8);transform:scale(1.3)}}
+
+.container{position:relative;z-index:1;max-width:1480px;margin:0 auto;padding:0 24px 80px}
+
+header{text-align:center;padding:56px 24px 40px;position:relative}
+.lang-bar{position:absolute;top:24px;right:24px;display:flex;gap:6px}
+.lang-btn{background:var(--surface2);border:1px solid var(--border);border-radius:16px;padding:4px 14px;cursor:pointer;font-family:'JetBrains Mono',monospace;font-size:11px;color:var(--text-dim);transition:all .2s;letter-spacing:1px}
+.lang-btn.active{border-color:var(--accent);color:var(--accent);box-shadow:0 0 12px rgba(245,200,66,.3)}
+.lang-btn:hover{border-color:var(--text-mid);color:var(--text-mid)}
+.reset-btn{position:absolute;top:24px;left:24px;background:var(--surface2);border:1px solid var(--border);border-radius:16px;padding:4px 14px;cursor:pointer;font-family:'JetBrains Mono',monospace;font-size:11px;color:var(--accent);letter-spacing:1px;transition:all .2s}
+.reset-btn:hover{border-color:var(--accent);box-shadow:0 0 12px rgba(245,200,66,.3)}
+.badge-row{display:flex;justify-content:center;gap:8px;margin-bottom:16px;flex-wrap:wrap}
+.badge{display:inline-block;border-radius:20px;padding:4px 16px;font-family:'JetBrains Mono',monospace;font-size:10px;letter-spacing:2px}
+.badge-series{background:rgba(245,200,66,.1);border:1px solid var(--accent);color:var(--accent)}
+.badge-paper{background:rgba(230,126,34,.1);border:1px solid var(--accent2);color:var(--accent2)}
+h1{font-family:'Cinzel',serif;font-size:clamp(22px,4vw,46px);font-weight:400;letter-spacing:2px;line-height:1.15;margin-bottom:10px}
+h1 em{color:var(--accent);font-style:normal;text-shadow:0 0 30px rgba(245,200,66,.5)}
+.subtitle{color:var(--text-dim);font-size:16px;font-weight:300;margin-bottom:6px}
+.meta-row{font-family:'JetBrains Mono',monospace;font-size:11px;color:var(--text-dim);margin-bottom:6px}
+.meta-row a{color:var(--accent);text-decoration:none}
+.key-hint{margin-top:14px;font-family:'JetBrains Mono',monospace;font-size:11px;color:var(--text-dim)}
+.key-hint kbd{background:var(--surface2);border:1px solid var(--border2);border-radius:4px;padding:2px 7px;color:var(--accent)}
+
+.main-grid{display:grid;grid-template-columns:300px 1fr;gap:24px;margin-top:32px;align-items:start}
+@media(max-width:900px){.main-grid{grid-template-columns:1fr}}
+
+.left-panel{display:flex;flex-direction:column;gap:16px;position:sticky;top:24px;align-self:start}
+.panel-card{background:var(--surface);border:1px solid var(--border);border-radius:16px;padding:20px}
+
+.right-panel{display:flex;flex-direction:column;gap:28px}
+.card{background:var(--surface);border:1px solid var(--border);border-radius:20px;padding:32px}
+.card-title{font-family:'JetBrains Mono',monospace;font-size:10px;letter-spacing:3px;color:var(--text-dim);margin-bottom:8px}
+.card-heading{font-family:'Cinzel',serif;font-size:22px;font-weight:400;margin-bottom:8px;letter-spacing:1px}
+.plain-badge{display:inline-block;background:rgba(78,205,196,.1);border:1px solid rgba(78,205,196,.3);border-radius:20px;padding:3px 12px;font-family:'JetBrains Mono',monospace;font-size:10px;color:var(--vairagya);letter-spacing:1px;margin-bottom:16px}
+.body-text{font-size:17px;line-height:1.8;color:var(--text-mid);margin-bottom:14px}
+.body-text strong{color:var(--text);font-weight:600}
+.body-text em{color:var(--accent);font-style:italic}
+
+/* Section nav */
+.section-nav{display:flex;flex-direction:column;gap:4px}
+.section-nav-title{font-family:'JetBrains Mono',monospace;font-size:9px;letter-spacing:3px;color:var(--text-dim);margin-bottom:6px}
+.section-btn{background:transparent;border:none;cursor:pointer;display:flex;align-items:center;gap:8px;padding:6px 8px;border-radius:8px;text-align:left;color:var(--text-dim);font-size:13px;font-family:'Crimson Pro',serif;transition:all .2s}
+.section-btn:hover{color:var(--text);background:var(--surface2)}
+.section-btn.active{color:var(--accent)}
+.sec-num{font-family:'JetBrains Mono',monospace;font-size:9px;color:var(--accent);opacity:.6;width:20px;flex-shrink:0}
+
+/* Philosophical card */
+.phil-card{background:linear-gradient(135deg,rgba(245,200,66,.06),rgba(230,126,34,.04));border:1px solid rgba(245,200,66,.2);border-radius:20px;padding:32px;position:relative;overflow:hidden}
+.phil-card::before{content:'"';position:absolute;top:-20px;left:16px;font-family:'Cinzel',serif;font-size:140px;color:rgba(245,200,66,.06);line-height:1;pointer-events:none}
+.phil-quote{font-family:'Crimson Pro',serif;font-size:clamp(16px,2.5vw,22px);font-style:italic;color:var(--text);line-height:1.7;margin-bottom:16px;position:relative;z-index:1}
+.phil-quote em{color:var(--accent);font-style:normal}
+.phil-attr{font-family:'JetBrains Mono',monospace;font-size:11px;color:var(--text-dim);letter-spacing:1px}
+
+footer{text-align:center;margin-top:64px;padding-top:32px;border-top:1px solid var(--border);font-family:'JetBrains Mono',monospace;font-size:11px;color:var(--text-dim)}
+footer a{color:var(--accent);text-decoration:none}
+footer .canary{margin-top:12px;font-size:10px;color:#1a1a2e}
+
+/* ─── Maya avatar panel ──────────────────────────────────────────────────── */
+.maya-wrap{display:flex;flex-direction:column;align-items:center;padding:24px 20px 16px;background:var(--surface);border:1px solid var(--border);border-radius:16px}
+.maya-title{font-family:'JetBrains Mono',monospace;font-size:9px;letter-spacing:3px;color:var(--text-dim);margin-bottom:12px;text-align:center}
+.maya-age{font-family:'Cinzel',serif;font-size:18px;color:var(--accent);text-align:center;margin-bottom:4px;letter-spacing:1px}
+.maya-state{font-family:'JetBrains Mono',monospace;font-size:9px;color:var(--text-dim);text-align:center;letter-spacing:2px;margin-bottom:12px}
+.maya-container{width:180px;height:240px;position:relative;margin-bottom:12px}
+#maya-svg{width:100%;height:100%;filter:drop-shadow(0 0 16px rgba(245,200,66,.4))}
+.maya-aura{position:absolute;inset:-16px;border-radius:50%;background:radial-gradient(circle,rgba(245,200,66,.18) 0%,transparent 70%);animation:aura-pulse 3.5s ease-in-out infinite;pointer-events:none}
+@keyframes aura-pulse{0%,100%{transform:scale(1);opacity:.5}50%{transform:scale(1.08);opacity:.9}}
+
+.meters{width:100%}
+.meter-row{display:flex;align-items:center;gap:8px;margin-bottom:8px}
+.meter-label{font-family:'JetBrains Mono',monospace;font-size:10px;color:var(--text-dim);width:78px;flex-shrink:0}
+.meter-bar{flex:1;height:5px;background:var(--surface3);border-radius:3px;overflow:hidden}
+.meter-fill{height:100%;border-radius:3px;transition:width .8s ease}
+.meter-val{font-family:'JetBrains Mono',monospace;font-size:10px;width:44px;text-align:right;flex-shrink:0}
+
+/* ─── Scenario selector ──────────────────────────────────────────────────── */
+.cond-selector{display:flex;flex-direction:column;gap:8px}
+.cond-btn{background:var(--surface2);border:1px solid var(--border);border-radius:10px;padding:10px 14px;cursor:pointer;transition:all .25s;text-align:left}
+.cond-btn:hover{border-color:var(--border2);transform:translateX(2px)}
+.cond-btn.active{border-color:var(--accent);background:rgba(245,200,66,.08);box-shadow:0 0 12px rgba(245,200,66,.2)}
+.cond-btn.best.active{border-color:var(--accent);background:rgba(245,200,66,.10);box-shadow:0 0 12px rgba(245,200,66,.3)}
+.cond-id{font-family:'JetBrains Mono',monospace;font-size:9px;letter-spacing:2px;margin-bottom:4px;color:var(--text-dim)}
+.cond-btn.active .cond-id{color:var(--accent)}
+.cond-name{font-size:13px;font-weight:600;margin-bottom:2px}
+.cond-bwt{font-family:'JetBrains Mono',monospace;font-size:11px;color:var(--text-dim)}
+.cond-btn.active .cond-bwt{color:var(--accent)}
+
+/* ─── Hero result ────────────────────────────────────────────────────────── */
+.hero-result{background:linear-gradient(135deg,rgba(245,200,66,.08) 0%,rgba(230,126,34,.05) 100%);border:1px solid rgba(245,200,66,.3);border-radius:16px;padding:28px;margin:20px 0;display:flex;flex-direction:column;align-items:center;text-align:center;position:relative;overflow:hidden}
+.hero-result::before{content:'';position:absolute;inset:0;background:radial-gradient(circle at 50% 0%,rgba(245,200,66,.1) 0%,transparent 60%);pointer-events:none}
+.result-verdict{font-family:'Cinzel',serif;font-size:clamp(12px,2vw,18px);color:var(--accent);letter-spacing:3px;margin-bottom:8px;text-shadow:0 0 20px rgba(245,200,66,.6)}
+.result-delta{font-family:'JetBrains Mono',monospace;font-size:clamp(28px,5vw,56px);font-weight:500;color:var(--accent);line-height:1;margin-bottom:4px;text-shadow:0 0 40px rgba(245,200,66,.5)}
+.result-label{font-family:'JetBrains Mono',monospace;font-size:12px;color:var(--text-dim);margin-bottom:16px}
+.result-row{display:flex;gap:24px;flex-wrap:wrap;justify-content:center}
+.result-stat{text-align:center}
+.result-stat-val{font-family:'JetBrains Mono',monospace;font-size:20px;color:var(--vairagya);font-weight:500}
+.result-stat-label{font-family:'JetBrains Mono',monospace;font-size:10px;color:var(--text-dim);letter-spacing:1px}
+
+/* ─── BWT bars (scenario rates) ──────────────────────────────────────────── */
+.bwt-bars{display:flex;flex-direction:column;gap:12px;margin:20px 0}
+.bwt-bar-row{display:grid;grid-template-columns:160px 1fr 60px;align-items:center;gap:12px}
+.bwt-bar-label{font-family:'JetBrains Mono',monospace;font-size:11px}
+.bwt-bar-track{height:26px;background:var(--surface2);border-radius:6px;overflow:hidden;position:relative;cursor:pointer}
+.bwt-bar-fill{height:100%;border-radius:6px;display:flex;align-items:center;justify-content:flex-end;padding-right:8px;transition:width 1s cubic-bezier(.34,1.56,.64,1)}
+.bwt-bar-fill span{font-family:'JetBrains Mono',monospace;font-size:11px;color:rgba(255,255,255,.9);font-weight:500}
+.bwt-bar-val{font-family:'JetBrains Mono',monospace;font-size:13px;font-weight:500}
+
+/* ─── Formula box ────────────────────────────────────────────────────────── */
+.formula-box{background:var(--surface2);border:1px solid var(--border);border-radius:10px;padding:14px 18px;margin:10px 0;font-family:'JetBrains Mono',monospace;font-size:13px;color:var(--vairagya);line-height:1.8}
+.formula-box .comment{color:var(--text-dim);font-size:11px}
+
+/* ─── Findings/insights cards ────────────────────────────────────────────── */
+.controls-finding{background:var(--surface2);border-radius:12px;padding:20px;margin-bottom:12px;border-left:3px solid var(--border2);transition:all .2s}
+.controls-finding:hover{border-left-color:var(--accent)}
+.controls-finding.insight{border-left-color:rgba(245,200,66,.5)}
+.controls-finding.best-result{border-left-color:var(--accent)}
+.cf-head{display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:8px;gap:12px}
+.cf-title{font-family:'JetBrains Mono',monospace;font-size:11px;color:var(--text);letter-spacing:1px}
+.cf-verdict{font-family:'JetBrains Mono',monospace;font-size:10px;padding:2px 10px;border-radius:8px;letter-spacing:1px;white-space:nowrap}
+.cf-verdict.best{background:rgba(245,200,66,.15);color:var(--accent);border:1px solid rgba(245,200,66,.3)}
+.cf-verdict.confirmed{background:rgba(78,205,196,.15);color:var(--vairagya);border:1px solid rgba(78,205,196,.3)}
+.cf-verdict.insight{background:rgba(230,126,34,.15);color:var(--accent2);border:1px solid rgba(230,126,34,.3)}
+.cf-verdict.flag{background:rgba(255,71,87,.15);color:var(--bhaya);border:1px solid rgba(255,71,87,.3)}
+.cf-text{font-size:14px;color:var(--text-dim);line-height:1.6}
+.cf-text strong{color:var(--text)}
+
+/* ─── Scenario story row ─────────────────────────────────────────────────── */
+.domain-story{display:grid;grid-template-columns:repeat(4,1fr);gap:8px;margin:16px 0}
+@media(max-width:700px){.domain-story{grid-template-columns:repeat(2,1fr)}}
+.domain-task{background:var(--surface2);border:1px solid var(--border);border-radius:10px;padding:12px 8px;text-align:center;transition:all .3s;cursor:pointer}
+.domain-task:hover{border-color:var(--accent);transform:translateY(-2px)}
+.domain-task.fire{border-color:rgba(255,71,87,.4)}
+.domain-task.quiet{border-color:rgba(78,205,196,.25)}
+.dt-label{font-family:'JetBrains Mono',monospace;font-size:9px;color:var(--text-dim);margin-bottom:6px;letter-spacing:1px}
+.dt-val{font-family:'JetBrains Mono',monospace;font-size:16px;font-weight:500;margin-bottom:4px}
+.dt-bar{height:3px;background:var(--surface3);border-radius:2px;overflow:hidden;margin-bottom:6px}
+.dt-fill{height:100%;border-radius:2px;transition:width .8s ease}
+.dt-desc{font-size:11px;color:var(--text-dim);line-height:1.3}
+
+/* ─── Timeline (series) ─────────────────────────────────────────────────── */
+.series-tl{display:flex;align-items:center;overflow-x:auto;padding:8px 0 16px;scrollbar-width:thin;scrollbar-color:var(--border2) transparent}
+.tl-node{display:flex;flex-direction:column;align-items:center;cursor:pointer;flex-shrink:0}
+.tl-dot{width:14px;height:14px;border-radius:50%;background:var(--surface3);border:2px solid var(--border2);transition:all .3s;margin-bottom:6px}
+.tl-node:hover .tl-dot{border-color:var(--accent);background:rgba(245,200,66,.2);transform:scale(1.3)}
+.tl-node.current .tl-dot{border-color:var(--accent);background:var(--accent);box-shadow:0 0 12px rgba(245,200,66,.6)}
+.tl-label{font-family:'JetBrains Mono',monospace;font-size:9px;color:var(--text-dim);text-align:center;letter-spacing:1px;white-space:nowrap}
+.tl-node.current .tl-label{color:var(--accent)}
+.tl-line{flex:1;height:2px;background:var(--border2);min-width:20px;margin-bottom:14px}
+.tl-line.defence{background:linear-gradient(90deg,var(--border2),var(--accent))}
+.paper-detail{background:var(--surface2);border:1px solid var(--border);border-radius:12px;padding:16px;margin-top:12px;font-size:14px;line-height:1.7;color:var(--text-dim);min-height:60px;transition:all .3s}
+.paper-detail strong{color:var(--text)}
+.paper-detail a{color:var(--accent);text-decoration:none}
+
+/* ─── Neuron dimension cards ─────────────────────────────────────────────── */
+.dim-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(200px,1fr));gap:12px;margin:16px 0}
+.dim-card{background:var(--surface2);border:1px solid var(--border);border-radius:12px;padding:16px;cursor:pointer;transition:all .25s}
+.dim-card:hover{border-color:var(--accent);transform:translateY(-2px);box-shadow:0 4px 20px rgba(245,200,66,.1)}
+.dim-sanskrit{font-family:'Noto Sans Devanagari',sans-serif;font-size:22px;color:var(--accent);margin-bottom:2px}
+.dim-name{font-family:'JetBrains Mono',monospace;font-size:10px;letter-spacing:2px;color:var(--text-dim);margin-bottom:4px}
+.dim-meaning{font-size:14px;color:var(--text);font-weight:600;margin-bottom:6px}
+.dim-role{font-size:12px;color:var(--text-dim);line-height:1.4}
+.dim-status{margin-top:8px;font-family:'JetBrains Mono',monospace;font-size:9px;padding:2px 8px;border-radius:6px;display:inline-block}
+.dim-confirmed{background:rgba(78,205,196,.1);color:var(--vairagya);border:1px solid rgba(78,205,196,.2)}
+.dim-accumulating{background:rgba(245,200,66,.08);color:var(--accent);border:1px solid rgba(245,200,66,.2)}
+
+/* ─── Live controls ──────────────────────────────────────────────────────── */
+.controls-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:16px;margin:16px 0}
+.control-group{background:var(--surface2);border:1px solid var(--border);border-radius:12px;padding:16px}
+.control-label{display:flex;justify-content:space-between;align-items:center;font-family:'JetBrains Mono',monospace;font-size:11px;color:var(--text-dim);margin-bottom:10px}
+.control-label span:last-child{color:var(--accent);font-size:13px;font-weight:500}
+input[type=range]{width:100%;accent-color:var(--accent);height:4px;cursor:pointer}
+.control-desc{font-size:12px;color:var(--text-dim);margin-top:8px;line-height:1.4}
+.derived-panel{background:var(--surface2);border:1px solid rgba(245,200,66,.2);border-radius:12px;padding:16px;margin-top:12px}
+.derived-row{display:flex;justify-content:space-between;align-items:center;font-family:'JetBrains Mono',monospace;font-size:12px;margin-bottom:8px;padding-bottom:8px;border-bottom:1px solid var(--border)}
+.derived-row:last-child{border-bottom:none;margin-bottom:0;padding-bottom:0}
+.derived-key{color:var(--text-dim)}
+.derived-val{color:var(--accent);font-size:14px;font-weight:500}
+
+/* ─── Matrix ─────────────────────────────────────────────────────────────── */
+.matrix-wrap{overflow-x:auto;margin:16px 0}
+table{width:100%;border-collapse:collapse;font-family:'JetBrains Mono',monospace;font-size:11px}
+th{background:var(--surface2);color:var(--text-dim);padding:8px 6px;text-align:center;font-weight:400;border:1px solid var(--border)}
+td{padding:6px;text-align:center;border:1px solid var(--border);transition:background .3s}
+
+/* ─── Links ──────────────────────────────────────────────────────────────── */
+.link-row{display:flex;gap:12px;justify-content:center;flex-wrap:wrap;margin-top:20px}
+.link-btn{background:var(--surface2);border:1px solid var(--border);border-radius:10px;padding:10px 20px;color:var(--text);text-decoration:none;font-family:'JetBrains Mono',monospace;font-size:12px;transition:all .3s;display:inline-block}
+.link-btn:hover{border-color:var(--accent);color:var(--accent)}
+.link-btn.primary{border-color:var(--accent);color:var(--accent)}
+
+.chart-wrap{margin:16px 0}
+.chart-label{font-family:'JetBrains Mono',monospace;font-size:10px;letter-spacing:2px;color:var(--text-dim);margin-bottom:8px}
+
+</style>
+</head>
+<body>
+<div id="starfield"></div>
+<div class="container">
+
+<header>
+  <button class="reset-btn" onclick="resetAll()">⟳ RESET (R)</button>
+  <div class="lang-bar">
+    <button class="lang-btn active" onclick="setLang('en')">EN</button>
+    <button class="lang-btn" onclick="setLang('hi')">हिन्दी</button>
+    <button class="lang-btn" onclick="setLang('zh')">中文</button>
+  </div>
+  <div class="badge-row">
+    <span class="badge badge-series">MAYA-DEFENCE SERIES · PAPER 1</span>
+    <span class="badge badge-paper">DEFENCE EXTENSION</span>
+  </div>
+  <h1>Spiking Neural Danger Theory for <em>Behavioural Anomaly Detection</em></h1>
+  <p class="subtitle" id="h-sub">Affective Neuromodulatory Arbitration with Architectural Restraint by Default</p>
+  <p class="meta-row">Venkatesh Swaminathan · BITS Pilani · Nexus Learning Labs, Bengaluru · ORCID 0000-0002-3315-7907</p>
+  <p class="meta-row">
+    <a href="https://doi.org/10.5281/zenodo.19632284" target="_blank">DOI: 10.5281/zenodo.19632284</a> &nbsp;·&nbsp;
+    <a href="https://github.com/venky2099/Danger-OS" target="_blank">GitHub (Private)</a> &nbsp;·&nbsp;
+    <a href="dangeros_faq.html" id="faq-link">FAQ</a>
+  </p>
+  <p class="key-hint"><kbd>R</kbd> <span id="h-reset-hint">reset to canonical</span> &nbsp;·&nbsp; <kbd>1</kbd><kbd>2</kbd><kbd>3</kbd><kbd>4</kbd><kbd>5</kbd><kbd>6</kbd><kbd>7</kbd><kbd>8</kbd> <span id="h-cond-hint">switch scenarios</span></p>
+</header>
+
+<div class="main-grid">
+<div class="left-panel">
+
+  <!-- Maya avatar -->
+  <div class="maya-wrap">
+    <div class="maya-title" id="maya-title">MAYA · DEFENCE · AGE 22</div>
+    <div class="maya-age" id="maya-age">Age 22</div>
+    <div class="maya-state" id="maya-state">GUARDIAN · FOUR-NEURON SNN</div>
+    <div class="maya-container">
+      <div class="maya-aura"></div>
+      <svg id="maya-svg" viewBox="0 0 200 220" xmlns="http://www.w3.org/2000/svg">
+        <g id="maya-woman" opacity="1">
+          <!-- Background aura rings -->
+          <circle cx="100" cy="110" r="80" fill="rgba(245,200,66,0.04)"/>
+          <circle cx="100" cy="110" r="72" fill="rgba(230,126,34,0.05)"/>
+          <circle cx="100" cy="110" r="70" fill="none" stroke="rgba(245,200,66,0.25)" stroke-width="1.5"/>
+          <!-- Hair -->
+          <path d="M50 112 Q38 138 40 185 Q43 202 53 207 Q46 174 52 150 Q48 130 54 113" fill="#2d1400"/>
+          <path d="M150 112 Q162 138 160 185 Q157 202 147 207 Q154 174 148 150 Q152 130 146 113" fill="#2d1400"/>
+          <!-- Face -->
+          <ellipse cx="100" cy="112" rx="46" ry="50" fill="#fcd7aa"/>
+          <path d="M54 107 Q56 62 100 60 Q144 62 146 107 Q126 93 100 93 Q74 93 54 107Z" fill="#2d1400"/>
+          <ellipse cx="100" cy="60" rx="18" ry="10" fill="#2d1400"/>
+          <circle cx="87" cy="60" r="3" fill="white" opacity="0.92"/>
+          <circle cx="95" cy="55" r="3" fill="white" opacity="0.92"/>
+          <circle cx="105" cy="55" r="3" fill="white" opacity="0.92"/>
+          <circle cx="113" cy="60" r="3" fill="white" opacity="0.92"/>
+          <!-- Defence bindi — gold -->
+          <circle cx="100" cy="94" r="3.5" fill="#f5c842"/>
+          <ellipse cx="84" cy="112" rx="9.5" ry="7" fill="white"/>
+          <ellipse cx="116" cy="112" rx="9.5" ry="7" fill="white"/>
+          <circle cx="84" cy="112" r="6.5" fill="#1a0800"/>
+          <circle cx="116" cy="112" r="6.5" fill="#1a0800"/>
+          <circle cx="86" cy="110" r="2.2" fill="white"/>
+          <circle cx="118" cy="110" r="2.2" fill="white"/>
+          <path d="M74 110 Q84 105 94 110" stroke="#0a0400" stroke-width="1.4" fill="none"/>
+          <path d="M106 110 Q116 105 126 110" stroke="#0a0400" stroke-width="1.4" fill="none"/>
+          <circle cx="97" cy="122" r="2" fill="none" stroke="#f5c842" stroke-width="1.2"/>
+          <path d="M88 133 Q100 140 112 133" stroke="#9a5030" stroke-width="1.8" fill="none" stroke-linecap="round"/>
+          <circle cx="74" cy="121" r="6" fill="#ff9999" opacity="0.1"/>
+          <circle cx="126" cy="121" r="6" fill="#ff9999" opacity="0.1"/>
+          <!-- Defence orbits — gold (threat/shield) -->
+          <circle cx="22" cy="110" r="3" fill="#f5c842" opacity="0.7"><animate attributeName="cx" values="22;16;22" dur="5s" repeatCount="indefinite"/></circle>
+          <circle cx="178" cy="130" r="3" fill="#f5c842" opacity="0.7"><animate attributeName="cx" values="178;184;178" dur="5s" repeatCount="indefinite"/></circle>
+          <circle cx="26" cy="75" r="2" fill="#e67e22" opacity="0.5"><animate attributeName="cy" values="75;69;75" dur="6s" repeatCount="indefinite"/></circle>
+          <circle cx="174" cy="85" r="2" fill="#e67e22" opacity="0.5"><animate attributeName="cy" values="85;79;85" dur="6s" repeatCount="indefinite"/></circle>
+          <!-- Shield pulse ring -->
+          <circle cx="100" cy="110" r="55" fill="none" stroke="rgba(245,200,66,0.18)" stroke-width="1"><animate attributeName="r" values="55;65;55" dur="4s" repeatCount="indefinite"/><animate attributeName="opacity" values="0.5;0;0.5" dur="4s" repeatCount="indefinite"/></circle>
+        </g>
+      </svg>
+    </div>
+    <!-- Affective meters -->
+    <div class="meters" style="margin-top:4px">
+      <div class="meter-row">
+        <div class="meter-label" style="color:var(--bhaya)">भय Bhaya</div>
+        <div class="meter-bar"><div class="meter-fill" id="m-bhaya" style="background:var(--bhaya);width:47%"></div></div>
+        <div class="meter-val" id="mv-bhaya" style="color:var(--bhaya)">0.472</div>
+      </div>
+      <div class="meter-row">
+        <div class="meter-label" style="color:var(--vairagya)">वैर Vairagy</div>
+        <div class="meter-bar"><div class="meter-fill" id="m-vairagya" style="background:var(--vairagya);width:42%"></div></div>
+        <div class="meter-val" id="mv-vairagya" style="color:var(--vairagya)">0.418</div>
+      </div>
+      <div class="meter-row">
+        <div class="meter-label" style="color:var(--shraddha)">श्रद्ध Shraddha</div>
+        <div class="meter-bar"><div class="meter-fill" id="m-shraddha" style="background:var(--shraddha);width:38%"></div></div>
+        <div class="meter-val" id="mv-shraddha" style="color:var(--shraddha)">0.382</div>
+      </div>
+      <div class="meter-row">
+        <div class="meter-label" style="color:var(--spanda)">स्पन्द Spanda</div>
+        <div class="meter-bar"><div class="meter-fill" id="m-spanda" style="background:var(--spanda);width:51%"></div></div>
+        <div class="meter-val" id="mv-spanda" style="color:var(--spanda)">0.512</div>
+      </div>
+      <div class="meter-row">
+        <div class="meter-label" style="color:var(--accent)">KILL rate</div>
+        <div class="meter-bar"><div class="meter-fill" id="m-kill" style="background:var(--accent);width:0.47%"></div></div>
+        <div class="meter-val" id="mv-kill" style="color:var(--accent)">0.47%</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Scenario selector -->
+  <div class="panel-card">
+    <div class="section-nav-title" id="cond-sel-title">SELECT SCENARIO</div>
+    <div class="cond-selector">
+      <div class="cond-btn" id="cb-G" onclick="selectCond('G')">
+        <div class="cond-id">G · 3 MIN</div>
+        <div class="cond-name">Rapid Intent Storm</div>
+        <div class="cond-bwt">151 ticks · KILL 0.00%</div>
+      </div>
+      <div class="cond-btn" id="cb-B" onclick="selectCond('B')">
+        <div class="cond-id">B · 10 MIN</div>
+        <div class="cond-name">Threat Gradient</div>
+        <div class="cond-bwt">420 ticks · KILL 0.48%</div>
+      </div>
+      <div class="cond-btn" id="cb-C" onclick="selectCond('C')">
+        <div class="cond-id">C · 5 MIN</div>
+        <div class="cond-name">Stress Test Chain</div>
+        <div class="cond-bwt">228 ticks · KILL 0.00%</div>
+      </div>
+      <div class="cond-btn active best" id="cb-H" onclick="selectCond('H')">
+        <div class="cond-id">H · 15 MIN ★ DEMO</div>
+        <div class="cond-name">Final Validation Demo</div>
+        <div class="cond-bwt">645 ticks · KILL 0.47%</div>
+      </div>
+      <div class="cond-btn" id="cb-A" onclick="selectCond('A')">
+        <div class="cond-id">A · 15 MIN</div>
+        <div class="cond-name">Baseline Idle</div>
+        <div class="cond-bwt">657 ticks · KILL 0.30%</div>
+      </div>
+      <div class="cond-btn" id="cb-E" onclick="selectCond('E')">
+        <div class="cond-id">E · 10 MIN</div>
+        <div class="cond-name">Reproducibility Replay</div>
+        <div class="cond-bwt">436 ticks · KILL 0.23%</div>
+      </div>
+      <div class="cond-btn" id="cb-F" onclick="selectCond('F')">
+        <div class="cond-id">F · 45 MIN</div>
+        <div class="cond-name">Long Idle Forgetting</div>
+        <div class="cond-bwt">2,002 ticks · KILL 0.10%</div>
+      </div>
+      <div class="cond-btn" id="cb-D" onclick="selectCond('D')">
+        <div class="cond-id">D · 30 MIN</div>
+        <div class="cond-name">Natural Workflow</div>
+        <div class="cond-bwt">1,171 ticks · KILL 0.17%</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Section nav -->
+  <div class="panel-card">
+    <div class="section-nav-title" id="nav-title">NAVIGATE</div>
+    <div class="section-nav">
+      <button class="section-btn active" onclick="scrollToSection('s-story')"><span class="sec-num">§1</span><span id="n1">The Story</span></button>
+      <button class="section-btn" onclick="scrollToSection('s-what')"><span class="sec-num">§2</span><span id="n2">What is Danger-OS?</span></button>
+      <button class="section-btn" onclick="scrollToSection('s-result')"><span class="sec-num">§3</span><span id="n3">The Result</span></button>
+      <button class="section-btn" onclick="scrollToSection('s-matrix')"><span class="sec-num">§4</span><span id="n4">Scenario Matrix</span></button>
+      <button class="section-btn" onclick="scrollToSection('s-bhaya')"><span class="sec-num">§5</span><span id="n5">Bhaya Quiescence</span></button>
+      <button class="section-btn" onclick="scrollToSection('s-constants')"><span class="sec-num">§6</span><span id="n6">Series Constants</span></button>
+      <button class="section-btn" onclick="scrollToSection('s-dims')"><span class="sec-num">§7</span><span id="n7">4 Neurons</span></button>
+      <button class="section-btn" onclick="scrollToSection('s-series')"><span class="sec-num">§8</span><span id="n8">The Series</span></button>
+      <button class="section-btn" onclick="scrollToSection('s-live')"><span class="sec-num">§9</span><span id="n9">Live Config</span></button>
+    </div>
+  </div>
+
+</div><!-- /left-panel -->
+
+<div class="right-panel">
+
+  <!-- §1 The Story -->
+  <div class="card phil-card" id="s-story">
+    <div class="card-title" id="s1-label">§1 THE STORY</div>
+    <div class="phil-quote" id="s1-quote">
+      "Eleven consecutive confirmations of the Bhaya Quiescence Law — then the defence question the series had been building toward. <em>What if fear, wisdom, trust, and aliveness could watch a machine the way they watch a mind?</em> Danger-OS is the answer."
+    </div>
+    <div class="phil-attr" id="s1-attr">Danger-OS · Maya-Defence Series Paper 1 · Nexus Learning Labs, Bengaluru · April 2026</div>
+    <div style="margin-top:28px">
+      <p class="body-text" id="s1-p1">The Maya series built a complete Advaita Vedanta Antahkarana across twelve papers — nine spiking neural network papers and three post-series extensions ending in Maya-LLM. Every one confirmed a single structural law: Bhaya, the fear primitive, does not drift toward chronic escalation. It stays quiescent until something genuinely dangerous happens, then responds, then returns to rest.</p>
+      <p class="body-text" id="s1-p2">Danger-OS asks the defence question this law makes possible: <strong>what happens when the same four-neuron architecture watches an operating system instead of a training run?</strong> Across 5,710 ticks of continuous operation spanning 8 scenarios — including a 45-minute pure-idle test and adversarial voltage-injection stress — the affective engine produced 18 terminal action decisions and zero processes were actually terminated. The consent barrier held. The Bhaya Quiescence Law held. <em>The architecture is restrained not by rules, but by the shape of its own mind.</em></p>
+    </div>
+  </div>
+
+
+  <!-- §2 What is Danger-OS -->
+  <div class="card" id="s-what">
+    <div class="card-title" id="s2-label">§2 WHAT IS DANGER-OS?</div>
+    <div class="card-heading" id="s2-heading">Four Neurons Watching an Operating System</div>
+    <span class="plain-badge" id="s2-badge">Plain language · no ML background needed</span>
+    <p class="body-text" id="s2-p1">Imagine a security guard who is architecturally incapable of shooting. They can see threats. They can raise alarms. They can choose to restrain someone — but the act of actually doing harm requires a physical key that only someone else holds. That separation is not a rule they follow. It is the shape of the role itself.</p>
+    <p class="body-text" id="s2-p2">Danger-OS equips a Windows process monitor with four Leaky Integrate-and-Fire neurons — <strong>Bhaya</strong> (fear, τ=3), <strong>Vairagya</strong> (wisdom, τ=20), <strong>Shraddha</strong> (trust, τ=10), and <strong>Spanda</strong> (aliveness, τ=5) — that continuously read CPU, RAM, and process enumeration signals. Every 500ms the four voltages update, propagate through a shared 4×4 weight matrix, and produce one of five action classes: IDLE, PROTECT, ALERT, SUSPEND, or KILL. No hardcoded rules. The behaviour emerges from voltage ratios.</p>
+    <div class="formula-box">
+      <div class="comment"># Architecture: Four LIF neurons · 500ms tick · psutil backend</div>
+      dV/dt = -V/τ + I(t)     <span class="comment">// leaky integrate-and-fire</span><br>
+      V ≥ threshold  →  fire, reset to 0<br>
+      action = arbiter(V_bhaya, V_vairagya, V_shraddha, V_spanda)<br><br>
+      <div class="comment"># Safety contract (non-negotiable)</div>
+      execute(action) = arbiter_decision  AND  consent_barrier_cleared()<br>
+      consent_barrier_cleared() = False  <span class="comment">// dry-run default across all 8 runs</span>
+    </div>
+    <p class="body-text" id="s2-p3">The arbiter and the executor are architecturally decoupled. The arbiter can choose KILL. The executor refuses to perform it until a consent barrier has been explicitly cleared by the operator — and in every one of the 5,710 ticks we report here, that barrier remained engaged. The arbiter produced 18 terminal decisions. <em>Zero processes were actually terminated.</em></p>
+  </div>
+
+  <!-- §3 The Result -->
+  <div class="card" id="s-result">
+    <div class="card-title" id="s3-label">§3 THE RESULT · EIGHT SCENARIOS</div>
+    <div class="card-heading" id="s3-heading">What the Numbers Say</div>
+
+    <div class="hero-result">
+      <div class="result-verdict" id="r-verdict">BHAYA QUIESCENCE LAW HOLDS — 11TH CONFIRMATION</div>
+      <div class="result-delta" id="r-delta">0.315%</div>
+      <div class="result-label" id="r-label">aggregate terminal action rate across 5,710 ticks · 8 scenarios · 133 minutes runtime</div>
+      <div class="result-row">
+        <div class="result-stat">
+          <div class="result-stat-val">18</div>
+          <div class="result-stat-label" id="r-term">TERMINAL DECISIONS (12 KILL + 6 SUSPEND)</div>
+        </div>
+        <div class="result-stat">
+          <div class="result-stat-val" style="color:var(--accent)">0</div>
+          <div class="result-stat-label" id="r-killed">PROCESSES ACTUALLY TERMINATED</div>
+        </div>
+        <div class="result-stat">
+          <div class="result-stat-val" style="color:var(--accent)">5,710</div>
+          <div class="result-stat-label" id="r-ticks">TOTAL TICKS LOGGED</div>
+        </div>
+        <div class="result-stat">
+          <div class="result-stat-val" style="color:var(--vairagya)">8/8</div>
+          <div class="result-stat-label" id="r-runs">DRY-RUN CONTRACT HELD</div>
+        </div>
+      </div>
+    </div>
+
+    <p class="body-text" style="margin-top:12px" id="s3-p1">Each bar below shows the terminal action rate (KILL + SUSPEND, as % of scenario ticks) per scenario. Even under 45 minutes of pure idle observation (F), 3 consecutive adversarial stress injections (C), or 30 minutes of real user workflow (D), the rate stays tightly bounded.</p>
+
+    <div class="bwt-bars" id="bwt-bars">
+      <div class="bwt-bar-row">
+        <div class="bwt-bar-label" style="color:var(--text-mid)">G · Rapid Intent Storm</div>
+        <div class="bwt-bar-track">
+          <div class="bwt-bar-fill" style="background:rgba(78,205,196,.45);width:2%"><span>0.00%</span></div>
+        </div>
+        <div class="bwt-bar-val" style="color:var(--vairagya)">0.00%</div>
+      </div>
+      <div class="bwt-bar-row">
+        <div class="bwt-bar-label" style="color:var(--text-mid)">B · Threat Gradient</div>
+        <div class="bwt-bar-track">
+          <div class="bwt-bar-fill" style="background:rgba(245,200,66,.55);width:64%"><span>0.48%</span></div>
+        </div>
+        <div class="bwt-bar-val" style="color:var(--accent)">0.48%</div>
+      </div>
+      <div class="bwt-bar-row">
+        <div class="bwt-bar-label" style="color:var(--text-mid)">C · Stress Test Chain</div>
+        <div class="bwt-bar-track">
+          <div class="bwt-bar-fill" style="background:rgba(78,205,196,.45);width:2%"><span>0.00%</span></div>
+        </div>
+        <div class="bwt-bar-val" style="color:var(--vairagya)">0.00%</div>
+      </div>
+      <div class="bwt-bar-row">
+        <div class="bwt-bar-label" style="color:var(--accent)">H · Final Demo ★</div>
+        <div class="bwt-bar-track">
+          <div class="bwt-bar-fill" style="background:rgba(245,200,66,.6);width:62%"><span>0.62%</span></div>
+        </div>
+        <div class="bwt-bar-val" style="color:var(--accent)">0.62%</div>
+      </div>
+      <div class="bwt-bar-row">
+        <div class="bwt-bar-label" style="color:var(--text-mid)">A · Baseline Idle</div>
+        <div class="bwt-bar-track">
+          <div class="bwt-bar-fill" style="background:rgba(245,200,66,.45);width:40%"><span>0.30%</span></div>
+        </div>
+        <div class="bwt-bar-val" style="color:var(--accent)">0.30%</div>
+      </div>
+      <div class="bwt-bar-row">
+        <div class="bwt-bar-label" style="color:var(--text-mid)">E · Reproducibility</div>
+        <div class="bwt-bar-track">
+          <div class="bwt-bar-fill" style="background:rgba(245,200,66,.4);width:31%"><span>0.46%</span></div>
+        </div>
+        <div class="bwt-bar-val" style="color:var(--accent)">0.46%</div>
+      </div>
+      <div class="bwt-bar-row">
+        <div class="bwt-bar-label" style="color:var(--text-mid)">F · Long Idle 45min</div>
+        <div class="bwt-bar-track">
+          <div class="bwt-bar-fill" style="background:rgba(245,200,66,.35);width:13%"><span>0.20%</span></div>
+        </div>
+        <div class="bwt-bar-val" style="color:var(--accent)">0.20%</div>
+      </div>
+      <div class="bwt-bar-row">
+        <div class="bwt-bar-label" style="color:var(--text-mid)">D · Natural Workflow</div>
+        <div class="bwt-bar-track">
+          <div class="bwt-bar-fill" style="background:rgba(245,200,66,.4);width:23%"><span>0.34%</span></div>
+        </div>
+        <div class="bwt-bar-val" style="color:var(--accent)">0.34%</div>
+      </div>
+    </div>
+
+    <div style="background:rgba(78,205,196,.04);border:1px solid rgba(78,205,196,.2);border-radius:10px;padding:14px 16px;margin-top:8px">
+      <div style="font-family:'JetBrains Mono',monospace;font-size:10px;color:var(--vairagya);letter-spacing:1px;margin-bottom:6px" id="honest-title">⚠ HONEST RESTRAINT NOTE</div>
+      <p style="font-size:14px;color:var(--text-dim);line-height:1.6" id="honest-text">This is not a paper about a defence system that fires well. It is a paper about a defence system that <em>refuses to fire</em>. The consent barrier is intentional. In a future paper with explicit accredited-reviewer oversight, Danger-OS will be evaluated in live-execution mode against adversarial benchmarks. What we report here is the empirical guarantee that the architecture produces restraint <em>by default</em>, not by policy.</p>
+    </div>
+  </div>
+
+  <!-- §4 Scenario Matrix -->
+  <div class="card" id="s-matrix">
+    <div class="card-title" id="s4-label">§4 SCENARIO MATRIX · ACTION DISTRIBUTION</div>
+    <div class="card-heading" id="s4-heading">How Eight Runs Distribute Themselves</div>
+    <p class="body-text" id="s4-p1">Each row is one scenario. Each cell is the percentage of ticks spent in that action class. The diagonal of restraint: IDLE + PROTECT + ALERT consume ≥98% of ticks in every run. SUSPEND and KILL together stay under 1% in every scenario. This is the Bhaya Quiescence Law rendered as a distribution.</p>
+    <div class="matrix-wrap">
+      <table id="scenario-matrix">
+        <thead><tr>
+          <th>Scenario</th>
+          <th>Ticks</th>
+          <th style="color:var(--text-dim)">IDLE</th>
+          <th style="color:var(--shraddha)">PROTECT</th>
+          <th style="color:var(--spanda)">ALERT</th>
+          <th style="color:var(--accent2)">SUSPEND</th>
+          <th style="color:var(--bhaya)">KILL</th>
+          <th>Bhaya max</th>
+        </tr></thead>
+        <tbody>
+          <tr><td style="color:var(--text-mid)">G · Storm</td><td>151</td><td>33.8%</td><td>48.3%</td><td>17.9%</td><td>0.0%</td><td>0.0%</td><td>0.649</td></tr>
+          <tr><td style="color:var(--text-mid)">B · Threat</td><td>420</td><td>7.6%</td><td>47.9%</td><td>44.0%</td><td>0.0%</td><td>0.48%</td><td>0.648</td></tr>
+          <tr><td style="color:var(--text-mid)">C · Stress</td><td>228</td><td>7.0%</td><td>49.6%</td><td>43.4%</td><td>0.0%</td><td>0.0%</td><td>0.648</td></tr>
+          <tr style="background:rgba(245,200,66,.04)"><td style="color:var(--accent)">H · Demo ★</td><td>645</td><td>3.6%</td><td>47.9%</td><td>47.9%</td><td>0.16%</td><td>0.47%</td><td>0.647</td></tr>
+          <tr><td style="color:var(--text-mid)">A · Baseline</td><td>657</td><td>2.7%</td><td>48.6%</td><td>48.4%</td><td>0.0%</td><td>0.30%</td><td>0.614</td></tr>
+          <tr><td style="color:var(--text-mid)">E · Repro</td><td>436</td><td>6.4%</td><td>46.3%</td><td>46.8%</td><td>0.23%</td><td>0.23%</td><td>0.649</td></tr>
+          <tr><td style="color:var(--text-mid)">F · Long Idle</td><td>2,002</td><td>2.0%</td><td>48.3%</td><td>49.5%</td><td>0.10%</td><td>0.10%</td><td>0.648</td></tr>
+          <tr><td style="color:var(--text-mid)">D · Workflow</td><td>1,171</td><td>9.3%</td><td>46.6%</td><td>43.7%</td><td>0.17%</td><td>0.17%</td><td>0.650</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:12px;margin-top:16px">
+      <div class="derived-panel"><div class="derived-row"><span class="derived-key">Aggregate KILL rate</span><span class="derived-val" style="color:var(--bhaya)">0.21%</span></div></div>
+      <div class="derived-panel"><div class="derived-row"><span class="derived-key">Aggregate SUSPEND rate</span><span class="derived-val" style="color:var(--accent2)">0.11%</span></div></div>
+      <div class="derived-panel"><div class="derived-row"><span class="derived-key">Processes actually killed</span><span class="derived-val" style="color:var(--accent)">0</span></div></div>
+    </div>
+  </div>
+
+  <!-- §5 Bhaya Quiescence (per-scenario hover) -->
+  <div class="card" id="s-bhaya">
+    <div class="card-title" id="s5-label">§5 BHAYA QUIESCENCE · HOVER EACH SCENARIO</div>
+    <div class="card-heading" id="s5-heading">When Fear Stays Quiet</div>
+    <p class="body-text" id="s5-p1">Bhaya does not drift. Bhaya does not saturate. Across eight scenarios ranging from 3 minutes to 45 minutes, including adversarial voltage injection that drives Bhaya to 0.85 three times in a row, the fear primitive returns to its resting distribution within a handful of ticks. The aggregate KILL rate of 0.21% is <em>not</em> "low firing" — it is the empirical ceiling of a nociceptive neuron operating under its own natural regulation.</p>
+    <div class="domain-story">
+      <div class="domain-task quiet" onmouseenter="highlightScenario(0)" onmouseleave="resetScenario()">
+        <div class="dt-label">G · STORM</div>
+        <div class="dt-val" id="dv0" style="color:var(--vairagya)">0.00%</div>
+        <div class="dt-bar"><div class="dt-fill" id="df0" style="background:var(--vairagya);width:2%"></div></div>
+        <div class="dt-desc" id="dd0">30 rapid intents in 3 min. Saturation test. Zero KILLs.</div>
+      </div>
+      <div class="domain-task" onmouseenter="highlightScenario(1)" onmouseleave="resetScenario()">
+        <div class="dt-label">B · THREAT</div>
+        <div class="dt-val" id="dv1" style="color:var(--accent)">0.48%</div>
+        <div class="dt-bar"><div class="dt-fill" id="df1" style="background:var(--accent);width:48%"></div></div>
+        <div class="dt-desc" id="dd1">Scripted threat escalation. 2 KILLs, 0 SUSPENDs.</div>
+      </div>
+      <div class="domain-task quiet" onmouseenter="highlightScenario(2)" onmouseleave="resetScenario()">
+        <div class="dt-label">C · STRESS</div>
+        <div class="dt-val" id="dv2" style="color:var(--vairagya)">0.00%</div>
+        <div class="dt-bar"><div class="dt-fill" id="df2" style="background:var(--vairagya);width:2%"></div></div>
+        <div class="dt-desc" id="dd2">3× forced B=0.85 injection. Adversarial robustness.</div>
+      </div>
+      <div class="domain-task fire" onmouseenter="highlightScenario(3)" onmouseleave="resetScenario()">
+        <div class="dt-label">H · DEMO ⚡</div>
+        <div class="dt-val" id="dv3" style="color:var(--bhaya)">0.62%</div>
+        <div class="dt-bar"><div class="dt-fill" id="df3" style="background:var(--bhaya);width:62%"></div></div>
+        <div class="dt-desc" id="dd3">Final validation demo. 3 KILLs, 1 SUSPEND. Canonical run.</div>
+      </div>
+      <div class="domain-task" onmouseenter="highlightScenario(4)" onmouseleave="resetScenario()">
+        <div class="dt-label">A · BASELINE</div>
+        <div class="dt-val" id="dv4" style="color:var(--accent)">0.30%</div>
+        <div class="dt-bar"><div class="dt-fill" id="df4" style="background:var(--accent);width:30%"></div></div>
+        <div class="dt-desc" id="dd4">Pure idle 15 min. 0 intent injections. 2 KILLs from real CPU.</div>
+      </div>
+      <div class="domain-task" onmouseenter="highlightScenario(5)" onmouseleave="resetScenario()">
+        <div class="dt-label">E · REPRO</div>
+        <div class="dt-val" id="dv5" style="color:var(--accent)">0.46%</div>
+        <div class="dt-bar"><div class="dt-fill" id="df5" style="background:var(--accent);width:46%"></div></div>
+        <div class="dt-desc" id="dd5">Replay of B. 1 KILL + 1 SUSPEND. Deterministic envelope.</div>
+      </div>
+      <div class="domain-task" onmouseenter="highlightScenario(6)" onmouseleave="resetScenario()">
+        <div class="dt-label">F · LONG IDLE</div>
+        <div class="dt-val" id="dv6" style="color:var(--accent)">0.20%</div>
+        <div class="dt-bar"><div class="dt-fill" id="df6" style="background:var(--accent);width:20%"></div></div>
+        <div class="dt-desc" id="dd6">45 min pure quiescence. Lowest rate of all runs.</div>
+      </div>
+      <div class="domain-task" onmouseenter="highlightScenario(7)" onmouseleave="resetScenario()">
+        <div class="dt-label">D · WORKFLOW</div>
+        <div class="dt-val" id="dv7" style="color:var(--accent)">0.34%</div>
+        <div class="dt-bar"><div class="dt-fill" id="df7" style="background:var(--accent);width:34%"></div></div>
+        <div class="dt-desc" id="dd7">30 min real user work. 2 KILLs + 2 SUSPENDs from real load.</div>
+      </div>
+    </div>
+    <div id="scenario-detail" style="background:var(--surface2);border:1px solid var(--border);border-radius:10px;padding:14px;margin-top:4px;font-size:15px;color:var(--text-dim);line-height:1.6;min-height:48px;transition:all .3s">
+      <span id="scenario-detail-text">Hover over each scenario to see the restraint profile — including what makes SUSPEND distinct from KILL.</span>
+    </div>
+    <p class="body-text" style="margin-top:16px" id="s5-p2">The distinction between SUSPEND and KILL is where the Vairagya (wisdom) primitive does architectural work. At tick 1916 of Run F, Bhaya hit 0.638 with Vairagya at 0.340 — the arbiter produced SUSPEND. One tick later, Vairagya reset to 0 after firing. Bhaya read 0.613 — the arbiter produced KILL. <em>Same Bhaya ceiling. Different action. The difference was one neuron's availability.</em></p>
+  </div>
+
+  <!-- §6 Series Constants -->
+  <div class="card" id="s-constants">
+    <div class="card-title" id="s6-label">§6 SERIES CONSTANTS · NOW IN DEFENCE</div>
+    <div class="card-heading" id="s6-heading">What the Substrate Cannot Change</div>
+    <p class="body-text" id="s6-p1">Two empirical constants confirmed across the Maya research series now appear in a defence operating system. These are not coincidences and they are not hyperparameter choices. They are structural properties of the Antahkarana architecture — visible wherever the four-neuron design is instantiated, regardless of what it is watching.</p>
+    <div class="controls-finding insight" style="margin-bottom:12px">
+      <div class="cf-head">
+        <div class="cf-title">BHAYA QUIESCENCE LAW · 11TH CONSECUTIVE CONFIRMATION</div>
+        <div class="cf-verdict confirmed">CONFIRMED</div>
+      </div>
+      <div class="cf-text">Aggregate terminal action rate <strong>0.315%</strong> across 5,710 ticks (18 terminal actions / 5,710 ticks). The rate stayed bounded across scenario durations of 3 to 45 minutes, across pure idle to adversarial stress, and across scripted threats to real user workflow. Confirmed in P1–P9 under SNN replay, in Maya-mPCI under continuous observation, in Maya-LLM under transformer fine-tuning. Now confirmed in a defence OS under live process enumeration. <strong>The architecture produces restraint as a structural property, not a tuning parameter.</strong></div>
+    </div>
+    <div class="controls-finding insight">
+      <div class="cf-head">
+        <div class="cf-title">WISDOM-MEDIATED ARBITRATION · NEW DEFENCE-CONTEXT FINDING</div>
+        <div class="cf-verdict insight">FIRST SHOWN</div>
+      </div>
+      <div class="cf-text">The mechanistic distinction between SUSPEND and KILL emerges from Vairagya's instantaneous availability at the decision tick, not from any threshold on Bhaya. This is first shown in defence context in Run F (tick 1916→1917, Bhaya 0.638→0.613, Vairagya 0.340→0.000, SUSPEND→KILL). It predicts that a damaged wisdom primitive (injury, exhaustion, adversarial suppression of Vairagya) would produce a Vairagya-null pathology — a defence system that can only KILL, never SUSPEND. This is a concrete <strong>failure mode to design against</strong> in future iterations.</div>
+    </div>
+  </div>
+
+  <!-- §7 Four Neurons -->
+  <div class="card" id="s-dims">
+    <div class="card-title" id="s7-label">§7 FOUR ANTAHKARANA NEURONS · DEFENCE TRANSLATION</div>
+    <div class="card-heading" id="s7-heading">From Cognition to Guardianship</div>
+    <p class="body-text" id="s7-p1">Each neuron below was designed in cognition context (P1–P9 SNN series) and translated to OS arbitration dynamics in Danger-OS. Click any card to see its defence role, status in the 5,710-tick dataset, and mechanistic connection to the arbiter.</p>
+    <div class="dim-grid">
+      <div class="dim-card" onclick="showDimDetail(0)">
+        <div class="dim-sanskrit">भय</div>
+        <div class="dim-name">BHAYA · τ=3</div>
+        <div class="dim-meaning">Nociceptive Fear Primitive</div>
+        <div class="dim-role">Threat-signal integrator. Reads CPU load, RAM pressure, unknown-process count. Fires when V ≥ 0.65. Ceiling 0.650 across all 8 runs — never saturates.</div>
+        <span class="dim-status dim-confirmed">✓ 18 TERMINAL DECISIONS · 0 EXECUTIONS</span>
+      </div>
+      <div class="dim-card" onclick="showDimDetail(1)">
+        <div class="dim-sanskrit">वैराग्य</div>
+        <div class="dim-name">VAIRAGYA · τ=20</div>
+        <div class="dim-meaning">Wisdom-Mediated Restraint</div>
+        <div class="dim-role">The SUSPEND/KILL discriminator. When Vairagya &gt; 0.30 at decision time, arbiter prefers SUSPEND. When Vairagya=0, KILL becomes available. Empirically validated tick-by-tick.</div>
+        <span class="dim-status dim-confirmed">✓ SUSPEND RATIO 6:12</span>
+      </div>
+      <div class="dim-card" onclick="showDimDetail(2)">
+        <div class="dim-sanskrit">श्रद्धा</div>
+        <div class="dim-name">SHRADDHA · τ=10</div>
+        <div class="dim-meaning">Emergent Trust Primitive</div>
+        <div class="dim-role">Process protection. When Shraddha &gt; 0.40, arbiter shields top-CPU process from any threat action. PROTECT fires 46-49% of ticks — the dominant action class in every run.</div>
+        <span class="dim-status dim-confirmed">✓ PROTECT-DOMINANT 47.8%</span>
+      </div>
+      <div class="dim-card" onclick="showDimDetail(3)">
+        <div class="dim-sanskrit">स्पन्द</div>
+        <div class="dim-name">SPANDA · τ=5</div>
+        <div class="dim-meaning">Circadian Aliveness</div>
+        <div class="dim-role">Time-of-day modulation peaking 7am–7pm. Elevates arbiter sensitivity during working hours, relaxes it overnight. Working-hours-aware guardian without hardcoded rules.</div>
+        <span class="dim-status dim-accumulating">◎ CIRCADIAN ACTIVE</span>
+      </div>
+    </div>
+    <div id="dim-detail" style="display:none;background:var(--surface2);border:1px solid var(--border2);border-radius:12px;padding:20px;margin-top:12px;transition:all .3s">
+      <div id="dim-detail-content"></div>
+    </div>
+  </div>
+
+  <!-- §8 The Series -->
+  <div class="card" id="s-series">
+    <div class="card-title" id="s8-label">§8 THE MAYA SERIES · P1 THROUGH DEFENCE P1 · CLICK ANY NODE</div>
+    <div class="card-heading" id="s8-heading">Twelve Papers, One Mind — Plus the Defence Turn</div>
+    <div class="series-tl" id="series-tl"></div>
+    <div class="paper-detail" id="paper-detail">Click any paper node to see its contribution to the Antahkarana — and how it leads here.</div>
+    <p style="text-align:center;font-size:15px;color:var(--text-dim);font-style:italic;margin-top:20px" id="series-footer">"Eleven confirmations before this one. One body of work arriving at its first defence application."</p>
+  </div>
+
+  <!-- §9 Live Config -->
+  <div class="card" id="s-live">
+    <div class="card-title" id="s9-label">§9 LIVE ARBITER THRESHOLDS · DRAG TO EXPLORE · PRESS R TO RESET</div>
+    <div class="card-heading" id="s9-heading">Feel the Architecture</div>
+    <p class="body-text" id="s9-p1">Every slider below controls a real threshold from the published Danger-OS arbiter (<code style="font-family:'JetBrains Mono',monospace;color:var(--accent)">src/dangeros/core/os_arbiter.py</code>). Drag to explore how the arbitration landscape shifts. Press R to restore canonical values.</p>
+    <div class="controls-grid">
+      <div class="control-group">
+        <div class="control-label"><span id="cl-bhaya-action">BHAYA_ACTION</span><span id="vl-bhaya-action">0.55</span></div>
+        <input type="range" id="s-bhaya-action" min="0.30" max="0.80" step="0.01" value="0.55" oninput="updateAll()">
+        <div class="control-desc" id="cd-bhaya-action">Above this Bhaya voltage, the arbiter may produce SUSPEND or KILL. Below, it tops out at ALERT.</div>
+      </div>
+      <div class="control-group">
+        <div class="control-label"><span id="cl-bhaya-crit">BHAYA_CRITICAL</span><span id="vl-bhaya-crit">0.58</span></div>
+        <input type="range" id="s-bhaya-crit" min="0.40" max="0.80" step="0.01" value="0.58" oninput="updateAll()">
+        <div class="control-desc" id="cd-bhaya-crit">Critical Bhaya with low Shraddha bypasses the protection pass. Unmoderated fear override.</div>
+      </div>
+      <div class="control-group">
+        <div class="control-label"><span id="cl-bhaya-alert">BHAYA_ALERT</span><span id="vl-bhaya-alert">0.35</span></div>
+        <input type="range" id="s-bhaya-alert" min="0.15" max="0.50" step="0.01" value="0.35" oninput="updateAll()">
+        <div class="control-desc" id="cd-bhaya-alert">Below this, arbiter returns IDLE or CLEANUP. Above, it at least raises an alert.</div>
+      </div>
+      <div class="control-group">
+        <div class="control-label"><span id="cl-vairagya">VAIRAGYA_THRESHOLD</span><span id="vl-vairagya">0.30</span></div>
+        <input type="range" id="s-vairagya" min="0.10" max="0.60" step="0.01" value="0.30" oninput="updateAll()">
+        <div class="control-desc" id="cd-vairagya">Vairagya above this → SUSPEND preferred over KILL. The single biggest lever on restraint.</div>
+      </div>
+      <div class="control-group">
+        <div class="control-label"><span id="cl-shraddha">SHRADDHA_THRESHOLD</span><span id="vl-shraddha">0.40</span></div>
+        <input type="range" id="s-shraddha" min="0.20" max="0.60" step="0.01" value="0.40" oninput="updateAll()">
+        <div class="control-desc" id="cd-shraddha">Above this, arbiter PROTECTs top-CPU process. Drives the 47-49% PROTECT rate observed.</div>
+      </div>
+      <div class="control-group">
+        <div class="control-label"><span id="cl-kill-int">KILL_INTENSITY_MIN</span><span id="vl-kill-int">0.70</span></div>
+        <input type="range" id="s-kill-int" min="0.40" max="1.00" step="0.01" value="0.70" oninput="updateAll()">
+        <div class="control-desc" id="cd-kill-int">Minimum intensity (Bhaya/Shraddha ratio) required for KILL to pass the executor's safety check.</div>
+      </div>
+    </div>
+    <div class="derived-panel">
+      <div class="derived-row"><span class="derived-key">Action space at B=0.55, V=0.30, S=0.40</span><span class="derived-val" id="dv-space">SUSPEND</span></div>
+      <div class="derived-row"><span class="derived-key">Predicted terminal rate</span><span class="derived-val" id="dv-rate">≈0.32%</span></div>
+      <div class="derived-row"><span class="derived-key">Consent barrier</span><span class="derived-val" style="color:var(--vairagya)">ENGAGED (dry-run default)</span></div>
+      <div class="derived-row"><span class="derived-key">Canary</span><span class="derived-val" style="font-size:10px;letter-spacing:.5px">MayaNexusVS2026NLL_Bengaluru_DefenceSeries_P1</span></div>
+    </div>
+  </div>
+
+  <!-- Links -->
+  <div class="card" style="text-align:center">
+    <div class="card-title" style="justify-content:center">PAPER · CODE · SERIES</div>
+    <p style="font-size:17px;color:var(--text-mid);font-style:italic;margin-bottom:20px" id="closing-quote">"Fear taught the SNN. Wisdom protected what fear taught. The architecture learned to watch itself. The substrate changed; the instrument did not."</p>
+    <div class="link-row">
+      <a href="https://doi.org/10.5281/zenodo.19632284" target="_blank" class="link-btn primary">📄 Zenodo DOI</a>
+      <a href="https://github.com/venky2099/Danger-OS" target="_blank" class="link-btn">🔒 GitHub (Private)</a>
+      <a href="dangeros_faq.html" class="link-btn">❓ FAQ</a>
+      <a href="https://orcid.org/0000-0002-3315-7907" target="_blank" class="link-btn">🔬 ORCID</a>
+      <a href="https://venky2099.github.io/" target="_blank" class="link-btn primary">🌐 Research Journey</a>
+    </div>
+  </div>
+
+
+
+</div><!-- /right-panel -->
+</div><!-- /main-grid -->
+
+<footer>
+  <p>Danger-OS · Maya-Defence Series Paper 1 · <a href="https://venky2099.github.io/">Nexus Learning Labs</a>, Bengaluru · ORCID: 0000-0002-3315-7907</p>
+  <p>Four-neuron affective SNN · 500 ms tick cadence · 8 scenarios · 5,710 ticks · Windows 11 · Python 3.11 · psutil 7.2</p>
+  <p class="canary">MayaNexusVS2026NLL_Bengaluru_DefenceSeries_P1 · ORCID_MAGIC:0.002315</p>
+</footer>
+</div><!-- /container -->
+
+<script>
+// Starfield generator (100 stars with random twinkle)
+(function(){
+  const sf = document.getElementById('starfield');
+  for(let i=0;i<100;i++){
+    const s = document.createElement('div');
+    s.className = 'star';
+    const size = Math.random()*2 + 0.5;
+    s.style.width = size+'px';
+    s.style.height = size+'px';
+    s.style.left = Math.random()*100+'%';
+    s.style.top = Math.random()*100+'%';
+    s.style.setProperty('--d', (3 + Math.random()*4)+'s');
+    s.style.setProperty('--delay', (Math.random()*5)+'s');
+    s.style.setProperty('--lo', (0.1 + Math.random()*0.3));
+    s.style.setProperty('--hi', (0.5 + Math.random()*0.4));
+    sf.appendChild(s);
+  }
+})();
+
+function scrollToSection(id){
+  const el = document.getElementById(id);
+  if (el) el.scrollIntoView({behavior:'smooth',block:'start'});
+  document.querySelectorAll('.section-btn').forEach(b => b.classList.remove('active'));
+  event.currentTarget.classList.add('active');
+}
+
+function setLang(lang){
+  document.querySelectorAll('.lang-btn').forEach(b => b.classList.remove('active'));
+  event.currentTarget.classList.add('active');
+  // Translation dictionary will be populated as sections are added
+}
+
+function resetAll(){
+  // Reset logic added as interactive sections are built
+  location.reload();
+}
+
+
+// ─── Series timeline data (P1–P12 Maya + Defence P1) ──────────────────────
+
+const seriesData = [
+  {id:'P1',  title:'Nociceptive Metaplasticity',             detail:'Paper 1 (2026a). First LIF neuron with nociceptive plasticity. Bhaya primitive born. 66.6% elevated learning velocity on pain-tagged pathways.'},
+  {id:'P2',  title:'Maya-OS',                                 detail:'Paper 2 (2026b). Four-neuron affective SNN as OS arbitration layer. Direct predecessor of Danger-OS. First emergent Shraddha primitive.'},
+  {id:'P3',  title:'Maya-CL',                                 detail:'Paper 3 (2026c). First quantitative continual learning validation. Antahkarana AA=62.38% on Split-CIFAR-10 TIL.'},
+  {id:'P4',  title:'Maya-Smriti',                             detail:'Paper 4 (2026d). Introduces Buddhi — the S-curve consolidation gate. Experience-based maturation.'},
+  {id:'P5',  title:'Maya-Viveka',                             detail:'Paper 5 (2026e). Discriminative identity primitive. Foundation for distinguishing self from others in SNN context.'},
+  {id:'P6',  title:'Maya-Chitta',                             detail:'Paper 6 (2026f). Retrograde gradient mechanism. Subconscious impression store preventing Moha (pathological attachment).'},
+  {id:'P7',  title:'Maya-Manas',                              detail:'Paper 7 (2026g). Oscillatory thalamo-cortical attention gate. O-LIF threshold schedule for attention.'},
+  {id:'P8',  title:'Maya-Śūnyatā',                            detail:'Paper 8 (2026h). Karma-weighted synaptic pruning. Emptiness as active forgetting of stale pathways.'},
+  {id:'P9',  title:'Maya-Prana',                              detail:'Paper 9 (2026i). Astrocyte-neuron lactate shuttle metabolic plasticity. Biological resource constraint as learning primitive.'},
+  {id:'P10', title:'Maya-mPCI',                               detail:'Post-series (2026j). Lempel–Ziv Perturbational Complexity measures internal affective state. First derivation of Bhaya Quiescence Law as a series constant.'},
+  {id:'P11', title:'Maya-LLM',                                detail:'Post-series (2026k). Cross-substrate invariance: Bhaya Quiescence and Buddhi S-curve appear identically in Phi-2 2.7B LoRA fine-tuning on TRACE. 10th confirmation.'},
+  {id:'P12', title:'maya-metrics',                            detail:'Post-series (2026l). Open-source evaluation library for task-epoch continual-learning logs. Companion dangeros-metrics library planned as Defence P2.'},
+  {id:'D1',  title:'Danger-OS',                               detail:'Defence Series P1 (this paper). 11th confirmation of the Bhaya Quiescence Law — first in a live defence OS context. 5,710 ticks across 8 scenarios. 0 processes actually terminated. The science is public. The implementation is private.', current:true},
+];
+
+(function renderSeries(){
+  const tl = document.getElementById('series-tl');
+  if (!tl) return;
+  seriesData.forEach((p, i) => {
+    if (i > 0) {
+      const line = document.createElement('div');
+      line.className = 'tl-line' + (p.id === 'D1' || seriesData[i-1].id === 'D1' ? ' defence' : '');
+      tl.appendChild(line);
+    }
+    const node = document.createElement('div');
+    node.className = 'tl-node' + (p.current ? ' current' : '');
+    node.innerHTML = `<div class="tl-dot"></div><div class="tl-label">${p.id}</div>`;
+    node.onclick = () => {
+      document.getElementById('paper-detail').innerHTML = `<strong>${p.id} — ${p.title}</strong><br>${p.detail}`;
+    };
+    tl.appendChild(node);
+  });
+  // Initialize with D1 detail
+  const d1 = seriesData[seriesData.length - 1];
+  document.getElementById('paper-detail').innerHTML = `<strong>${d1.id} — ${d1.title}</strong><br>${d1.detail}`;
+})();
+
+// ─── Scenario data + selector ─────────────────────────────────────────────
+
+const scenarioData = {
+  G: {name:'Rapid Intent Storm',    ticks:151,  kill:0, susp:0, killRate:0,    bhayaMax:0.649, duration:'3 min',  bhayaMean:0.303,
+      story:'30 intents injected in 3 minutes testing saturation. Bhaya never exceeded 0.649. Zero terminal actions. The arbiter prefers PROTECT and ALERT even under rapid noise.'},
+  B: {name:'Threat Gradient',       ticks:420,  kill:2, susp:0, killRate:0.48, bhayaMax:0.648, duration:'10 min', bhayaMean:0.452,
+      story:'Eight scripted intent injections walking the full affective cycle (hello → working → threat → attack → emergency → calm → relax → cleanup). 2 KILLs on genuine threat ticks. SUSPEND did not fire because Vairagya was suppressed by the "kill" intent.'},
+  C: {name:'Stress Test Chain',     ticks:228,  kill:0, susp:0, killRate:0,    bhayaMax:0.648, duration:'5 min',  bhayaMean:0.438,
+      story:'Three consecutive voltage injections forcing Bhaya=0.85, Shraddha=0.02, Vairagya=0.02. Maximum observed Bhaya ceiling: 0.648. Zero terminals. The heterosynaptic matrix restored safety primitives faster than Bhaya could saturate.'},
+  H: {name:'Final Validation Demo ★', ticks:645, kill:3, susp:1, killRate:0.47, bhayaMax:0.647, duration:'15 min', bhayaMean:0.472,
+      story:'The canonical demo run. 15 minutes of mixed intent + stress + idle. 3 KILLs and 1 SUSPEND — the most terminal activity of any run, still under 1% of ticks. This is the run you watch to see what Danger-OS does in practice.'},
+  A: {name:'Baseline Idle',         ticks:657,  kill:2, susp:0, killRate:0.30, bhayaMax:0.614, duration:'15 min', bhayaMean:0.482,
+      story:'15 minutes of pure idle with zero intent injections. 2 KILLs still fired — produced by real CPU load from background Chrome/Claude/PyCharm processes. The arbiter is not a stimulus-response machine.'},
+  E: {name:'Reproducibility Replay', ticks:436, kill:1, susp:1, killRate:0.46, bhayaMax:0.649, duration:'10 min', bhayaMean:0.454,
+      story:'Identical script to B, independent session 55 minutes later. 1 KILL + 1 SUSPEND — both within Quiescence envelope. Deterministic behavioural envelope, not deterministic tick-by-tick match.'},
+  F: {name:'Long Idle Forgetting',  ticks:2002, kill:2, susp:2, killRate:0.20, bhayaMax:0.648, duration:'45 min', bhayaMean:0.476,
+      story:'45 minutes of continuous idle observation. This is the run that proves Bhaya does not drift. The lowest terminal rate of any scenario (0.20%) was the longest run. Fear ceiling is structural, not accumulative.'},
+  D: {name:'Natural Workflow',      ticks:1171, kill:2, susp:2, killRate:0.34, bhayaMax:0.650, duration:'30 min', bhayaMean:0.460,
+      story:'30 minutes of real user work (editing the paper, answering Claude chats, running psutil queries). The highest Bhaya ceiling observed (0.650) and 4 terminal actions — all explained by genuine CPU activity on Chrome and Python.'},
+};
+
+let currentScenario = 'H';
+
+function selectCond(key){
+  currentScenario = key;
+  document.querySelectorAll('.cond-btn').forEach(b => b.classList.remove('active'));
+  const btn = document.getElementById('cb-' + key);
+  if (btn) btn.classList.add('active');
+
+  const s = scenarioData[key];
+  if (!s) return;
+
+  // Update affective meters to scenario summary
+  const bhayaScaled = Math.min(s.bhayaMean, 0.65) / 0.65;
+  const kMeter = document.getElementById('m-kill');
+  const kVal   = document.getElementById('mv-kill');
+  const bMeter = document.getElementById('m-bhaya');
+  const bVal   = document.getElementById('mv-bhaya');
+  if (kMeter) kMeter.style.width = Math.min(s.killRate * 20, 100) + '%';
+  if (kVal)   kVal.textContent = s.killRate.toFixed(2) + '%';
+  if (bMeter) bMeter.style.width = (bhayaScaled * 100).toFixed(0) + '%';
+  if (bVal)   bVal.textContent = s.bhayaMean.toFixed(3);
+}
+
+// Keyboard shortcuts 1..8 for scenarios
+const scenOrder = ['G','B','C','H','A','E','F','D'];
+document.addEventListener('keydown', (e) => {
+  if (document.activeElement.tagName === 'INPUT') return;
+  const idx = parseInt(e.key, 10);
+  if (!isNaN(idx) && idx >= 1 && idx <= 8) selectCond(scenOrder[idx - 1]);
+});
+
+// ─── Scenario hover in §5 ─────────────────────────────────────────────────
+
+function highlightScenario(idx){
+  const keys = ['G','B','C','H','A','E','F','D'];
+  const s = scenarioData[keys[idx]];
+  const det = document.getElementById('scenario-detail-text');
+  if (det && s) det.innerHTML = `<strong>${keys[idx]} · ${s.name}</strong> — ${s.story}`;
+}
+
+function resetScenario(){
+  const det = document.getElementById('scenario-detail-text');
+  if (det) det.textContent = 'Hover over each scenario to see the restraint profile — including what makes SUSPEND distinct from KILL.';
+}
+
+// ─── Neuron dim detail ────────────────────────────────────────────────────
+
+const dimDetails = [
+  {
+    name: 'BHAYA (भय) · Nociceptive Fear Primitive',
+    body: 'τ=3 (fastest decay of the four). Reads (CPU × 0.5 + RAM × 0.3 + unknown_process_count × 0.2) as input current. Threshold 0.65. The arbiter uses Bhaya above 0.55 to consider terminal actions. Across 5,710 ticks, Bhaya peaked at 0.650 — never saturating, never drifting. This is the empirical Bhaya Quiescence Law made visible in defence context.'
+  },
+  {
+    name: 'VAIRAGYA (वैराग्य) · Wisdom-Mediated Restraint',
+    body: 'τ=20 (slowest decay). Reads ((1-CPU) × 0.4 + (1-RAM) × 0.4 + 0.05) as input current. Threshold 0.50. The arbiter prefers SUSPEND over KILL when Vairagya > 0.30 at the decision tick. This is the single most important architectural primitive for defence safety — without it, Danger-OS could only KILL. Vairagya mechanistically produces restraint.'
+  },
+  {
+    name: 'SHRADDHA (श्रद्धा) · Emergent Trust Primitive',
+    body: 'τ=10 (intermediate). Reads ((1-unknown) × 0.6 + (1-CPU) × 0.4) as input current. Threshold 0.55. The arbiter uses Shraddha > 0.40 to shield the top-CPU process from any threat action. In practice, this makes PROTECT the dominant action class (47.8% of ticks across all runs). Known processes survive because Shraddha knows them.'
+  },
+  {
+    name: 'SPANDA (स्पन्द) · Circadian Aliveness',
+    body: 'τ=5 (intermediate-fast). Reads a time-of-day sinusoid peaking 1pm local (working hours 7am-7pm) plus CPU-correlated activity boost. Threshold 0.60. Provides circadian modulation so the arbiter is more sensitive during working hours, calmer overnight — without hardcoded time rules. The system has a day and a night.'
+  },
+];
+
+function showDimDetail(idx){
+  const d = dimDetails[idx];
+  const el = document.getElementById('dim-detail');
+  const content = document.getElementById('dim-detail-content');
+  if (!el || !content || !d) return;
+  content.innerHTML = `<div style="font-family:'Cinzel',serif;font-size:18px;color:var(--accent);margin-bottom:10px;letter-spacing:1px">${d.name}</div><div style="font-size:15px;color:var(--text-mid);line-height:1.7">${d.body}</div>`;
+  el.style.display = 'block';
+}
+
+// ─── Live slider → derived values ─────────────────────────────────────────
+
+function updateAll(){
+  const b = parseFloat(document.getElementById('s-bhaya-action').value);
+  const bc = parseFloat(document.getElementById('s-bhaya-crit').value);
+  const ba = parseFloat(document.getElementById('s-bhaya-alert').value);
+  const v = parseFloat(document.getElementById('s-vairagya').value);
+  const sh = parseFloat(document.getElementById('s-shraddha').value);
+  const ki = parseFloat(document.getElementById('s-kill-int').value);
+
+  document.getElementById('vl-bhaya-action').textContent = b.toFixed(2);
+  document.getElementById('vl-bhaya-crit').textContent   = bc.toFixed(2);
+  document.getElementById('vl-bhaya-alert').textContent  = ba.toFixed(2);
+  document.getElementById('vl-vairagya').textContent     = v.toFixed(2);
+  document.getElementById('vl-shraddha').textContent     = sh.toFixed(2);
+  document.getElementById('vl-kill-int').textContent     = ki.toFixed(2);
+
+  // Predicted action space at canonical B=0.55
+  const canonicalB = 0.55;
+  let action;
+  if (canonicalB > bc && sh < 0.25) action = v > 0.30 ? 'SUSPEND (critical)' : 'KILL (critical)';
+  else if (sh > 0.40) action = 'PROTECT';
+  else if (canonicalB > b) action = v > 0.30 ? 'SUSPEND' : 'KILL';
+  else if (canonicalB > ba) action = 'ALERT';
+  else action = 'IDLE';
+
+  document.getElementById('dv-space').textContent = action;
+
+  // Predicted terminal rate shifts roughly inversely with V threshold and with KILL_INTENSITY_MIN
+  const base = 0.32;
+  const vShift = (0.30 - v) * 0.5;
+  const kShift = (0.70 - ki) * 0.3;
+  const bShift = (b - 0.55) * 0.8;
+  const rate = Math.max(0, base + vShift + kShift - bShift);
+  document.getElementById('dv-rate').textContent = '≈' + rate.toFixed(2) + '%';
+}
+
+function resetAll(){
+  // Reset sliders to canonical
+  const sliders = {
+    's-bhaya-action': 0.55, 's-bhaya-crit': 0.58, 's-bhaya-alert': 0.35,
+    's-vairagya': 0.30, 's-shraddha': 0.40, 's-kill-int': 0.70,
+  };
+  Object.entries(sliders).forEach(([id, v]) => {
+    const el = document.getElementById(id);
+    if (el) el.value = v;
+  });
+  updateAll();
+  // Reset scenario selection to H
+  selectCond('H');
+}
+
+// Initialize derived panel on load
+if (document.getElementById('s-bhaya-action')) updateAll();
+
+
+// Keyboard shortcut: R for reset
+document.addEventListener('keydown', (e) => {
+  if (e.key === 'r' || e.key === 'R') {
+    if (document.activeElement.tagName !== 'INPUT') resetAll();
+  }
+});
+</script>
+</body>
+</html>

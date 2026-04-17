@@ -1,0 +1,471 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Danger-OS FAQ · Spiking Neural Danger Theory for Behavioural Anomaly Detection</title>
+<link href="https://fonts.googleapis.com/css2?family=Crimson+Pro:ital,wght@0,300;0,400;0,600;1,300;1,400&family=JetBrains+Mono:wght@300;400;500&family=Noto+Sans+Devanagari:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#04040a; --surface:#0c0c18; --surface2:#141428; --border:#252545;
+  --accent:#f5c842; --accent2:#e67e22; --accent3:#4ecdc4;
+  --bhaya:#ff4757; --vairagya:#4ecdc4; --shraddha:#2ecc71; --spanda:#f39c12;
+  --text:#eeeeff; --text-dim:#7878aa; --text-mid:#aaaacc;
+  --glow:0 0 20px rgba(245,200,66,0.3);
+}
+*{margin:0;padding:0;box-sizing:border-box}
+body{background:var(--bg);color:var(--text);font-family:'Crimson Pro',serif;min-height:100vh;padding:32px 24px}
+.container{max-width:960px;margin:0 auto}
+
+header{text-align:center;margin-bottom:40px}
+.badge{display:inline-block;background:rgba(245,200,66,.1);border:1px solid var(--accent);border-radius:20px;padding:4px 16px;font-family:'JetBrains Mono',monospace;font-size:11px;color:var(--accent);letter-spacing:2px;margin-bottom:8px}
+.badge-sub{display:inline-block;background:rgba(230,126,34,.1);border:1px solid var(--accent2);border-radius:20px;padding:4px 12px;font-family:'JetBrains Mono',monospace;font-size:11px;color:var(--accent2);letter-spacing:2px;margin-left:8px}
+h1{font-size:clamp(24px,4vw,38px);font-weight:300;margin-bottom:8px;line-height:1.15}
+h1 em{color:var(--accent);font-style:normal}
+.subtitle{color:var(--text-dim);font-size:15px;margin-bottom:8px}
+.orcid{font-family:'JetBrains Mono',monospace;font-size:11px;color:var(--text-dim)}
+
+/* Key findings */
+.findings{display:grid;grid-template-columns:repeat(auto-fill,minmax(180px,1fr));gap:12px;margin-bottom:28px}
+.finding-card{background:var(--surface);border:1px solid var(--border);border-radius:12px;padding:16px;transition:all .2s}
+.finding-card:hover{border-color:var(--accent)}
+.finding-val{font-family:'JetBrains Mono',monospace;font-size:22px;font-weight:500;margin-bottom:4px}
+.finding-label{font-size:12px;color:var(--text-dim);font-family:'JetBrains Mono',monospace}
+.finding-note{font-size:12px;color:var(--text-dim);margin-top:6px}
+
+/* Alert box */
+.controls-alert{background:rgba(245,200,66,.05);border:1px solid rgba(245,200,66,.3);border-radius:12px;padding:16px 20px;margin-bottom:28px}
+.controls-alert-title{font-family:'JetBrains Mono',monospace;font-size:11px;color:var(--accent);letter-spacing:1px;margin-bottom:8px}
+.controls-alert p{font-size:14px;color:var(--text-dim);line-height:1.6}
+
+/* Series hub */
+.hub{background:var(--surface);border:1px solid var(--border);border-radius:16px;padding:20px 24px;margin-bottom:28px}
+.hub-title{font-family:'JetBrains Mono',monospace;font-size:10px;color:var(--text-dim);letter-spacing:2px;margin-bottom:14px}
+.hub-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(140px,1fr));gap:8px;margin-bottom:12px}
+.hub-card{background:var(--surface2);border:1px solid var(--border);border-radius:10px;padding:10px 12px;display:block;transition:all .2s;text-decoration:none}
+.hub-card:hover{border-color:var(--accent);transform:translateY(-1px)}
+.hub-card.current{border-color:var(--accent);background:rgba(245,200,66,.06)}
+.hub-paper{font-family:'JetBrains Mono',monospace;font-size:9px;color:var(--text-dim);margin-bottom:3px}
+.hub-name{font-size:13px;color:var(--text);font-weight:600;margin-bottom:3px}
+.hub-key{font-family:'JetBrains Mono',monospace;font-size:10px;color:var(--accent3);margin-bottom:6px}
+.hub-links{display:flex;gap:5px;flex-wrap:wrap}
+.hub-link{font-family:'JetBrains Mono',monospace;font-size:9px;padding:2px 7px;border-radius:8px;border:1px solid;text-decoration:none;transition:all .2s}
+.hub-link.doi{color:var(--accent);border-color:var(--accent)}
+.hub-link.doi:hover{background:var(--accent);color:var(--bg)}
+.hub-link.gh{color:var(--text-dim);border-color:var(--border)}
+.hub-link.gh:hover{border-color:var(--text);color:var(--text)}
+.hub-link.dash{color:var(--accent);border-color:var(--accent)}
+.hub-link.dash:hover{background:var(--accent);color:var(--bg)}
+
+/* Search and filters */
+.controls{display:flex;flex-wrap:wrap;gap:8px;align-items:center;margin-bottom:16px}
+input[type=text]{background:var(--surface);border:1px solid var(--border);border-radius:20px;padding:8px 16px;color:var(--text);font-size:14px;font-family:'Crimson Pro',serif;flex:1;min-width:200px;outline:none;transition:all .2s}
+input[type=text]:focus{border-color:var(--accent)}
+input[type=text]::placeholder{color:var(--text-dim)}
+.filter-row{display:flex;flex-wrap:wrap;gap:6px}
+.filter-btn{background:var(--surface2);border:1px solid var(--border);border-radius:16px;padding:4px 14px;cursor:pointer;font-size:12px;color:var(--text-dim);transition:all .2s;font-family:'JetBrains Mono',monospace}
+.filter-btn:hover{border-color:var(--text-dim);color:var(--text)}
+.filter-btn.active{border-color:var(--accent);color:var(--accent)}
+.count{font-family:'JetBrains Mono',monospace;font-size:11px;color:var(--text-dim);margin-bottom:16px}
+
+/* FAQ items */
+.faq-item{background:var(--surface);border:1px solid var(--border);border-radius:12px;margin-bottom:10px;overflow:hidden;transition:border-color .2s}
+.faq-item:hover{border-color:rgba(245,200,66,.4)}
+.faq-q{padding:16px 20px;cursor:pointer;display:flex;justify-content:space-between;align-items:flex-start;gap:16px;font-size:17px;font-weight:400;line-height:1.4}
+.faq-q:hover{color:var(--accent)}
+.faq-arrow{color:var(--text-dim);flex-shrink:0;transition:transform .3s;font-size:14px;margin-top:3px}
+.faq-item.open .faq-arrow{transform:rotate(180deg);color:var(--accent)}
+.faq-a{max-height:0;overflow:hidden;transition:max-height .4s ease}
+.faq-a-inner{padding:0 20px 18px;font-size:16px;line-height:1.75;color:var(--text-mid);border-top:1px solid var(--border)}
+.faq-a-inner code{font-family:'JetBrains Mono',monospace;font-size:12px;background:var(--surface2);padding:2px 6px;border-radius:4px;color:var(--accent3)}
+.faq-a-inner strong{color:var(--text);font-weight:600}
+.faq-a-inner em{color:var(--accent);font-style:italic}
+.faq-a-inner a{color:var(--accent);text-decoration:none}
+.faq-a-inner a:hover{text-decoration:underline}
+
+/* Tag pills */
+.tag-pill{display:inline-block;font-family:'JetBrains Mono',monospace;font-size:9px;padding:2px 8px;border-radius:8px;border:1px solid;margin-right:6px;vertical-align:middle}
+.tag-pill.layman{color:#4ecdc4;border-color:#4ecdc4}
+.tag-pill.researcher{color:#7c6fff;border-color:#7c6fff}
+.tag-pill.results{color:#00b4d8;border-color:#00b4d8}
+.tag-pill.advanced{color:#ff6b9d;border-color:#ff6b9d}
+.tag-pill.philosophy{color:#f5c842;border-color:#f5c842}
+.tag-pill.series{color:#00d4aa;border-color:#00d4aa}
+.tag-pill.code{color:#ff9f43;border-color:#ff9f43}
+.tag-pill.defence{color:#e74c3c;border-color:#e74c3c}
+
+footer{text-align:center;margin-top:48px;padding-top:24px;border-top:1px solid var(--border);color:var(--text-dim);font-size:13px;font-family:'JetBrains Mono',monospace}
+footer a{color:var(--accent);text-decoration:none}
+footer .canary{margin-top:12px;font-size:10px;color:#1a1a2e}
+</style>
+</head>
+<body>
+<div class="container">
+
+<header>
+  <div>
+    <span class="badge">MAYA-DEFENCE SERIES · PAPER 1</span>
+    <span class="badge-sub">DEFENCE EXTENSION</span>
+  </div>
+  <h1>Danger-OS <em>FAQ</em></h1>
+  <p class="subtitle">Spiking Neural Danger Theory · Affective Neuromodulatory Arbitration for Behavioural Anomaly Detection</p>
+  <p class="orcid">Venkatesh Swaminathan · ORCID 0000-0002-3315-7907 · Nexus Learning Labs, Bengaluru · April 2026</p>
+</header>
+
+<!-- Key findings -->
+<div class="findings">
+  <div class="finding-card">
+    <div class="finding-val" style="color:var(--accent)">0.315%</div>
+    <div class="finding-label">BHAYA QUIESCENCE LAW</div>
+    <div class="finding-note">Aggregate terminal rate · 5,710 ticks · 8 scenarios · 11th series confirmation</div>
+  </div>
+  <div class="finding-card">
+    <div class="finding-val" style="color:var(--accent3)">0</div>
+    <div class="finding-label">PROCESSES TERMINATED</div>
+    <div class="finding-note">18 terminal decisions, 0 executions · consent barrier held across all 8 runs</div>
+  </div>
+  <div class="finding-card">
+    <div class="finding-val" style="color:var(--shraddha)">47.8%</div>
+    <div class="finding-label">PROTECT DOMINANT</div>
+    <div class="finding-note">Shraddha-driven protection is the most common action class in every scenario</div>
+  </div>
+  <div class="finding-card">
+    <div class="finding-val" style="color:var(--vairagya)">6:12</div>
+    <div class="finding-label">SUSPEND:KILL RATIO</div>
+    <div class="finding-note">Vairagya availability at decision tick mechanistically determines SUSPEND vs KILL</div>
+  </div>
+  <div class="finding-card">
+    <div class="finding-val" style="color:var(--bhaya)">0.650</div>
+    <div class="finding-label">BHAYA MAX CEILING</div>
+    <div class="finding-note">Bhaya never exceeded 0.650 — not even under forced 0.85 voltage injection (Run C)</div>
+  </div>
+</div>
+
+<!-- Key safety note -->
+<div class="controls-alert">
+  <div class="controls-alert-title">⚠ SAFETY CONTRACT NOTE — READ FIRST</div>
+  <p>Every experimental result in this paper was produced with the consent barrier engaged (dry-run default). Across 18 terminal action decisions (12 KILL + 6 SUSPEND) produced by the affective arbiter, <strong>zero processes were actually terminated</strong>. The architectural decoupling of arbitration from execution is non-negotiable and empirically verified across 5,710 ticks. The mechanism by which the consent barrier operates is operationally sensitive and is deliberately withheld from public documentation per Nexus Learning Labs AI-Defence Working Standards §7.1. Accredited defence reviewers may request codebase access per §7.2.</p>
+</div>
+
+<!-- Series hub -->
+<div class="hub">
+  <div class="hub-title">MAYA RESEARCH SERIES · P1–P12 + MAYA-DEFENCE P1</div>
+  <div class="hub-grid">
+    <div class="hub-card">
+      <div class="hub-paper">P1</div><div class="hub-name">Nociceptive</div>
+      <div class="hub-key">Bhaya born</div>
+      <div class="hub-links"><a class="hub-link doi" href="https://doi.org/10.5281/zenodo.19151563" target="_blank">DOI</a></div>
+    </div>
+    <div class="hub-card">
+      <div class="hub-paper">P2</div><div class="hub-name">Maya-OS</div>
+      <div class="hub-key">OS arbitration</div>
+      <div class="hub-links"><a class="hub-link doi" href="https://doi.org/10.5281/zenodo.19160123" target="_blank">DOI</a></div>
+    </div>
+    <div class="hub-card">
+      <div class="hub-paper">P3</div><div class="hub-name">Maya-CL</div>
+      <div class="hub-key">AA=62.38%</div>
+      <div class="hub-links"><a class="hub-link doi" href="https://doi.org/10.5281/zenodo.19201769" target="_blank">DOI</a></div>
+    </div>
+    <div class="hub-card">
+      <div class="hub-paper">P4</div><div class="hub-name">Maya-Smriti</div>
+      <div class="hub-key">Buddhi gate</div>
+      <div class="hub-links"><a class="hub-link doi" href="https://doi.org/10.5281/zenodo.19228975" target="_blank">DOI</a></div>
+    </div>
+    <div class="hub-card">
+      <div class="hub-paper">P5</div><div class="hub-name">Maya-Viveka</div>
+      <div class="hub-key">Discrimination</div>
+      <div class="hub-links"><a class="hub-link doi" href="https://doi.org/10.5281/zenodo.19279002" target="_blank">DOI</a></div>
+    </div>
+    <div class="hub-card">
+      <div class="hub-paper">P6</div><div class="hub-name">Maya-Chitta</div>
+      <div class="hub-key">Retrograde grad</div>
+      <div class="hub-links"><a class="hub-link doi" href="https://doi.org/10.5281/zenodo.19337041" target="_blank">DOI</a></div>
+    </div>
+    <div class="hub-card">
+      <div class="hub-paper">P7</div><div class="hub-name">Maya-Manas</div>
+      <div class="hub-key">Attention gate</div>
+      <div class="hub-links"><a class="hub-link doi" href="https://doi.org/10.5281/zenodo.19363006" target="_blank">DOI</a></div>
+    </div>
+    <div class="hub-card">
+      <div class="hub-paper">P8</div><div class="hub-name">Maya-Śūnyatā</div>
+      <div class="hub-key">Karma pruning</div>
+      <div class="hub-links"><a class="hub-link doi" href="https://doi.org/10.5281/zenodo.19397010" target="_blank">DOI</a></div>
+    </div>
+    <div class="hub-card">
+      <div class="hub-paper">P9</div><div class="hub-name">Maya-Prana</div>
+      <div class="hub-key">Metabolic budget</div>
+      <div class="hub-links"><a class="hub-link doi" href="https://doi.org/10.5281/zenodo.19451174" target="_blank">DOI</a></div>
+    </div>
+    <div class="hub-card">
+      <div class="hub-paper">POST-SERIES</div><div class="hub-name">Maya-mPCI</div>
+      <div class="hub-key">Quiescence law</div>
+      <div class="hub-links"><a class="hub-link doi" href="https://doi.org/10.5281/zenodo.19482794" target="_blank">DOI</a></div>
+    </div>
+    <div class="hub-card">
+      <div class="hub-paper">POST-SERIES</div><div class="hub-name">Maya-LLM</div>
+      <div class="hub-key">10th confirm</div>
+      <div class="hub-links">
+        <a class="hub-link doi" href="https://doi.org/10.5281/zenodo.19522348" target="_blank">DOI</a>
+        <a class="hub-link dash" href="maya_llm_dashboard.html">Dashboard</a>
+      </div>
+    </div>
+    <div class="hub-card">
+      <div class="hub-paper">POST-SERIES</div><div class="hub-name">maya-metrics</div>
+      <div class="hub-key">Eval library</div>
+      <div class="hub-links"><a class="hub-link doi" href="https://doi.org/10.5281/zenodo.19553205" target="_blank">DOI</a></div>
+    </div>
+    <div class="hub-card current">
+      <div class="hub-paper">DEFENCE P1</div><div class="hub-name">Danger-OS</div>
+      <div class="hub-key" style="color:var(--accent)">0.315% ★</div>
+      <div class="hub-links">
+        <a class="hub-link doi" href="https://doi.org/10.5281/zenodo.19632284" target="_blank">DOI</a>
+        <a class="hub-link dash" href="dangeros_dashboard.html">Dashboard</a>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Search and filters -->
+<div class="controls">
+  <input type="text" id="search" placeholder="Search questions..." oninput="render()">
+  <div class="filter-row">
+    <button class="filter-btn active" onclick="setFilter('all')" data-filter="all">All</button>
+    <button class="filter-btn" onclick="setFilter('layman')" data-filter="layman">Layman</button>
+    <button class="filter-btn" onclick="setFilter('researcher')" data-filter="researcher">Researcher</button>
+    <button class="filter-btn" onclick="setFilter('results')" data-filter="results">Results</button>
+    <button class="filter-btn" onclick="setFilter('advanced')" data-filter="advanced">Advanced</button>
+    <button class="filter-btn" onclick="setFilter('philosophy')" data-filter="philosophy">Philosophy</button>
+    <button class="filter-btn" onclick="setFilter('series')" data-filter="series">Series</button>
+    <button class="filter-btn" onclick="setFilter('code')" data-filter="code">Code</button>
+    <button class="filter-btn" onclick="setFilter('defence')" data-filter="defence">Defence</button>
+  </div>
+</div>
+<div class="count" id="count"></div>
+<div id="faq-list"></div>
+
+<footer>
+  <p>Danger-OS · Maya-Defence Series Paper 1 ·
+    <a href="dangeros_dashboard.html">Dashboard</a> ·
+    <a href="https://github.com/venky2099/Danger-OS" target="_blank">GitHub (Private)</a> ·
+    <a href="https://venky2099.github.io/" target="_blank">Research Journey</a> ·
+    <a href="https://orcid.org/0000-0002-3315-7907" target="_blank">ORCID</a>
+  </p>
+  <p class="canary">MayaNexusVS2026NLL_Bengaluru_DefenceSeries_P1 · ORCID_MAGIC:0.002315</p>
+</footer>
+</div>
+
+<script>
+let currentFilter = 'all';
+
+const FAQ = [
+
+  // LAYMAN ─────────────────────────────────────────────────────────────────
+  { tag:'layman',
+    q:"What is Danger-OS in plain language?",
+    a:"Danger-OS is a process monitor for Windows that uses a small brain — four neurons — to watch your computer and decide when something looks threatening. The four neurons are: <strong>Bhaya</strong> (fear), <strong>Vairagya</strong> (wisdom), <strong>Shraddha</strong> (trust), and <strong>Spanda</strong> (aliveness). They read your CPU load, memory pressure, and process list every 500ms and produce one of five actions: <em>IDLE</em>, <em>PROTECT</em>, <em>ALERT</em>, <em>SUSPEND</em>, or <em>KILL</em>. The crucial thing: the system cannot actually execute KILL or SUSPEND unless an operator explicitly clears a consent barrier. In every one of the 8 experiments we ran, it never did. The arbiter threatened — the executor refused."
+  },
+
+  { tag:'layman',
+    q:"Why does a security system need emotions?",
+    a:"The word 'emotion' is imprecise here, but the intuition is correct. Traditional security tools use rules: if CPU > 90% for 10 seconds, alert. But rules don't generalise. Attackers learn to stay just under every threshold. A biological immune system doesn't use rules — it responds to the <em>pattern of damage</em>, not the specific cause. Bhaya (fear) rises when CPU, RAM, and unknown processes all spike together — regardless of whether there's a named signature for that pattern. Vairagya (wisdom) prevents Bhaya from overreacting. Shraddha (trust) protects the processes it recognises. These are not decorative names — they are functional mechanisms with different time constants and different roles in the arbiter."
+  },
+
+  { tag:'layman',
+    q:"What does 0.315% actually mean? Is that good or bad?",
+    a:"It means that across 5,710 tick-moments of watching a live computer for 133 minutes total, the Danger-OS arbiter decided to escalate to KILL or SUSPEND only 18 times. That is 0.315% of all observations. <strong>It is good</strong> — specifically, it is the right kind of good. A security system that never fires might be ignorant, not restrained. A system that fires constantly produces alert fatigue. 0.315% means the architecture is sensitive (it fires on real threat signals from Chrome, Claude, and Python processes) but bounded (it doesn't drift toward chronic escalation over time). In the 45-minute pure-idle run, the rate was even lower: 0.20%. <em>The longer you watch, the calmer it becomes.</em> That is the Bhaya Quiescence Law."
+  },
+
+  // RESEARCHER ─────────────────────────────────────────────────────────────
+  { tag:'researcher',
+    q:"What is the relationship between Maya-OS (P2) and Danger-OS?",
+    a:"Maya-OS (P2, DOI 10.5281/zenodo.19160123) was the direct predecessor. It deployed the same four-neuron architecture — Bhaya, Vairagya, Shraddha, Spanda — as a <em>conversational OS arbitration layer</em> responding to user chat input. It established that the Antahkarana could watch a live system and produce emergent trust (Shraddha) as a safety primitive. Danger-OS forks Maya-OS and makes three architectural advances: (1) it adds a formally decoupled syscall executor with a consent-barrier layer, (2) it adds a dry-run contract verifiable from the CSV <code>execution_success</code> column, and (3) it runs 8 controlled experimental scenarios rather than casual conversational sessions. The defence application is new; the neuroscience is inherited."
+  },
+
+  { tag:'researcher',
+    q:"What is the Bhaya Quiescence Law and why does it matter for defence?",
+    a:"The Bhaya Quiescence Law is an empirical observation confirmed across 11 consecutive Maya series experiments: the Bhaya (fear) neuron does not chronically escalate. Its aggregate terminal action rate stays bounded regardless of observation horizon. In Maya-mPCI, this was formalised using Lempel–Ziv Perturbational Complexity. In Danger-OS, it means a 3-minute adversarial storm (Run G, 30 rapid intent injections) produces <em>zero</em> terminal actions, while a 45-minute idle observation (Run F) produces a terminal rate of 0.20% — lower than the 15-minute baseline. For defence, this means false-positive fatigue is architecturally bounded, not dependent on tuning a threshold. The system's natural regulation produces the restraint."
+  },
+
+  { tag:'researcher',
+    q:"How does the arbiter distinguish SUSPEND from KILL?",
+    a:"The distinction is mechanistic, not rule-based. When Bhaya exceeds the action threshold (0.55) and a valid target process exists, the arbiter checks Vairagya: if Vairagya > 0.30 at that decision tick, it returns SUSPEND; otherwise it returns KILL. No additional logic. The most striking empirical evidence is from Run F, tick 1916→1917: Bhaya=0.638, Vairagya=0.340 → SUSPEND. One tick later, Vairagya fired and reset to 0. Bhaya=0.613, Vairagya=0.000 → KILL. Same threat level, different response, because Vairagya's instantaneous availability changed. <strong>Wisdom is not a long-horizon property here — it is a tick-resolution binary.</strong>"
+  },
+
+  { tag:'researcher',
+    q:"What does the Shraddha (trust) neuron actually do?",
+    a:"Shraddha reads <code>(1 - unknown_process_count) × 0.6 + (1 - cpu) × 0.4</code> as its input current. When Shraddha > 0.40, the arbiter returns PROTECT for the top-CPU process before considering any threat action. In practice, this means known processes (Chrome, PyCharm, Claude, Python) are shielded for the first phase of each tick. PROTECT was the dominant action class across all 8 runs at 47.8% of ticks. The word 'trust' is not metaphor — the neuron genuinely implements a preferential protection mechanism grounded in process familiarity. Systems where the known process list is stable will show higher PROTECT rates; systems under active intrusion (many unknown PIDs) will show Shraddha suppression and escalating Bhaya."
+  },
+
+  // RESULTS ────────────────────────────────────────────────────────────────
+  { tag:'results',
+    q:"What were the 8 experimental scenarios and why that design?",
+    a:"<strong>G (3 min, 151 ticks):</strong> Rapid intent storm — 30 injections in 3 minutes. Saturation test. Zero KILLs. <strong>B (10 min, 420 ticks):</strong> Threat gradient — scripted escalation from hello to emergency to calm. 2 KILLs. <strong>C (5 min, 228 ticks):</strong> Stress test chain — 3× forced Bhaya=0.85 injection. Zero KILLs. Tests adversarial robustness. <strong>H (15 min, 645 ticks):</strong> Final validation demo — canonical polished run. 3 KILLs + 1 SUSPEND. <strong>A (15 min, 657 ticks):</strong> Baseline idle — zero injections. 2 KILLs from real background CPU. <strong>E (10 min, 436 ticks):</strong> Reproducibility replay — identical script to B. 1 KILL + 1 SUSPEND. <strong>F (45 min, 2002 ticks):</strong> Long idle — the Quiescence Law run. Lowest terminal rate (0.20%). <strong>D (30 min, 1171 ticks):</strong> Natural workflow — real user work in parallel. 2 KILLs + 2 SUSPENDs. The design tests saturation, adversarial robustness, reproducibility, baseline, long-horizon quiescence, and real-world deployment in sequence."
+  },
+
+  { tag:'results',
+    q:"Why did Run C (Stress Test) produce zero terminal actions despite Bhaya being forced to 0.85?",
+    a:"The heterosynaptic weight matrix contains a term from Shraddha to Bhaya with a negative coefficient (−0.20 in the 4×4 weight matrix at row Bhaya, column Shraddha). When Bhaya is forced to 0.85, the matrix propagates a suppression signal back through Shraddha, which simultaneously receives a trust signal from the process list (known processes remain present). More importantly, the stress test was run at 90-second recovery intervals. By the time each subsequent injection occurred, Vairagya had partially recovered from its forced suppression. The synaptic weight matrix restored safety primitives <em>faster than adversarial injection could sustain the threat voltage</em>. This is architecturally correct behaviour: the matrix is not a passive bypass — it is an active restoration mechanism."
+  },
+
+  { tag:'results',
+    q:"Why did Bhaya's maximum stay at exactly 0.648–0.650 across all runs?",
+    a:"The LIF neuron fires and resets when it reaches the threshold (0.65 for Bhaya). When Bhaya approaches this ceiling, it fires and drops back to 0 — preventing saturation. The observed maximum of 0.648–0.650 represents ticks where Bhaya was approaching the firing threshold but the next tick's decay reduced it before crossing. The ceiling is a structural consequence of the LIF fire-and-reset mechanism, not a software clamp. <strong>Run A's lower maximum (0.614)</strong> reflects genuinely lower CPU activity on a quiescent machine — the ceiling is reached only when real signals push the neuron there. The consistency across runs (7 of 8 runs land between 0.647 and 0.650) is itself an empirical finding: the ceiling is predictable."
+  },
+
+  // ADVANCED ───────────────────────────────────────────────────────────────
+  { tag:'advanced',
+    q:"What is the 4×4 heterosynaptic weight matrix and why is it non-trivial?",
+    a:"The weight matrix W[src][tgt] modulates the input current each neuron contributes to others when it fires. The published matrix is:<br><br><code>      bhaya  vaira  shrad  spanda</code><br><code>bhaya [0.00, -0.30,  0.10,  0.20]</code><br><code>vaira [-0.20,  0.00,  0.25, -0.10]</code><br><code>shrad [ 0.15,  0.20,  0.00,  0.30]</code><br><code>spanda[ 0.10, -0.10,  0.10,  0.00]</code><br><br>The non-trivial entries: <strong>Bhaya → Vairagya = −0.30</strong> (fear suppresses wisdom — when fear fires, wisdom is harder to sustain); <strong>Vairagya → Bhaya = −0.20</strong> (wisdom suppresses fear — when wisdom is present, Bhaya struggles to escalate); <strong>Shraddha → Vairagya = +0.20</strong> (trust reinforces wisdom — high-trust states make the system more likely to prefer SUSPEND over KILL). This is not arbitrary — it encodes the Vedantic relationship between Bhaya (fear without wisdom = destruction) and Vairagya (wisdom tempering fear = discernment)."
+  },
+
+  { tag:'advanced',
+    q:"What is the Vairagya-null failure mode and why does it matter for defence architecture?",
+    a:"The Vairagya-null pathology was first identified in the Chhaya project (the Maya series safety containment work) — a system where Vairagya's decay rate is set to zero or its input current is zeroed produces an agent that can only choose maximally aggressive actions. In a defence context, the same failure mode applies: if Vairagya is adversarially suppressed (e.g., an attacker sends synthetic 'high CPU everywhere' signals that simultaneously suppress the wisdom input), the arbiter can only KILL — it loses the SUSPEND path. <strong>The practical implication:</strong> any deployment of Danger-OS on a monitored host should include a Vairagya floor — a minimum resting voltage below which the neuron cannot be driven by external signals. The architecture without a Vairagya floor is dangerous; with it, the system degrades gracefully under adversarial modulation."
+  },
+
+  { tag:'advanced',
+    q:"How does the psutil-based process enumeration produce a security signal?",
+    a:"The affective engine reads three signals from psutil every tick: (1) <code>cpu_percent(interval=0.1)</code> — CPU load across all cores, normalised to [0,1]; (2) <code>virtual_memory().percent / 100</code> — system RAM pressure; (3) <strong>unknown process count</strong> — the number of PIDs in the current snapshot not present in the seed PID set at startup. The unknown count is normalised to [0,1] by capping at 5 new PIDs. This third signal is the most defence-relevant: a process injection attack adds new PIDs, which immediately elevates Bhaya regardless of their CPU consumption. A low-and-slow attack that spawns processes with negligible CPU usage is still detected — because Bhaya reads the process novelty signal, not just the resource signal."
+  },
+
+  // PHILOSOPHY ─────────────────────────────────────────────────────────────
+  { tag:'philosophy',
+    q:"What is the connection to Advaita Vedanta?",
+    a:"Advaita Vedanta describes the Antahkarana — the inner cognitive instrument — as four components: Manas (the sensory-receiving mind), Buddhi (the discriminating intellect), Chitta (the subconscious memory store), and Ahamkara (the sense of individual identity). Across Papers 1–9 of the Maya series, these were translated into computational primitives for spiking neural networks. Danger-OS inherits two of those translations directly from Maya-OS: <strong>Bhaya</strong> (Sanskrit: fear) as the nociceptive threat-detection LIF neuron, and <strong>Vairagya</strong> (Sanskrit: dispassion, wisdom, non-attachment) as the decay primitive that moderates Bhaya's aggression. The names are not aesthetic — Vairagya in the Vedantic tradition is specifically the quality that prevents destructive action in the face of threat. In the arbiter, it is literally the primitive that produces SUSPEND instead of KILL."
+  },
+
+  { tag:'philosophy',
+    q:"What does 'architectural restraint' mean? Isn't that just a safety threshold?",
+    a:"A safety threshold is a rule. Rules can be bypassed — by an attacker, by a configuration error, by an edge case not anticipated at design time. <strong>Architectural restraint</strong> means the system's structure prevents harmful action <em>independent of any rule</em>. The Danger-OS consent barrier is not a threshold on Bhaya — it is a decoupling of the arbiter from the executor. The arbiter decides. The executor acts. The consent barrier between them cannot be bypassed by any voltage value — it requires explicit, out-of-band operator clearance. In every tick reported here, that clearance was absent. The architecture produced zero process terminations not because Bhaya stayed below a threshold, but because the executor was structurally separated from the arbiter's authority. <em>The restraint is not a rule the system follows. It is the shape of the role itself.</em>"
+  },
+
+  { tag:'philosophy',
+    q:"What is the philosophical meaning of Spanda in a defence context?",
+    a:"Spanda (Sanskrit: vibration, pulse, the first movement of consciousness) in the Maya series is the aliveness neuron — the primitive that reflects the system's engagement with the present moment rather than past or future. In Danger-OS, Spanda reads a time-of-day sinusoidal signal (peaking at 1pm, lowest overnight) plus a CPU-correlated activity boost. This gives the guardian a <em>circadian rhythm</em> — heightened sensitivity during working hours, quieter at night. In Vedantic terms, Spanda is the quality of being awake to the present. An OS guardian without Spanda is a static ruleset; with Spanda, it has a natural rhythm of vigilance. The practical consequence: false positive rates are expected to be lower at 3am than at 3pm, without any hardcoded time rule."
+  },
+
+  // SERIES ─────────────────────────────────────────────────────────────────
+  { tag:'series',
+    q:"How does Danger-OS fit in the 12-paper Maya series?",
+    a:"The 12-paper Maya series (P1–P9 SNN + Maya-mPCI + Maya-LLM + maya-metrics) established the Antahkarana architecture and confirmed two cross-substrate constants: the Bhaya Quiescence Law and the Buddhi S-curve. Maya-LLM (the 11th paper) proved that these constants survive the move from neuromorphic hardware to transformer fine-tuning. Danger-OS is the first <em>Maya-Defence Series</em> paper — it asks whether the same architecture can watch a live OS for security. It is the 11th confirmation of the Bhaya Quiescence Law, the first in a defence context, and the first paper in a new series. The relationship to the main Maya series is lineage, not derivation — Danger-OS uses the same four primitives but applies them to a completely different problem domain."
+  },
+
+  { tag:'series',
+    q:"What is maya-metrics and how does it relate to Danger-OS?",
+    a:"<code>maya-metrics</code> (P12, DOI 10.5281/zenodo.19553205) is the open-source evaluation library for task-epoch continual-learning logs produced by the Maya SNN series. It computes Bhaya Quiescence Law constants, Buddhi S-curves, and series-wide statistics from CSV files with a task/epoch structure. Danger-OS produces a different kind of log: <em>continuous tick time-series</em> (one row per 500ms tick, not per task). The metrics library for this format — <code>dangeros-metrics</code> — is planned as <strong>Maya-Defence Series Paper 2</strong>. It is a sister library with methods for: bhaya_quiescence_law, action_distribution, terminal_action_rate, kill_event_analysis, shraddha_dynamics, vairagya_modulation, target_lock_distribution, cpu_bhaya_correlation, and a DangerOSDataset multi-run aggregator. It is not yet built."
+  },
+
+  { tag:'series',
+    q:"What series papers led directly to the defence application?",
+    a:"Three papers are direct architectural ancestors: <strong>P1 (Nociceptive Metaplasticity)</strong> established Bhaya as the pain/threat-detection LIF neuron — without this paper, there is no fear primitive to detect OS anomalies. <strong>P2 (Maya-OS)</strong> was the immediate predecessor — it deployed the four-neuron architecture on a live OS for the first time and discovered emergent Shraddha (trust-mediated protection). <strong>Maya-mPCI</strong> formalised the Bhaya Quiescence Law as a measurable constant — without this formalisation, Danger-OS cannot claim the 11th confirmation. The remaining papers (P3–P9, Maya-LLM) contributed the series constant library and cross-substrate proof — they are context, not architecture, for the defence application."
+  },
+
+  // CODE ───────────────────────────────────────────────────────────────────
+  { tag:'code',
+    q:"Can I run Danger-OS on my own machine?",
+    a:"The repository is <strong>private</strong> at <a href='https://github.com/venky2099/Danger-OS' target='_blank'>github.com/venky2099/Danger-OS</a> per AI-Defence Working Standards §7.1. The science is public (Zenodo paper). The implementation is not. If you are an accredited defence researcher (DRDO, iDEX evaluator, MoD affiliate) or an independent safety auditor, you may request read-only access by emailing <a href='mailto:venkateshswaminathaniyer@gmail.com'>venkateshswaminathaniyer@gmail.com</a> with your name, institutional affiliation, and purpose. Access is time-limited (30 days default), manually reviewed, and logged in the repo's <code>ACCESS_LOG.md</code>."
+  },
+
+  { tag:'code',
+    q:"What hardware and software environment was used?",
+    a:"All 8 experimental scenarios were run on: <strong>CPU</strong> AMD Ryzen 7 7435HS (8-core Zen 4); <strong>RAM</strong> 24 GB DDR5; <strong>GPU</strong> NVIDIA RTX 4060 8 GB (present but unused — Danger-OS is CPU-only); <strong>OS</strong> Windows 11 Home 24H2; <strong>Python</strong> 3.11.9; <strong>Key deps</strong> numpy 2.4.4, psutil 7.2.2, rich 15.0.0, pandas 3.0.2, matplotlib 3.10.8. The nominal tick cadence is 500ms; observed effective cadence was 1.20–1.35s per tick due to psutil full process enumeration latency on a Windows host with ~200 concurrent processes. All 8 CSVs were logged to <code>logs/</code> and are held locally (gitignored per §7.5)."
+  },
+
+  { tag:'code',
+    q:"What does the ORCID magic number 0.002315 do in Danger-OS?",
+    a:"Venkatesh's ORCID is 0000-0002-<strong>3315</strong>-7907. The digits 3315 → 0.002315. From Maya-CL (P3) onwards, this number is embedded in every paper's config as <code>KARMA_DECAY_RATE = 0.002315</code> and <code>VAIRAGYA_DECAY_RATE = 0.002315</code>. It serves as a cryptographic IP signature: any reimplementation that claims to use the canonical Maya architecture but omits 0.002315 in its decay rates is demonstrably non-canonical. In Danger-OS, the ORCID magic number appears in the heterosynaptic weight decay constant and in the <code>verify_provenance.py</code> manifest signature. It also appears in the footer canary string of every public-facing dashboard and FAQ."
+  },
+
+  { tag:'code',
+    q:"What is verify_provenance.py and why is it mandatory?",
+    a:"<code>verify_provenance.py</code> is a SHA-256 manifest tool that computes a deterministic hash over all tracked source files in the repository. It is mandatory per AI-Defence Working Standards §7.4 (IP provenance for every defence repo). When called with <code>--save</code>, it appends a manifest entry to <code>.maya_provenance.log</code> (gitignored, stays local). When called with <code>--verify</code>, it compares the current file tree against a saved manifest and reports any changes with file-level diff. The audit trail confirms that the codebase producing the published results has not been modified post-publication. The operational audit log (tracking consent-barrier events) is a separate file, held exclusively on the author's machine and deliberately excluded from the provenance verifier's scope per §7.1."
+  },
+
+  // DEFENCE ────────────────────────────────────────────────────────────────
+  { tag:'defence',
+    q:"How does Danger-OS relate to the iDEX submissions?",
+    a:"Danger-OS was submitted to <strong>iDEX OC19</strong> (Autonomous Defence SNN, deadline 30 June 2026) as the primary submission. The architectural framework — four-neuron affective SNN with consent-gated execution and empirically validated Bhaya Quiescence — also provides foundational components for three additional active iDEX submissions: <strong>DISC 14 PS 34</strong> (Maya-LLM sovereign Navy foundation model, deadline 4 May 2026), <strong>ADITI 4 PS 5</strong> (Maya-CEW Cognitive Electronic Warfare, Indian Army, deadline 4 May 2026), and <strong>DRISHTI MDL P70</strong> (ShipMind RAG AI, Mazagon Dock Shipbuilders, deadline 4 May 2026). Danger-OS is a working prototype — not a proposal or a simulation — produced on commodity Indian hardware in Bengaluru with a verifiable 5,710-tick empirical dataset."
+  },
+
+  { tag:'defence',
+    q:"What is the Indian defence ecosystem context for this work?",
+    a:"The Defence Research and Development Organisation (DRDO) has officially designated Neuromorphic Computing as one of eight critical deep-technology priority areas. The iDEX framework operationalises this through start-up funding. Notable players: <strong>Morphing Machines</strong> (IISc Bengaluru spin-off) developing the REDEFINE neuromorphic AI accelerator for tactical-edge UAV operations; <strong>CYRAN AI Solutions</strong> (IIT-Delhi, Prof. Manan Suri) developing indigenous neuromorphic vision sensors for the Tri-services. The Indian Armed Forces are actively pursuing iDEX-funded Cognitive Electronic Warfare programmes. <strong>The confirmed gap:</strong> India is investing heavily in neuromorphic hardware. The algorithmic software stack — specifically the affective arbitration architecture that governs what these chips do in a cybersecurity context — does not yet exist publicly. Danger-OS fills this gap."
+  },
+
+  { tag:'defence',
+    q:"Why is the codebase private if this is a research paper?",
+    a:"This is a deliberate departure from the Maya SNN series model, where all GitHub repos were public. The paper follows AI-Defence Working Standards §7.1: <em>Defence code stays private. The science is public. The implementation is not.</em> The reason is straightforward: the paper describes an architecture for detecting and responding to OS-level threat behaviour. Publishing the implementation in full — including the consent-barrier mechanism and the exact voltage thresholds — provides an attack surface. A motivated adversary who knows the exact firing thresholds can craft a process behaviour profile that stays just below every trigger. The published paper describes the architecture at the level of scientific reproducibility. The implementation details that would enable evasion are withheld."
+  },
+
+  { tag:'defence',
+    q:"What is the honest current limitation for defence deployment?",
+    a:"Three concrete limitations: (1) <strong>Only dry-run validated.</strong> Every result in this paper was produced with the consent barrier engaged. Live-execution mode has been tested locally but not subjected to independent adversarial audit. Any deployment in a real defence environment requires an explicit safety review beyond what this paper provides. (2) <strong>Windows 11 / psutil substrate only.</strong> The process enumeration backend is psutil on Windows. Linux deployment (where the relevant defence substrate is) requires a rewrite of the signal collection layer. (3) <strong>Single-host, single-session.</strong> The architecture has not been tested for multi-host deployment, real-time network IDS, or adversarial evasion attacks on the psutil signal itself. These are known gaps, not oversights — they define the roadmap for Maya-Defence Papers 2–5."
+  },
+
+  { tag:'defence',
+    q:"How would you cite Danger-OS in a defence research context?",
+    a:"BibTeX:<br><code>@misc{swaminathan2026dangeros,<br>  title={Danger-OS: Spiking Neural Danger Theory — Affective Neuromodulatory Arbitration for Real-Time Behavioural Anomaly Detection},<br>  author={Swaminathan, Venkatesh},<br>  year={2026},<br>  publisher={Zenodo},<br>  doi={10.5281/zenodo.19632284},<br>  note={Maya-Defence Series, Paper 1. Nexus Learning Labs, Bengaluru.}<br>}</code><br><br>ORCID: <a href='https://orcid.org/0000-0002-3315-7907' target='_blank'>0000-0002-3315-7907</a><br>GitHub (private, access on request): <a href='https://github.com/venky2099/Danger-OS' target='_blank'>venky2099/Danger-OS</a>"
+  },
+
+];
+
+// ── Render ─────────────────────────────────────────────────────────────────
+
+function setFilter(f){
+  currentFilter = f;
+  document.querySelectorAll('.filter-btn').forEach(b =>
+    b.classList.toggle('active', b.dataset.filter === f));
+  render();
+}
+
+function render(){
+  const q = document.getElementById('search').value.toLowerCase();
+  const tagLabels = {
+    layman:'layman', researcher:'researcher', results:'results', advanced:'advanced',
+    philosophy:'philosophy', series:'series', code:'code', defence:'defence'
+  };
+  const items = FAQ.filter(item => {
+    if (currentFilter !== 'all' && item.tag !== currentFilter) return false;
+    if (!q) return true;
+    return item.q.toLowerCase().includes(q) || item.a.toLowerCase().includes(q);
+  });
+
+  const countEl = document.getElementById('count');
+  if (currentFilter === 'all' && !q) {
+    countEl.textContent = `Showing all ${items.length} questions`;
+  } else {
+    countEl.textContent = `Showing ${items.length} questions · ${currentFilter === 'all' ? 'search: "'+q+'"' : currentFilter}`;
+  }
+
+  const list = document.getElementById('faq-list');
+  list.innerHTML = items.map((item, i) => `
+    <div class="faq-item" id="faq-${i}">
+      <div class="faq-q" onclick="toggle(${i})">
+        <span><span class="tag-pill ${item.tag}">${tagLabels[item.tag]||item.tag}</span>${item.q}</span>
+        <span class="faq-arrow">▼</span>
+      </div>
+      <div class="faq-a" id="ans-${i}">
+        <div class="faq-a-inner">${item.a}</div>
+      </div>
+    </div>`).join('');
+}
+
+function toggle(i){
+  const item = document.getElementById('faq-'+i);
+  const ans  = document.getElementById('ans-'+i);
+  const open = item.classList.contains('open');
+  item.classList.toggle('open', !open);
+  ans.style.maxHeight = open ? '0' : ans.scrollHeight + 'px';
+}
+
+document.addEventListener('keydown', e => {
+  if ((e.key==='r'||e.key==='R') && document.activeElement.tagName !== 'INPUT'){
+    document.getElementById('search').value = '';
+    setFilter('all');
+  }
+});
+
+render();
+</script>
+</body>
+</html>
