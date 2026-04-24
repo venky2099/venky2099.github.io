@@ -535,6 +535,181 @@
     section { padding: 60px 1.25rem; }
     #hero { padding: 72px 1.25rem 60px; }
   }
+
+  /* ── SHAKTI BETA BANNER ─────────────────────────────────────────────── */
+  .shakti-banner {
+    background: linear-gradient(135deg, #C8420E 0%, #E8581A 100%);
+    color: white;
+    text-align: center;
+    padding: 12px 2rem;
+    font-size: 14px;
+    font-weight: 500;
+    position: relative;
+    z-index: 200;
+  }
+  .shakti-banner a {
+    color: white;
+    text-decoration: underline;
+    font-weight: 600;
+  }
+  .shakti-banner a:hover { opacity: 0.85; }
+  .beta-slots {
+    display: inline-block;
+    background: rgba(255,255,255,0.2);
+    border-radius: 20px;
+    padding: 2px 10px;
+    font-size: 12px;
+    margin-left: 8px;
+    font-weight: 600;
+  }
+
+  /* ── SHAKTI BETA SECTION ─────────────────────────────────────────────── */
+  #shakti-beta {
+    background: #FFF8F5;
+    border-top: 3px solid #E8581A;
+    border-bottom: 1px solid #F0D0C0;
+    padding: 80px 2rem;
+  }
+  .shakti-beta-grid {
+    max-width: var(--max);
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 60px;
+    align-items: start;
+  }
+  @media (max-width: 768px) {
+    .shakti-beta-grid { grid-template-columns: 1fr; gap: 40px; }
+  }
+  .shakti-beta-tag {
+    display: inline-block;
+    background: #E8581A;
+    color: white;
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    padding: 4px 12px;
+    border-radius: 20px;
+    margin-bottom: 16px;
+  }
+  .shakti-beta-title {
+    font-family: 'DM Serif Display', serif;
+    font-size: 2.4rem;
+    line-height: 1.2;
+    color: #1C1008;
+    margin-bottom: 16px;
+  }
+  .shakti-beta-sub {
+    font-size: 16px;
+    color: #5C4030;
+    line-height: 1.75;
+    margin-bottom: 24px;
+  }
+  .shakti-beta-promise {
+    background: white;
+    border: 1px solid #F0D0C0;
+    border-left: 3px solid #E8581A;
+    border-radius: 8px;
+    padding: 16px 20px;
+    font-size: 13px;
+    color: #5C4030;
+    line-height: 1.7;
+    margin-bottom: 28px;
+  }
+  .shakti-beta-promise strong { color: #1C1008; }
+  .shakti-apply-btn {
+    display: inline-block;
+    background: #E8581A;
+    color: white;
+    font-size: 15px;
+    font-weight: 600;
+    padding: 14px 32px;
+    border-radius: 10px;
+    text-decoration: none;
+    transition: all 0.2s;
+    letter-spacing: 0.02em;
+  }
+  .shakti-apply-btn:hover { background: #C8420E; transform: translateY(-1px); }
+  .shakti-counter-box {
+    background: white;
+    border: 1px solid #E8D8D0;
+    border-radius: 14px;
+    padding: 28px;
+    text-align: center;
+    margin-bottom: 24px;
+    box-shadow: 0 2px 12px rgba(232,88,26,0.08);
+  }
+  .shakti-counter-num {
+    font-family: 'DM Serif Display', serif;
+    font-size: 3.5rem;
+    color: #E8581A;
+    line-height: 1;
+    margin-bottom: 4px;
+  }
+  .shakti-counter-label {
+    font-size: 13px;
+    color: #8A7068;
+    margin-bottom: 16px;
+  }
+  .shakti-slots-bar-bg {
+    background: #F0E8E4;
+    border-radius: 8px;
+    height: 8px;
+    width: 100%;
+    overflow: hidden;
+    margin-bottom: 8px;
+  }
+  .shakti-slots-bar-fill {
+    height: 100%;
+    background: linear-gradient(90deg, #E8581A, #C8420E);
+    border-radius: 8px;
+    transition: width 0.5s ease;
+  }
+  .shakti-slots-text {
+    font-size: 12px;
+    color: #8A7068;
+  }
+  .shakti-what-box {
+    background: white;
+    border: 1px solid #E8D8D0;
+    border-radius: 14px;
+    padding: 28px;
+    margin-bottom: 20px;
+  }
+  .shakti-what-box h4 {
+    font-family: 'DM Serif Display', serif;
+    font-size: 1.1rem;
+    color: #1C1008;
+    margin-bottom: 12px;
+  }
+  .shakti-what-box p {
+    font-size: 13px;
+    color: #5C4030;
+    line-height: 1.7;
+  }
+  .shakti-who-box {
+    background: linear-gradient(135deg, #1C1008 0%, #3C2018 100%);
+    border-radius: 14px;
+    padding: 28px;
+    color: white;
+  }
+  .shakti-who-box h4 {
+    font-family: 'DM Serif Display', serif;
+    font-size: 1.1rem;
+    color: #F4D0B0;
+    margin-bottom: 12px;
+  }
+  .shakti-who-box p {
+    font-size: 13px;
+    color: rgba(255,255,255,0.75);
+    line-height: 1.7;
+  }
+  .shakti-who-box a {
+    color: #F4D0B0;
+    text-decoration: underline;
+  }
+
 </style>
 </head>
 <body>
@@ -551,12 +726,112 @@
       <li><a href="#tools">Tools</a></li>
       <li><a href="#about">About</a></li>
       <li><a href="#contact">Contact</a></li>
+      <li><a href="#shakti-beta" style="color:#E8581A;font-weight:600;">&#128155; Shakti Beta</a></li>
     </ul>
 
   </div>
 </nav>
 
+<!-- ── SHAKTI BETA ANNOUNCEMENT BANNER ────────────────────────────────── -->
+<div class="shakti-banner">
+  &#128155; <strong>Shakti Beta is Live</strong> &mdash; A free, trauma-informed AI companion for women in India.
+  <a href="#shakti-beta">Apply for 100-woman closed beta &rarr;</a>
+  <span class="beta-slots" id="bannerSlots">Applications open</span>
+</div>
+
+<!-- ── SHAKTI BETA SECTION ─────────────────────────────────────────────── -->
+<section id="shakti-beta">
+  <div class="shakti-beta-grid">
+
+    <!-- LEFT: What is Shakti + Who built it + Apply -->
+    <div>
+      <span class="shakti-beta-tag">&#128155; Closed Beta &mdash; 100 Women</span>
+      <h2 class="shakti-beta-title">Meet Shakti &mdash;<br>your safety companion</h2>
+      <p class="shakti-beta-sub">
+        Shakti is a free, trauma-informed AI companion built for women in India.
+        She listens without judgment. She knows your legal rights. She speaks in
+        English, Hindi, and Hinglish &mdash; in whatever language your pain lives in.
+        She is available 24 hours, completely free, completely private.
+      </p>
+
+      <div class="shakti-beta-promise">
+        <strong>Our promise to you:</strong><br>
+        Your conversations are stored privately on your device for your benefit only.
+        Nexus Learning Labs does not read individual conversations.
+        Only anonymised, aggregated patterns are used to improve Shakti &mdash;
+        and only with your explicit consent. You can delete everything at any time.
+        You can stop using Shakti at any time, for any reason, with no explanation needed.
+        <br><br>
+        <strong>&#2350;&#2375;&#2352;&#2366; &#2357;&#2366;&#2342;&#2366;:</strong>
+        &#2310;&#2346;&#2325;&#2368; &#2348;&#2366;&#2340;&#2375;&#2306; &#2360;&#2367;&#2352;&#2381;&#2347; &#2310;&#2346;&#2325;&#2368; &#2361;&#2376;&#2306;&#2404;
+        &#2344;&#2375;&#2325;&#2360;&#2360; &#2354;&#2352;&#2381;&#2344;&#2367;&#2306;&#2327; &#2354;&#2376;&#2348;&#2381;&#2360; &#2310;&#2346;&#2325;&#2368; &#2348;&#2366;&#2340;&#2330;&#2368;&#2340; &#2344;&#2361;&#2368;&#2306; &#2346;&#2397;&#2340;&#2366;&#2404;
+      </div>
+
+      <div style="margin-bottom:20px">
+        <div style="font-size:13px;color:#8A7068;margin-bottom:12px;">
+          <strong style="color:#1C1008">Who should apply?</strong><br>
+          Women professionals &mdash; lawyers, doctors, counsellors, researchers, educators &mdash;
+          and any woman who wants a safe, private companion. All backgrounds welcome.
+          You do not need to be in crisis to use Shakti. She is here for you at every tier of your life.
+        </div>
+      </div>
+
+      <a href="https://forms.gle/PLACEHOLDER" class="shakti-apply-btn" id="applyBtn" target="_blank">
+        Apply for Beta Access &rarr;
+      </a>
+      <p style="font-size:12px;color:#8A7068;margin-top:12px;">
+        Free. No credit card. No commitment. Withdraw at any time.
+      </p>
+    </div>
+
+    <!-- RIGHT: Counter + What is it + Who built it -->
+    <div>
+      <div class="shakti-counter-box">
+        <div class="shakti-counter-num" id="slotsUsed">0</div>
+        <div class="shakti-counter-label">women have applied</div>
+        <div class="shakti-slots-bar-bg">
+          <div class="shakti-slots-bar-fill" id="slotsBar" style="width:0%"></div>
+        </div>
+        <div class="shakti-slots-text"><span id="slotsLeft">100</span> of 100 slots remaining</div>
+      </div>
+
+      <div class="shakti-what-box">
+        <h4>What is Shakti?</h4>
+        <p>
+          Shakti is a fine-tuned large language model with a neuromorphic affective engine &mdash;
+          four spiking neural network neurons (Bhaya, Vairagya, Shraddha, Spanda) that read
+          every message in real time and adjust her response from Safe to Watch to Alert to Crisis.
+          She was trained on 75,000 trauma-informed, trilingual samples grounded in Indian law,
+          cultural psychology, and the WHO LIVES framework.
+          <br><br>
+          She is Nexus Learning Labs&rsquo; first shipped product.
+          Beta launch: April 2026.
+        </p>
+      </div>
+
+      <div class="shakti-who-box">
+        <h4>Who built Shakti?</h4>
+        <p>
+          <strong style="color:white">Venkatesh Swaminathan</strong> &mdash; independent AI researcher,
+          founder of Nexus Learning Labs, Bengaluru.
+          ORCID: <a href="https://orcid.org/0000-0002-3315-7907" target="_blank">0000-0002-3315-7907</a>.
+          UDYAM: UDYAM-KR-02-0122422.
+          <br><br>
+          Nexus Learning Labs builds neuromorphic AI systems at the intersection of
+          spiking neural networks, LLMs, and real-world safety applications.
+          Shakti is the first product. The Maya Research Series has 9 published papers.
+          <br><br>
+          Questions? Write to
+          <a href="mailto:venky209995@gmail.com">venky209995@gmail.com</a>
+        </p>
+      </div>
+    </div>
+
+  </div>
+</section>
+
 <!-- HERO -->
+
 <section id="hero">
   <div class="hero-grid">
     <div>
@@ -1082,5 +1357,44 @@
 </footer>
 
 <!-- Cloudflare Web Analytics --><script defer src='https://static.cloudflareinsights.com/beacon.min.js' data-cf-beacon='{"token": "b8ea2116f48b44b8bc4669cf586c7822"}'></script><!-- End Cloudflare Web Analytics -->
+
+<script>
+// ── Shakti Beta Slot Counter ──────────────────────────────────────────────────
+// Update SHEET_URL with your published Google Sheet CSV URL after creating the form
+// For now shows 0/100 — update this URL once form is live
+const SHEET_CSV_URL = ''; // e.g. 'https://docs.google.com/spreadsheets/d/YOUR_ID/export?format=csv&gid=0'
+const TOTAL_SLOTS = 100;
+
+async function updateSlotCounter() {
+  let count = 0;
+  if (SHEET_CSV_URL) {
+    try {
+      const r = await fetch(SHEET_CSV_URL + '&cachebust=' + Date.now());
+      const text = await r.text();
+      // Count rows minus header
+      count = Math.max(0, text.trim().split('\n').length - 1);
+    } catch(e) {
+      count = 0;
+    }
+  }
+  const pct = Math.min(100, (count / TOTAL_SLOTS) * 100);
+  const left = Math.max(0, TOTAL_SLOTS - count);
+
+  document.getElementById('slotsUsed').textContent = count;
+  document.getElementById('slotsLeft').textContent = left;
+  document.getElementById('slotsBar').style.width = pct + '%';
+  document.getElementById('bannerSlots').textContent = left + ' slots left';
+
+  if (left === 0) {
+    document.getElementById('applyBtn').textContent = 'Applications closed';
+    document.getElementById('applyBtn').style.background = '#8A7068';
+    document.getElementById('applyBtn').style.pointerEvents = 'none';
+  }
+}
+
+updateSlotCounter();
+setInterval(updateSlotCounter, 60000); // refresh every 60 seconds
+</script>
+
 </body>
 </html>
