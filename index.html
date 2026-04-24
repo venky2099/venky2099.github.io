@@ -710,6 +710,59 @@
     text-decoration: underline;
   }
 
+
+  /* ── FAQ BLOCK ──────────────────────────────────────────────────────────── */
+  .shakti-faq-block {
+    margin-top: 28px;
+    background: white;
+    border: 1px solid #F0D8CC;
+    border-radius: 14px;
+    padding: 22px 24px;
+    display: flex;
+    align-items: flex-start;
+    gap: 16px;
+  }
+  .shakti-faq-icon {
+    width: 44px;
+    height: 44px;
+    border-radius: 50%;
+    background: linear-gradient(135deg, rgba(232,88,26,.12), rgba(201,150,42,.08));
+    border: 1.5px solid rgba(232,88,26,.3);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: 'DM Serif Display', serif;
+    font-size: 18px;
+    color: #E8581A;
+    flex-shrink: 0;
+  }
+  .shakti-faq-content h4 {
+    font-family: 'DM Serif Display', serif;
+    font-size: 16px;
+    color: #1C1008;
+    margin-bottom: 6px;
+    font-weight: 400;
+  }
+  .shakti-faq-content p {
+    font-size: 13px;
+    color: #6A5040;
+    line-height: 1.7;
+    margin-bottom: 10px;
+  }
+  .shakti-faq-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    font-size: 13px;
+    font-weight: 500;
+    color: #E8581A;
+    text-decoration: none;
+    border-bottom: 1px solid rgba(232,88,26,.3);
+    padding-bottom: 1px;
+    transition: border-color 0.2s;
+  }
+  .shakti-faq-link:hover { border-color: #E8581A; }
+
 </style>
 </head>
 <body>
@@ -842,6 +895,22 @@
       <p style="font-size:12px;color:#8A7068;margin-top:12px;">
         No credit card. No commitment. Leave whenever you wish.
       </p>
+
+      <div class="shakti-faq-block">
+        <div class="shakti-faq-icon">श</div>
+        <div class="shakti-faq-content">
+          <h4>Have questions before you join?</h4>
+          <p>
+            Every question about Shakti &mdash; who she is, how she works, what she knows,
+            what happens to your conversations, what the beta involves &mdash; is answered
+            in the complete FAQ. Written for women, lawyers, doctors, and AI researchers alike.
+            The FAQ will remain publicly available indefinitely, for anyone who wishes to read it.
+          </p>
+          <a href="https://venky2099.github.io/shakti_faq.html" target="_blank" class="shakti-faq-link">
+            Read the complete Shakti FAQ &rarr;
+          </a>
+        </div>
+      </div>
     </div>
 
     <!-- RIGHT: Counter + Who built her -->
