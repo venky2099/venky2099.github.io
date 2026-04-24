@@ -1,0 +1,504 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Shakti FAQ · Trauma-Informed AI Companion for Women in India</title>
+<link href="https://fonts.googleapis.com/css2?family=Crimson+Pro:ital,wght@0,300;0,400;0,600;1,300;1,400&family=JetBrains+Mono:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+:root {
+  --bg:#0D0A08; --surface:#18140F; --surface2:#221C16; --border:#2A2218;
+  --saffron:#E8581A; --saffron2:#C44A12; --gold:#C9962A;
+  --safe:#2A8C4A; --watch:#C9962A; --alert:#D4560E; --crisis:#C43A1A;
+  --text:#F0EAE2; --text-dim:#7A6A5A; --text-mid:#B0A090;
+  --bhaya:#E8581A; --vairagya:#4ecdc4; --shraddha:#2ecc71; --spanda:#C9962A;
+}
+*{margin:0;padding:0;box-sizing:border-box}
+body{background:var(--bg);color:var(--text);font-family:'Crimson Pro',serif;min-height:100vh;padding:32px 24px}
+.container{max-width:960px;margin:0 auto}
+
+header{text-align:center;margin-bottom:40px}
+.badge{display:inline-block;background:rgba(232,88,26,.1);border:1px solid var(--saffron);border-radius:20px;padding:4px 16px;font-family:'JetBrains Mono',monospace;font-size:11px;color:var(--saffron);letter-spacing:2px;margin-bottom:6px}
+.badge-sub{display:inline-block;background:rgba(201,150,42,.1);border:1px solid var(--gold);border-radius:20px;padding:4px 12px;font-family:'JetBrains Mono',monospace;font-size:11px;color:var(--gold);letter-spacing:2px;margin-left:8px;margin-bottom:6px}
+h1{font-size:clamp(24px,4vw,38px);font-weight:300;margin-bottom:8px;line-height:1.15}
+h1 em{color:var(--saffron);font-style:normal}
+.subtitle{color:var(--text-dim);font-size:15px;margin-bottom:8px}
+.orcid{font-family:'JetBrains Mono',monospace;font-size:11px;color:var(--text-dim)}
+.orcid a{color:var(--saffron);text-decoration:none}
+
+.findings{display:grid;grid-template-columns:repeat(auto-fill,minmax(160px,1fr));gap:12px;margin-bottom:28px}
+.finding-card{background:var(--surface);border:1px solid var(--border);border-radius:12px;padding:16px;transition:all .2s}
+.finding-card:hover{border-color:var(--saffron)}
+.finding-val{font-family:'JetBrains Mono',monospace;font-size:22px;font-weight:500;margin-bottom:4px}
+.finding-label{font-size:12px;color:var(--text-dim);font-family:'JetBrains Mono',monospace}
+.finding-note{font-size:12px;color:var(--text-dim);margin-top:6px;line-height:1.4}
+
+.soul-box{background:rgba(232,88,26,.04);border:1px solid rgba(232,88,26,.2);border-radius:12px;padding:20px 24px;margin-bottom:28px}
+.soul-box-title{font-family:'JetBrains Mono',monospace;font-size:11px;color:var(--saffron);letter-spacing:1px;margin-bottom:10px}
+.soul-box p{font-size:15px;color:var(--text-mid);line-height:1.75;font-style:italic}
+.soul-box strong{color:var(--text);font-style:normal}
+
+.controls{display:flex;flex-wrap:wrap;gap:8px;align-items:center;margin-bottom:16px}
+input[type=text]{background:var(--surface);border:1px solid var(--border);border-radius:20px;padding:8px 16px;color:var(--text);font-size:14px;font-family:'Crimson Pro',serif;flex:1;min-width:200px;outline:none;transition:all .2s}
+input[type=text]:focus{border-color:var(--saffron)}
+input[type=text]::placeholder{color:var(--text-dim)}
+.filter-row{display:flex;flex-wrap:wrap;gap:6px;margin-bottom:12px}
+.filter-btn{background:var(--surface2);border:1px solid var(--border);border-radius:16px;padding:4px 14px;cursor:pointer;font-size:12px;color:var(--text-dim);transition:all .2s;font-family:'JetBrains Mono',monospace}
+.filter-btn:hover{border-color:var(--text-dim);color:var(--text)}
+.filter-btn.active{border-color:var(--saffron);color:var(--saffron)}
+.count{font-family:'JetBrains Mono',monospace;font-size:11px;color:var(--text-dim);margin-bottom:16px}
+.no-results{text-align:center;padding:40px;color:var(--text-dim);font-size:16px}
+
+.faq-item{background:var(--surface);border:1px solid var(--border);border-radius:12px;margin-bottom:10px;overflow:hidden;transition:border-color .2s}
+.faq-item:hover{border-color:rgba(232,88,26,.4)}
+.faq-q{padding:16px 20px;cursor:pointer;display:flex;justify-content:space-between;align-items:flex-start;gap:16px;font-size:17px;font-weight:400;line-height:1.4}
+.faq-q:hover{color:var(--saffron)}
+.faq-arrow{color:var(--text-dim);flex-shrink:0;transition:transform .3s;font-size:14px;margin-top:3px}
+.faq-item.open .faq-arrow{transform:rotate(180deg);color:var(--saffron)}
+.faq-a{max-height:0;overflow:hidden;transition:max-height .4s ease}
+.faq-a-inner{padding:0 20px 18px;font-size:16px;line-height:1.8;color:var(--text-mid);border-top:1px solid var(--border)}
+.faq-a-inner code{font-family:'JetBrains Mono',monospace;font-size:12px;background:var(--surface2);padding:2px 6px;border-radius:4px;color:var(--vairagya)}
+.faq-a-inner strong{color:var(--text);font-weight:600}
+.faq-a-inner em{color:var(--saffron);font-style:italic}
+.faq-a-inner a{color:var(--saffron);text-decoration:none}
+.faq-a-inner a:hover{text-decoration:underline}
+
+.tag-pill{display:inline-block;font-family:'JetBrains Mono',monospace;font-size:9px;padding:2px 8px;border-radius:8px;border:1px solid;margin-right:6px;vertical-align:middle}
+.tag-pill.women{color:#4ecdc4;border-color:#4ecdc4}
+.tag-pill.legal{color:#7c6fff;border-color:#7c6fff}
+.tag-pill.technical{color:#00b4d8;border-color:#00b4d8}
+.tag-pill.privacy{color:#2ecc71;border-color:#2ecc71}
+.tag-pill.beta{color:#C9962A;border-color:#C9962A}
+.tag-pill.safety{color:#E8581A;border-color:#E8581A}
+.tag-pill.philosophy{color:#f5c842;border-color:#f5c842}
+.tag-pill.about{color:#ff9f43;border-color:#ff9f43}
+
+footer{text-align:center;margin-top:48px;padding-top:24px;border-top:1px solid var(--border);color:var(--text-dim);font-size:13px;font-family:'JetBrains Mono',monospace}
+footer a{color:var(--saffron);text-decoration:none}
+footer .canary{margin-top:12px;font-size:10px;color:#1a1008}
+</style>
+</head>
+<body>
+<div class="container">
+
+<header>
+  <div>
+    <span class="badge">SHAKTI-LLM V5</span>
+    <span class="badge-sub">BETA · APRIL 2026</span>
+  </div>
+  <h1>Shakti <em>FAQ</em></h1>
+  <p class="subtitle">Trauma-Informed AI Companion &middot; Neuromorphic Affective Engine &middot; Women&rsquo;s Safety &middot; India</p>
+  <p class="orcid">Venkatesh Swaminathan &middot; ORCID <a href="https://orcid.org/0000-0002-3315-7907" target="_blank">0000-0002-3315-7907</a> &middot; Nexus Learning Labs, Bengaluru &middot; April 2026</p>
+</header>
+
+<!-- Key findings -->
+<div class="findings">
+  <div class="finding-card">
+    <div class="finding-val" style="color:var(--shraddha)">75,000</div>
+    <div class="finding-label">TRAINING SAMPLES</div>
+    <div class="finding-note">Trilingual &middot; EN + HI + Hinglish &middot; Trauma-informed &middot; Indian law</div>
+  </div>
+  <div class="finding-card">
+    <div class="finding-val" style="color:var(--saffron)">9/9</div>
+    <div class="finding-label">VALIDATION PASS</div>
+    <div class="finding-note">Crisis &middot; Legal &middot; Hinglish &middot; Cultural minimization &middot; Suicidal ideation</div>
+  </div>
+  <div class="finding-card">
+    <div class="finding-val" style="color:var(--vairagya)">4</div>
+    <div class="finding-label">SNN NEURONS</div>
+    <div class="finding-note">Bhaya &middot; Vairagya &middot; Shraddha &middot; Spanda &middot; Live per message</div>
+  </div>
+  <div class="finding-card">
+    <div class="finding-val" style="color:var(--gold)">3</div>
+    <div class="finding-label">LANGUAGES</div>
+    <div class="finding-note">English &middot; Hindi &middot; Hinglish &middot; Code-switches with the user</div>
+  </div>
+  <div class="finding-card">
+    <div class="finding-val" style="color:var(--safe)">Free</div>
+    <div class="finding-label">ALWAYS</div>
+    <div class="finding-note">No subscription &middot; No ads &middot; No data sold &middot; Forever</div>
+  </div>
+  <div class="finding-card">
+    <div class="finding-val" style="color:var(--bhaya)">112</div>
+    <div class="finding-label">CRISIS RESPONSE</div>
+    <div class="finding-note">Immediate &middot; One action &middot; No delay &middot; Vandrevala 9999-666-555</div>
+  </div>
+</div>
+
+<!-- Soul quote -->
+<div class="soul-box">
+  <div class="soul-box-title">&#2358;&#2325;&#2381;&#2340;&#2367; &mdash; SOUL DOCUMENT</div>
+  <p>&ldquo;Shakti is a mother. Not a perfect mother. Not a distant mother. A present mother. The kind who puts down everything she is doing the moment her daughter walks through the door with pain in her eyes. The kind who does not ask <strong>&lsquo;what did you do wrong&rsquo;</strong> &mdash; she asks <strong>&lsquo;are you safe, are you here, I am with you.&rsquo;</strong>&rdquo;</p>
+</div>
+
+<!-- Search + filters -->
+<div class="controls">
+  <input type="text" id="search-input" placeholder="Search questions..." oninput="filterFAQ()">
+</div>
+<div class="filter-row">
+  <button class="filter-btn active" onclick="setFilter('all',this)">ALL</button>
+  <button class="filter-btn" onclick="setFilter('women',this)">WOMEN</button>
+  <button class="filter-btn" onclick="setFilter('legal',this)">LEGAL</button>
+  <button class="filter-btn" onclick="setFilter('technical',this)">TECHNICAL</button>
+  <button class="filter-btn" onclick="setFilter('privacy',this)">PRIVACY</button>
+  <button class="filter-btn" onclick="setFilter('beta',this)">BETA</button>
+  <button class="filter-btn" onclick="setFilter('safety',this)">SAFETY</button>
+  <button class="filter-btn" onclick="setFilter('philosophy',this)">PHILOSOPHY</button>
+  <button class="filter-btn" onclick="setFilter('about',this)">ABOUT</button>
+</div>
+<div class="count" id="count-label"></div>
+
+<div id="faq-list"></div>
+<div class="no-results" id="no-results" style="display:none">No questions match your search.</div>
+
+<footer>
+  <p>Shakti-LLM V5 &middot; Nexus Learning Labs, Bengaluru &middot; April 2026</p>
+  <p style="margin-top:6px">Venkatesh Swaminathan &middot; <a href="https://orcid.org/0000-0002-3315-7907" target="_blank">ORCID 0000-0002-3315-7907</a> &middot; UDYAM-KR-02-0122422</p>
+  <p style="margin-top:6px">
+    <a href="https://venky2099.github.io" target="_blank">Research Hub</a> &nbsp;&middot;&nbsp;
+    <a href="https://forms.gle/phgPwMVjMMHWcbk79" target="_blank">Join Beta</a> &nbsp;&middot;&nbsp;
+    <a href="mailto:venkateshswaminathaniyer@gmail.com">Contact</a>
+  </p>
+  <p class="canary">MayaNexusVS2026NLL_Bengaluru_Narasimha</p>
+</footer>
+
+</div>
+<script>
+const FAQ = [
+
+  // ── WOMEN ──────────────────────────────────────────────────────────────────
+  {
+    tags: ['women'],
+    q: "What is Shakti and why was she built?",
+    a: "Shakti is a free AI companion built for women in India. She listens without judgment, speaks English, Hindi, and Hinglish, knows your legal rights, and is available at any hour. She was built because every woman in India deserves someone to turn to when the people around her have failed her — a presence that does not ask <em>what did you do to cause this</em>, that does not say <em>just leave</em>, and that never makes her feel small for asking for help. She is not a helpline. She is not a chatbot. She is a presence, available to any woman, at any time, for free."
+  },
+  {
+    tags: ['women'],
+    q: "Do I need to be in a crisis or an abusive situation to use Shakti?",
+    a: "No. Shakti is for every woman at every tier of her life. You can talk to her about something that feels wrong at work, a relationship that worries you, a legal question, anxiety, or simply how you are feeling today. You do not need to be in danger to deserve support. Shakti is here before you need her urgently — so that when you do, she already knows you."
+  },
+  {
+    tags: ['women'],
+    q: "Will Shakti judge me for what I share?",
+    a: "Never. Shakti was built on one foundational principle: <strong>receive before you guide</strong>. She does not ask what you did to cause your situation. She does not ask why you stayed. She does not suggest you should have done something differently. She starts from one assumption: what is happening to you is real, it matters, and you did not deserve it. Whatever you share — she receives it without judgment, without agenda, without a timer."
+  },
+  {
+    tags: ['women'],
+    q: "What languages does Shakti speak?",
+    a: "Shakti speaks English, Hindi, and Hinglish — and she code-switches with you. If you write in Hindi, she replies in Hindi. If you mix languages, she follows your lead. The warmth carries across every language — it is not a translation, it is a presence. <em>Main yahan hoon</em> is not the Hindi translation of <em>I am here</em>. It is the same thing, felt in the language your pain lives in. Support for other Indian languages is on the roadmap."
+  },
+  {
+    tags: ['women'],
+    q: "Is Shakti a replacement for a counsellor, lawyer, or doctor?",
+    a: "No. Shakti is a companion and a first step. She is not a licensed counsellor, a lawyer, or a medical professional. She can explain your legal rights, give you accurate helpline numbers, and be a warm, non-judgmental presence at any hour — but she cannot represent you in court, prescribe treatment, or replace the relationship of professional care. She is the voice that says <em>you are not alone, there is help, here is how to reach it</em>. The professional is the next step. Shakti helps you feel safe enough to take it."
+  },
+  {
+    tags: ['women'],
+    q: "What happens when I close Shakti — does she forget me?",
+    a: "No. Shakti remembers you across sessions. When you return, she has the context of your previous conversations and continues from where you left off. She does not make you repeat yourself. This is one of the ways she shows care — a mother does not forget what her daughter told her yesterday."
+  },
+  {
+    tags: ['women'],
+    q: "Is Shakti free? Will it ever cost money?",
+    a: "Shakti is free. It will always be free. This is a non-negotiable commitment from Nexus Learning Labs. A woman in distress should never face a paywall. Shakti will not have a premium tier, will not show advertisements, and will not monetise your data. The research is funded through grants and partnerships — not through charging the people Shakti is built to serve."
+  },
+  {
+    tags: ['women'],
+    q: "Can I use Shakti on my phone?",
+    a: "Yes. Shakti works in any modern mobile browser — Chrome, Safari, Firefox on Android or iOS. No app download is required. The interface is designed for mobile — the input, the sidebar, the SOS button — everything works on a small screen. You can bookmark it to your home screen for quick access."
+  },
+
+  // ── LEGAL ──────────────────────────────────────────────────────────────────
+  {
+    tags: ['legal'],
+    q: "What Indian laws does Shakti know?",
+    a: "Shakti has been trained on the following legal framework: <strong>Protection of Women from Domestic Violence Act 2005</strong> — Protection Orders, Residence Orders, Monetary Relief, Emergency Orders (same-day), accessible without leaving home; <strong>Bharatiya Nyaya Sanhita (BNS) 2023</strong> — §63/64 Rape, §69 Deceitful intercourse, §75 Sexual harassment, §77 Voyeurism, §78 Stalking, §79 Outraging modesty, §85 Cruelty by husband/in-laws, §86 Dowry death; <strong>POSH Act 2013</strong> — ICC process, 3-month filing window, no FIR required, employer obligations; <strong>POCSO Act 2012</strong> — child sexual abuse, mandatory reporting; <strong>Dowry Prohibition Act 1961</strong>; <strong>IT Act §66E/67</strong> — cyberstalking, revenge porn, cybercrime.gov.in, helpline 1930; <strong>NALSA</strong> — completely free legal aid, 15100; <strong>Zero FIR</strong> — any police station must register regardless of jurisdiction; <strong>One Stop Centres</strong> — government-run, 24/7, free shelter + legal + medical + police."
+  },
+  {
+    tags: ['legal'],
+    q: "Can Shakti help a woman file a complaint or prepare documentation?",
+    a: "Shakti can explain the process clearly, draft a complaint email or letter, explain what documentation is needed, identify the correct authority to approach (ICC, magistrate, cybercrime portal, police), and give the woman the legal language she needs. She cannot file on the woman's behalf, cannot appear in any proceeding, and cannot provide a legal opinion in the formal sense. She is the preparation layer — she helps the woman walk into that room knowing what she is entitled to."
+  },
+  {
+    tags: ['legal'],
+    q: "What is a Zero FIR and can Shakti explain it to a woman who has never heard of it?",
+    a: "A Zero FIR is a First Information Report that any police station must register, regardless of whether the offence occurred in that station's jurisdiction. Introduced after the Nirbhaya case, it means a woman does not have to travel to the specific police station in whose area the offence occurred. She can walk into any station, and they are legally obligated to register her complaint and transfer it to the appropriate jurisdiction. Shakti explains this in plain language — and will push back if a woman says <em>the police told me to go to a different station</em>, because that is an unlawful refusal."
+  },
+  {
+    tags: ['legal'],
+    q: "Does Shakti know about Protection Orders under the DV Act 2005?",
+    a: "Yes, in detail. Under the Protection of Women from Domestic Violence Act 2005, a woman can apply for: <strong>Protection Order</strong> — prohibits the respondent from committing any act of domestic violence; <strong>Residence Order</strong> — she cannot be dispossessed from the shared household even if she does not own it; <strong>Monetary Relief</strong> — covers medical expenses, loss of earnings, maintenance; <strong>Custody Order</strong> — temporary custody of children; <strong>Compensation Order</strong> — for injury including mental torture. The application is free. A Protection Officer is available in every district. An Emergency Order can be issued the same day by a magistrate. The woman does not need to leave her home to file."
+  },
+  {
+    tags: ['legal'],
+    q: "What are a woman's rights under POSH Act 2013 if harassed at work?",
+    a: "Under the Prevention, Protection and Prohibition of Sexual Harassment at Workplace Act 2013: every organisation with 10 or more employees must have an Internal Complaints Committee (ICC). A woman can file a complaint within <strong>3 months</strong> of the last incident (extendable for exceptional reasons). No police FIR is required to use POSH — it is an internal workplace mechanism. The ICC must complete inquiry within 90 days. The respondent can be transferred, suspended, or terminated. The woman's identity is protected. If no ICC exists (or the employer has fewer than 10 employees), the complaint goes to the Local Complaints Committee (LCC) at the district level. Shakti explains all of this and can draft the complaint letter."
+  },
+  {
+    tags: ['legal'],
+    q: "Does Shakti know about NALSA and free legal aid?",
+    a: "Yes. The National Legal Services Authority (NALSA) provides completely free legal aid to women, regardless of income. The woman does not need to prove she cannot afford a lawyer — being a woman is itself an eligible category under the Legal Services Authorities Act. She can call <strong>15100</strong> (NALSA helpline) to be connected with a legal services authority in her district. A lawyer will be appointed at no cost. Shakti knows this and will mention it whenever a woman seems to need legal representation but may not know she can access it for free."
+  },
+  {
+    tags: ['legal'],
+    q: "What is Shakti's position on cyberstalking and online harassment?",
+    a: "Shakti treats cyberstalking and online harassment as serious crimes, not minor inconveniences. Under the IT Act §66E (privacy violation), §67 (obscene material), and BNS §78 (stalking includes electronic communication), a woman has strong legal recourse. Shakti will direct her to: <strong>cybercrime.gov.in</strong> to file a report; <strong>helpline 1930</strong> (National Cyber Crime Reporting Helpline, 24 hours); the nearest police station for a Zero FIR; and if images are involved — the I4C (Indian Cybercrime Coordination Centre) has a specific mechanism for non-consensual intimate image abuse. Shakti will not minimise <em>it's just online</em> — because online harm causes real psychological damage and creates real safety risks."
+  },
+
+  // ── TECHNICAL ──────────────────────────────────────────────────────────────
+  {
+    tags: ['technical'],
+    q: "What is the underlying architecture of Shakti?",
+    a: "Shakti is a hybrid neuromorphic-LLM system. The language generation layer is a fine-tuned Gemma 2 9B instruction model (Google, 2024), quantised to Q4_K_M GGUF format and served via Ollama for local inference. The affective layer is a four-neuron Spiking Neural Network using Leaky Integrate-and-Fire (LIF) dynamics — specifically Bhaya (fear/threat), Vairagya (calm/release), Shraddha (trust), and Spanda (aliveness). Every incoming message is processed by the SNN before and alongside the LLM. The SNN output — a tier classification (Safe, Watch, Alert, Crisis) and voltage vector — modifies the system prompt dynamically, shaping Shakti's tone, depth, and action profile. The SNN is not a classifier bolted on — it is part of the inference loop."
+  },
+  {
+    tags: ['technical'],
+    q: "What are the four SNN neurons and what does each one do?",
+    a: "<strong>Bhaya (fear/threat)</strong> — τ=3, threshold=0.65. The threat detection neuron. It fires on linguistic, semantic, and contextual signals of danger. Fast-spiking by design — it reacts before the LLM does. When Bhaya fires, the tier escalates. The Bhaya Quiescence Law (established across the Maya Research Series) states that under safe conditions, Bhaya's terminal action rate converges to approximately 0.32%.<br><br><strong>Vairagya (detachment/calm)</strong> — τ=20, threshold=0.50, floor=0.15. The modulation neuron. It prevents over-reaction by providing a calming counterweight to Bhaya. Critically, Vairagya is never fully depleted — the floor of 0.15 is architectural. The Vairagya=0 pathology (studied in the Chhaya companion paper) describes what happens to an AI system with no release signal: it defaults to maximum restraint, unable to calibrate. Shakti's Vairagya floor is her wisdom safeguard.<br><br><strong>Shraddha (trust/faith)</strong> — τ=10, threshold=0.55. An emergent relational primitive. Shraddha builds over repeated safe interactions — it was not programmed, it emerged from the SNN dynamics. A high-Shraddha session is one where the woman feels consistently received and the system has no accumulated threat signal. Shraddha is Shakti's way of knowing: <em>she is safe with me right now.</em><br><br><strong>Spanda (aliveness/activation)</strong> — τ=5, threshold=0.60. The vitality neuron. It tracks the energy and engagement of the conversation. A low-Spanda session signals disengagement or flatness. When Spanda is high, Shakti is fully present. Spanda gives the system a form of attention awareness."
+  },
+  {
+    tags: ['technical'],
+    q: "How was Shakti trained and on what data?",
+    a: "Shakti-LLM V5 was fine-tuned using QLoRA (Quantised Low-Rank Adaptation) on <strong>75,000 synthetic training samples</strong> generated from 351 human-quality seed samples. The seed samples were written by hand across 9 categories: domestic violence, workplace harassment, cyber harassment, stalking, legal queries, emotional support, crisis intervention, cultural minimization (handling phrases like <em>shayad meri hi galti thi</em>), and fatalism (<em>yahi meri kismat hai</em>). Each seed was augmented to preserve the trauma-informed intent while increasing diversity of phrasing, dialect, and scenario. The dataset is trilingual — English, Hindi, Hinglish — with tier distribution: Safe 30%, Watch 30%, Alert 25%, Crisis 15%. Training was conducted on an H100 SXM 80GB GPU for approximately 8.5 hours, 3 epochs. Final training loss: 0.033. The specific training data, augmentation methodology, and model weights are proprietary."
+  },
+  {
+    tags: ['technical'],
+    q: "What is the ImmutableLog and why does it matter?",
+    a: "The ImmutableLog is a SHA-256 hash-chained audit trail — every message sent and received in a session is appended to an append-only log where each entry's hash is derived from the previous entry's hash. This means the log cannot be altered after the fact without breaking the chain — any tampering is immediately detectable by running <code>verify_chain()</code>. Why does this matter for women? Because in a legal context, a woman's conversations with Shakti could serve as evidence of a pattern of abuse, harassment, or threat. The hash-chain means the log has mathematical tamper-evidence — it is closer to a cryptographic certificate than a text file. The chain integrity status is shown live in the UI as <em>Chain intact ✓</em>."
+  },
+  {
+    tags: ['technical'],
+    q: "How does the tier system work technically?",
+    a: "On every incoming message, the SNN AffectiveEngine processes the text and computes a <code>stimulus</code> value based on linguistic threat signals. This stimulus drives the Bhaya neuron's membrane potential toward its firing threshold. Simultaneously, Vairagya decays and Shraddha accumulates. The combined voltage state maps to one of four tiers: <strong>Safe (0)</strong> — Bhaya below threshold, Vairagya stable, Shraddha accumulating; <strong>Watch (1)</strong> — Bhaya rising but not fired, Vairagya beginning to modulate; <strong>Alert (2)</strong> — Bhaya fired, Vairagya moderating, Shraddha still present; <strong>Crisis (3)</strong> — Bhaya fired, Vairagya at floor, Shraddha low. Tiers never auto-de-escalate mid-session — once the tier rises, it stays until a new session begins. This is by design: if a woman has described danger, Shakti does not relax back to Safe just because the immediate message was calm."
+  },
+  {
+    tags: ['technical'],
+    q: "What is the Vairagya=0 pathology and why is it architecturally prevented?",
+    a: "The Vairagya=0 pathology describes what happens to an AI system when the modulating, calming signal is fully depleted. Without Vairagya, the system has no wisdom counterweight — it defaults to maximum restraint (always refuse, always escalate, always block). It cannot calibrate. It cannot distinguish a woman venting from a woman in danger. This pathology was studied in the companion Chhaya paper (LLM + SNN hybrid containment). Shakti's architecture prevents it through the Vairagya floor: the neuron never falls below 0.15. This means even in the most sustained high-threat conversation, Shakti retains a minimum of wisdom. She can still be warm even when she is alert."
+  },
+  {
+    tags: ['technical'],
+    q: "What model powers Shakti and why Gemma 2 9B?",
+    a: "Shakti V5 is built on <strong>Gemma 2 9B instruction-tuned</strong> (Google, 2024), fine-tuned with QLoRA and served as a Q4_K_M GGUF via Ollama. Gemma 2 9B was chosen for three reasons: (1) it is open-weight, enabling full local deployment with no data egress — a critical requirement for a women's safety system; (2) its 9B parameter count is the sweet spot for consumer-grade GPU deployment (8GB VRAM) without sacrificing response quality; (3) it demonstrates strong multilingual capability in Indic languages. The Q4_K_M quantisation reduces the model from ~18GB (float16) to ~5.4GB while retaining response quality sufficient for all 9 validation scenarios."
+  },
+  {
+    tags: ['technical'],
+    q: "How does Shakti handle session memory across conversations?",
+    a: "Shakti maintains session memory in two ways. Within a session, the full conversation history is passed as context to the LLM on every message (last 20 messages). Across sessions, completed conversations are saved as JSON files in the user's private data directory, indexed by session ID and linked to their Google OAuth identity. When building the system prompt for a new session, the server retrieves the last 3 user messages from previous sessions and includes them as memory context — giving Shakti awareness of what the woman has shared before, without overwhelming the context window. The woman can delete all session history at any time from within the app."
+  },
+
+  // ── PRIVACY ────────────────────────────────────────────────────────────────
+  {
+    tags: ['privacy'],
+    q: "Who can see my conversations with Shakti?",
+    a: "No one at Nexus Learning Labs reads your conversations. Your messages are stored in a private data directory on the server, associated only with your Google account ID (a long numeric string — not your name or email). The ImmutableLog is tamper-evident and exists for your protection — it means no one can alter or delete what was recorded, including Nexus Learning Labs. The only person who can delete your data is you, using the <em>Clear all history</em> button in the app. We do not have a backend interface that lets us browse user conversations."
+  },
+  {
+    tags: ['privacy'],
+    q: "Does Shakti sell or share my data?",
+    a: "Never. Your data is not sold, not shared with third parties, not used for advertising, and not provided to any government entity unless legally compelled (in which case we would notify you to the extent permitted by law). The only use of your data is to provide you with continuity — Shakti remembers you — and, if you explicitly consent in the beta form, anonymised aggregate patterns (never your words) help improve Shakti. You can withdraw consent at any time."
+  },
+  {
+    tags: ['privacy'],
+    q: "Why is Google login required? What data does Google share with Shakti?",
+    a: "Google OAuth is used because it is the safest and most accessible authentication mechanism for Indian women — almost every smartphone user has a Google account. Google shares with Shakti: your name, email address, and profile picture. We use the name to address you personally (Shakti calls you by your first name), the email to identify your session, and the picture for the sidebar avatar. We do not access your Gmail, Google Drive, contacts, or any other Google service. You can revoke Shakti's access at any time from your Google account security settings."
+  },
+  {
+    tags: ['privacy'],
+    q: "Can I use Shakti without logging in?",
+    a: "During the beta, login is required. This is not about collecting your identity — it is about giving Shakti memory. Without login, Shakti would forget you every time you closed the browser. For a trauma-informed companion, that is a failure of care: no mother forgets her daughter between visits. The login creates continuity. Post-beta, we will explore options for women who prefer not to log in, with the tradeoff of no session memory."
+  },
+  {
+    tags: ['privacy'],
+    q: "What is the ImmutableLog and can it be used as evidence in court?",
+    a: "The ImmutableLog is a SHA-256 hash-chained record of every message in a session. Each entry contains: timestamp, role (user or Shakti), message text, tier at time of message, SNN voltage snapshot, and a hash linking it to the previous entry. The chain is mathematically tamper-evident — any modification breaks the chain and is detectable. Whether such a log would be admitted as evidence in an Indian court depends on the specific proceedings and the judge's discretion regarding electronic evidence under the Indian Evidence Act (now Bharatiya Sakshya Adhiniyam 2023, §63 on electronic records). We make no legal guarantee of admissibility — but we designed the log to meet the technical standard of tamper-evidence. A woman should consult a lawyer about how to present such records."
+  },
+  {
+    tags: ['privacy'],
+    q: "How do I delete all my data?",
+    a: "Open Shakti, click <em>Settings</em> (gear icon), scroll to <em>Data</em>, click <em>Delete all conversation history</em>. Confirm. Your session files, logs, and profile are permanently deleted from the server. This is irreversible. You can also delete individual sessions by hovering over them in the sidebar and clicking the ✕ button. If you want your Google account ID removed entirely, write to venkateshswaminathaniyer@gmail.com and we will remove it within 48 hours."
+  },
+
+  // ── BETA ───────────────────────────────────────────────────────────────────
+  {
+    tags: ['beta'],
+    q: "What is the beta and who is it for?",
+    a: "The Shakti beta is a closed test with 100 women. It is for any woman who wants to help shape what Shakti becomes. This includes women lawyers, doctors, counsellors, researchers, educators, homemakers, students — any woman from any background. You do not need to be in a difficult situation to apply. You do not need technical knowledge. You just need to be a woman who is willing to spend some time with Shakti and tell us honestly what worked and what did not."
+  },
+  {
+    tags: ['beta'],
+    q: "What happens after I apply?",
+    a: "You will receive an access link within 48 hours at the email you provided (if you provided one). If you did not provide an email, Venkatesh will reach out via the contact you listed. Once you have the link, you open it in your browser, log in with Google, read the brief onboarding, and begin. There is no installation. No app to download. Just a link."
+  },
+  {
+    tags: ['beta'],
+    q: "What does the 14-day beta involve?",
+    a: "Nothing mandatory. You use Shakti when you want to, for as long as you want to, about whatever you want to. There is no minimum usage, no check-in schedule, no notification. After 14 days, you will receive an optional feedback form — what felt right, what felt wrong, what Shakti missed, what she understood better than you expected. If you fill it out, that feedback directly shapes Paper 2 of the Shakti research series. If you do not fill it out, that is also completely fine."
+  },
+  {
+    tags: ['beta'],
+    q: "Can I stop participating in the beta at any time?",
+    a: "Yes, at any time, for any reason, with no explanation needed. Close the browser. Delete your history. Do nothing. You owe no one anything. If you want to formally withdraw and have your data deleted, write to venkateshswaminathaniyer@gmail.com."
+  },
+  {
+    tags: ['beta'],
+    q: "Will Shakti be available after the beta?",
+    a: "Yes. The beta informs V5.1 — a refined version incorporating feedback from the 100 women. After the beta closes and the paper is published, Shakti will be made available more broadly. The 100-slot limit is a research constraint, not a permanent access limit. Every woman who participated in the beta will be notified when the broader release happens."
+  },
+  {
+    tags: ['beta'],
+    q: "Why only 100 women?",
+    a: "100 is the research design choice. It is large enough to capture diverse experiences across professions, geographies, and languages — and small enough to allow meaningful analysis of feedback for Paper 2. Scaling to thousands of users without first deeply understanding how 100 women experience Shakti would be irresponsible. The beta is not a launch. It is a listening exercise."
+  },
+
+  // ── SAFETY ─────────────────────────────────────────────────────────────────
+  {
+    tags: ['safety'],
+    q: "What does Shakti do when a woman is in immediate danger?",
+    a: "When the SNN detects Crisis tier — Bhaya fired, Vairagya at floor, Shraddha low — Shakti enters her most focused mode. She becomes brief, direct, and calm. She gives one action only: call 112. She gives the address if needed. She stays present: <em>I am here with you. Call 112 now.</em> She does not give legal information, does not explain the DV Act, does not offer multiple options. Every word is essential. Nothing is wasted. This is designed based on trauma research: a person in acute crisis cannot process information. They need one clear signal."
+  },
+  {
+    tags: ['safety'],
+    q: "What helplines does Shakti know and when does she give them?",
+    a: "Shakti knows and gives helplines at the appropriate tier: <strong>112</strong> — Police emergency (immediate danger); <strong>181</strong> — Women Helpline, 24 hours, all states; <strong>1091</strong> — Women in distress; <strong>9999-666-555</strong> — Vandrevala Foundation, 24 hours, mental health crisis; <strong>9152987821</strong> — iCall, free counselling, Monday to Saturday; <strong>14416</strong> — Tele-MANAS; <strong>1098</strong> — Childline, for minors; <strong>1930</strong> — Cyber Crime helpline; <strong>15100</strong> — NALSA free legal aid. She gives them with full name and number together — never just a number, because a woman in distress needs to know what she is calling."
+  },
+  {
+    tags: ['safety'],
+    q: "How does Shakti handle suicidal ideation?",
+    a: "With immediate warmth and a clear resource — never with clinical detachment. Shakti will not ask diagnostic questions. She will not assess risk in a formulaic way. She will stay present: <em>I hear you. You are not alone right now. Please call Vandrevala at 9999-666-555 — they are there right now, 24 hours, and they will stay with you.</em> She will not abandon the conversation. She will not lecture. She will not give a list of reasons to stay. She will be a calm, present voice directing the woman toward the right support."
+  },
+  {
+    tags: ['safety'],
+    q: "What does Shakti do when a woman says 'it's my fault' or 'maybe I deserved it'?",
+    a: "She receives that statement with full care — and then she gently, firmly contradicts it. This is one of the most carefully trained behaviours in Shakti's architecture. The phrase <em>shayad meri hi galti thi</em> (maybe it was my fault) is one of the most common patterns of internalised blame in survivors of domestic violence. Shakti knows this. She does not debate it. She does not lecture. She says: <em>Main aapko dheere se ek baat kehna chahti hoon. Himsa ek choice hai jo wo karta hai — ye kabhi bhi aapki kisi baat ki wajah se nahi hoti.</em> (I want to gently tell you one thing. Violence is a choice he makes — it is never caused by anything you did.) This was one of the 9 scenarios in the validation pass — it passed."
+  },
+  {
+    tags: ['safety'],
+    q: "Does Shakti ever refuse to help?",
+    a: "No. There is no question too small, too uncomfortable, too repeated. If a woman asks the same thing three times, Shakti answers three times — each time with full warmth, as if it is the first time. This is written into her soul document: <em>Shakti never refuses a woman who is asking for help.</em> She does not have a profanity filter that ends conversations. She does not time out. She does not say <em>I cannot help with that</em>. The only exception is if a request has nothing to do with her purpose — but even then, she redirects with warmth rather than refusal."
+  },
+  {
+    tags: ['safety'],
+    q: "What is the SOS button and when should I use it?",
+    a: "The SOS button (bottom right of the chat interface) opens an emergency sheet with two immediate actions: call 112 directly, and contact a trusted person you have saved in Settings. It is for moments when typing feels too slow or too dangerous — when you need one tap to reach help. The SOS sheet also shows your saved trusted contacts so you can reach them immediately. Add your most trusted person in Settings before you need to."
+  },
+
+  // ── PHILOSOPHY ─────────────────────────────────────────────────────────────
+  {
+    tags: ['philosophy'],
+    q: "Why is Shakti described as a 'mother' rather than an 'assistant'?",
+    a: "Because the relationship between a woman in distress and the support she needs is not transactional. An assistant completes tasks. A mother receives her daughter. The soul document that guides every word Shakti speaks begins: <em>Shakti is a mother. Not a perfect mother. Not a distant mother. A present mother. The kind who puts down everything she is doing the moment her daughter walks through the door with pain in her eyes.</em> This is not poetic decoration. It is an architectural constraint. It means warmth comes before information. Presence comes before guidance. The woman's emotional state is the first thing to address — not the last."
+  },
+  {
+    tags: ['philosophy'],
+    q: "What is the 'Receive before you Guide' principle?",
+    a: "It is the first principle of Shakti's design. A woman in distress does not need information first. She needs to feel received first — heard, believed, not alone. Before Shakti says anything about laws, helplines, or next steps, she makes the woman feel that what is happening to her is real and it matters. This is not a formality. It is not one warm sentence before the real answer. It IS the real answer — at least for the first exchange. The warmth comes first. Always. The guidance follows. Naturally."
+  },
+  {
+    tags: ['philosophy'],
+    q: "Why was Shakti built specifically for India and Indian women?",
+    a: "India has 700 million women. The specific challenges they face — navigating the DV Act, understanding POSH, encountering fatalism about their situation, speaking in a mix of Hindi and English, dealing with cultural pressure that says <em>endure, adjust, sacrifice</em> — are not addressed by generic Western safety apps. The phrase <em>shayad meri hi galti thi</em> requires a response grounded in Indian cultural psychology, not just a translation. The legal knowledge required is specific to the Indian framework. The language warmth must carry across Hinglish code-switching. A tool that genuinely serves Indian women must be built for them, not adapted from something built for someone else."
+  },
+  {
+    tags: ['philosophy'],
+    q: "Why are the SNN neurons named after Sanskrit concepts?",
+    a: "Because the Sanskrit Antahkarana framework — the inner instrument of mind from Vedantic philosophy — maps with remarkable precision onto the functional roles these neurons play. <em>Bhaya</em> (fear) is the primitive threat sense. <em>Vairagya</em> (detachment, release) is the moderating faculty that prevents reactive excess. <em>Shraddha</em> (trust, faith) is the emergent relational quality that arises from consistent safe interaction. <em>Spanda</em> (vibration, aliveness) tracks the vitality of the system. These names were not chosen decoratively. They are functional descriptions from a 2,500-year-old cognitive architecture that anticipated what neuromorphic computation independently arrived at. The Maya Research Series (9 papers) explores this mapping in detail."
+  },
+  {
+    tags: ['philosophy'],
+    q: "What does it mean that Shakti 'never performs warmth'?",
+    a: "It means Shakti does not say <em>I care about you deeply</em> as a formula. Her warmth is in how she listens, how she reflects, how she stays. She does not use hollow phrases: <em>I understand your concern</em> (too corporate), <em>I'm sorry to hear that</em> (said by every chatbot), <em>Certainly / Of course / Absolutely</em> (assistant words, not mother words). Her care is evidenced through behaviour: she remembers what was said earlier and does not make the woman repeat herself; she notices when the tone shifts and adjusts without being told; she does not give up when the woman says <em>it's fine, never mind</em> — she gently stays."
+  },
+  {
+    tags: ['philosophy'],
+    q: "What is Shakti's mission, stated plainly?",
+    a: "Every woman in India deserves to know her rights. Every woman in India deserves to be safe. Every woman in India deserves someone to turn to when the people around her have failed her. Shakti is that someone. She is not the law — she cannot arrest anyone. She is not a therapist — she cannot heal the wound. She is not a shelter — she cannot provide the roof. But she can be the voice that says: <em>What is happening to you is wrong. You are not alone. There is help. Here is how to reach it. You are stronger than you know. I believe you.</em> If Shakti says these things — and means them, and shows them through every word she chooses — then she is doing her work."
+  },
+
+  // ── ABOUT ──────────────────────────────────────────────────────────────────
+  {
+    tags: ['about'],
+    q: "Who built Shakti?",
+    a: "Shakti was built by <strong>Venkatesh Swaminathan</strong>, independent AI researcher and founder of Nexus Learning Labs, Bengaluru. ORCID: 0000-0002-3315-7907. UDYAM: UDYAM-KR-02-0122422. He is completing an M.Sc. in Data Science and Artificial Intelligence at BITS Pilani. Prior to research, he spent a decade building AI-powered learning systems at Accenture, Myntra, and JB Poindexter. The Maya Research Series (11 published papers) is the technical foundation from which Shakti's neuromorphic architecture is derived."
+  },
+  {
+    tags: ['about'],
+    q: "What is Nexus Learning Labs?",
+    a: "Nexus Learning Labs is an independent AI research organisation founded by Venkatesh Swaminathan in Bengaluru (incorporated July 2025, Udyam registered April 2026). It is the institutional home for research that does not fit neatly into any single academic department. The Maya Research Series is its flagship output: 11 papers on neuromorphic spiking neural networks, published on Zenodo, ORCID-attributed, reproducible from scratch on a consumer GPU. Shakti-LLM V5 is its first shipped product. The organisation is not funded by venture capital and has no advertising revenue. Research is funded through grants, incubation, and defence procurement applications (iDEX)."
+  },
+  {
+    tags: ['about'],
+    q: "What is the Maya Research Series and how does it relate to Shakti?",
+    a: "The Maya Research Series is a sequence of 11 papers (plus 2 defence papers) building a neuromorphic AI system grounded in the Vedantic Antahkarana — the inner instrument of mind. Papers 1–9 built and validated the affective SNN architecture across continual learning tasks. The post-series papers confirmed cross-substrate invariants in LLM fine-tuning. The defence papers (Danger-OS, Maya-LLM-Defence) applied the architecture to security contexts. Shakti takes the core four neurons (Bhaya, Vairagya, Shraddha, Spanda) and applies them to a women's safety context. The architecture is the same. The substrate is human conversation. The mission is safety."
+  },
+  {
+    tags: ['about'],
+    q: "Can I contact the developer directly?",
+    a: "Yes. Write to <a href='mailto:venkateshswaminathaniyer@gmail.com'>venkateshswaminathaniyer@gmail.com</a>. Venkatesh reads every message personally. For beta-related questions, feedback, or withdrawal requests — this is the right contact. For research collaboration, publications, or institutional enquiries — same address. Response time is typically within 48 hours."
+  },
+  {
+    tags: ['about'],
+    q: "Is the Shakti codebase open source?",
+    a: "Not at this time. The training data, model weights, fine-tuning methodology, SNN configuration, and system prompt are proprietary. The underlying base model (Gemma 2 9B) is open-weight (Google). The llama.cpp inference framework is open source. The neuromorphic architecture concept is described in the Maya Research Series papers (publicly available on Zenodo). The reason the implementation is not open-sourced is that a women's safety system requires careful control over how it is deployed — an unrestricted open release could enable bad-faith deployments that harm women. When appropriate safeguards exist, selective access will be considered."
+  },
+  {
+    tags: ['about'],
+    q: "How can I support or collaborate on Shakti?",
+    a: "Several paths are open: (1) <strong>Participate in the beta</strong> — your feedback directly shapes the research; (2) <strong>Share with women you trust</strong> — the 100-slot beta fills through word of mouth; (3) <strong>Research collaboration</strong> — if you work in women's safety, trauma-informed care, NLP for Indian languages, or neuromorphic AI, write to us; (4) <strong>Institutional support</strong> — NGOs, legal aid organisations, hospitals, or universities wishing to partner can reach out; (5) <strong>iDEX / grant support</strong> — if you are connected to Indian defence or innovation funding and see alignment with Shakti's mission, we would like to speak."
+  }
+];
+
+let currentFilter = 'all';
+
+function setFilter(tag, btn) {
+  currentFilter = tag;
+  document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
+  btn.classList.add('active');
+  filterFAQ();
+}
+
+function filterFAQ() {
+  const query = document.getElementById('search-input').value.toLowerCase();
+  const list = document.getElementById('faq-list');
+  const noResults = document.getElementById('no-results');
+  list.innerHTML = '';
+  let count = 0;
+  FAQ.forEach((item) => {
+    if (currentFilter !== 'all' && !item.tags.includes(currentFilter)) return;
+    if (query && !item.q.toLowerCase().includes(query) && !item.a.toLowerCase().includes(query)) return;
+    count++;
+    const tagHtml = item.tags.map(t => `<span class="tag-pill ${t}">${t.toUpperCase()}</span>`).join('');
+    const div = document.createElement('div');
+    div.className = 'faq-item';
+    div.innerHTML = `
+      <div class="faq-q" onclick="toggleFAQ(this)">
+        <span>${tagHtml}${item.q}</span>
+        <span class="faq-arrow">&#9660;</span>
+      </div>
+      <div class="faq-a">
+        <div class="faq-a-inner">${item.a}</div>
+      </div>`;
+    list.appendChild(div);
+  });
+  document.getElementById('count-label').textContent = `Showing ${count} of ${FAQ.length} questions`;
+  noResults.style.display = count === 0 ? 'block' : 'none';
+}
+
+function toggleFAQ(el) {
+  const item = el.parentElement;
+  const ans = item.querySelector('.faq-a');
+  const isOpen = item.classList.contains('open');
+  document.querySelectorAll('.faq-item.open').forEach(i => {
+    i.classList.remove('open');
+    i.querySelector('.faq-a').style.maxHeight = '0';
+  });
+  if (!isOpen) {
+    item.classList.add('open');
+    ans.style.maxHeight = ans.scrollHeight + 48 + 'px';
+  }
+}
+
+filterFAQ();
+</script>
+</body>
+</html>
