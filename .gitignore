@@ -5,3 +5,9 @@ Nexus Learning Labs 2.png
 Nexus Learning Labs 3.png
 Nexus Learning Labs 4.png
 Nexus Learning Labs 5.png
+
+# Added by fix_all_repos.py
+*.jsonl
+*.csv
+.env
+.maya_provenance.log
