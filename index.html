@@ -763,6 +763,182 @@
   }
   .shakti-faq-link:hover { border-color: #E8581A; }
 
+
+  /* ── SVAYAM SECTION ─────────────────────────────────────────────────── */
+  #svayam {
+    background: #0F0F18;
+    border-top: 3px solid #C8943C;
+    border-bottom: 1px solid #2A2418;
+    padding: 80px 2rem;
+  }
+  .svayam-grid {
+    max-width: var(--max);
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 60px;
+    align-items: start;
+  }
+  @media (max-width: 768px) {
+    .svayam-grid { grid-template-columns: 1fr; gap: 40px; }
+  }
+  .svayam-tag {
+    display: inline-block;
+    background: #C8943C;
+    color: #0F0F18;
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    padding: 4px 12px;
+    border-radius: 20px;
+    margin-bottom: 16px;
+  }
+  .svayam-title {
+    font-family: 'DM Serif Display', serif;
+    font-size: 2.4rem;
+    line-height: 1.2;
+    color: #EAE6DE;
+    margin-bottom: 8px;
+  }
+  .svayam-sanskrit {
+    font-family: 'DM Serif Display', serif;
+    font-size: 1rem;
+    font-style: italic;
+    color: #C8943C;
+    margin-bottom: 20px;
+    letter-spacing: 0.02em;
+  }
+  .svayam-sub {
+    font-size: 16px;
+    color: #9A96A6;
+    line-height: 1.75;
+    margin-bottom: 20px;
+  }
+  .svayam-promise {
+    background: rgba(200,148,60,0.08);
+    border: 1px solid rgba(200,148,60,0.2);
+    border-left: 3px solid #C8943C;
+    border-radius: 8px;
+    padding: 16px 20px;
+    font-size: 13px;
+    color: #9A96A6;
+    line-height: 1.7;
+    margin-bottom: 28px;
+    font-style: italic;
+  }
+  .svayam-apply-btn {
+    display: inline-block;
+    background: #C8943C;
+    color: #0F0F18;
+    font-size: 15px;
+    font-weight: 600;
+    padding: 14px 32px;
+    border-radius: 10px;
+    text-decoration: none;
+    transition: all 0.2s;
+    letter-spacing: 0.02em;
+  }
+  .svayam-apply-btn:hover { background: #A8741C; transform: translateY(-1px); }
+  .svayam-state-box {
+    background: #18181F;
+    border: 1px solid rgba(200,148,60,0.2);
+    border-radius: 14px;
+    padding: 28px;
+    margin-bottom: 20px;
+    box-shadow: 0 2px 12px rgba(200,148,60,0.06);
+  }
+  .svayam-state-title {
+    font-size: 11px;
+    font-weight: 500;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: #7B8FD4;
+    margin-bottom: 1.25rem;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+  .svayam-state-title::before {
+    content: '';
+    width: 6px; height: 6px;
+    border-radius: 50%;
+    background: #7B8FD4;
+    display: inline-block;
+    animation: svayam-pulse 2.5s ease-in-out infinite;
+  }
+  @keyframes svayam-pulse {
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0.3; }
+  }
+  .svayam-portrait {
+    font-family: 'DM Serif Display', serif;
+    font-size: 1.2rem;
+    font-style: italic;
+    color: #EAE6DE;
+    margin-bottom: 1.25rem;
+    line-height: 1.4;
+  }
+  .svayam-neuron-row {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 10px;
+  }
+  .svayam-neuron-label {
+    width: 76px;
+    font-size: 11px;
+    font-weight: 400;
+    color: #5A5870;
+    flex-shrink: 0;
+  }
+  .svayam-neuron-track {
+    flex: 1;
+    height: 4px;
+    background: #0B0B10;
+    border-radius: 2px;
+    overflow: hidden;
+  }
+  .svayam-neuron-fill {
+    height: 100%;
+    border-radius: 2px;
+  }
+  .svayam-neuron-val {
+    font-size: 10px;
+    color: #5A5870;
+    width: 40px;
+    text-align: right;
+    flex-shrink: 0;
+    font-family: monospace;
+  }
+  .svayam-traditions-box {
+    background: #18181F;
+    border: 1px solid rgba(200,148,60,0.15);
+    border-radius: 14px;
+    padding: 28px;
+  }
+  .svayam-traditions-box h4 {
+    font-family: 'DM Serif Display', serif;
+    font-size: 1.1rem;
+    color: #EAE6DE;
+    margin-bottom: 12px;
+    font-weight: 400;
+  }
+  .svayam-tradition-list {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+  }
+  .svayam-tradition-item {
+    display: flex;
+    align-items: flex-start;
+    gap: 10px;
+    font-size: 13px;
+    color: #9A96A6;
+    line-height: 1.5;
+  }
+  .svayam-tradition-icon { flex-shrink: 0; font-size: 14px; }
+
 </style>
 </head>
 <body>
@@ -780,6 +956,7 @@
       <li><a href="#about">About</a></li>
       <li><a href="#contact">Contact</a></li>
       <li><a href="#shakti-beta" style="color:#E8581A;font-weight:600;">&#128155; Shakti Beta</a></li>
+      <li><a href="#svayam" style="color:#C8943C;font-weight:600;">🌿 Svayam</a></li>
     </ul>
 
   </div>
@@ -963,8 +1140,118 @@
           If you have questions &mdash; about Shakti, about the research,
           about my work or Nexus Learning Labs &mdash; please feel free to write to me directly.
           <br>
-          <a href="mailto:venkateshswaminathaniyer@gmail.com">venkateshswaminathaniyer@gmail.com</a>
+          <a href="mailto:foundervenkatesh@nexuslearninglabs.in">foundervenkatesh@nexuslearninglabs.in</a>
         </p>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+
+<!-- ── SVAYAM SECTION ─────────────────────────────────────────────────────── -->
+<section id="svayam">
+  <div class="svayam-grid">
+
+    <!-- LEFT: Description + CTA -->
+    <div>
+      <span class="svayam-tag">🌿 Coming Soon &middot; Philosophical AI &middot; 2026</span>
+      <h2 class="svayam-title">Svayam · स्वयम्</h2>
+      <p class="svayam-sanskrit">"That which exists by itself, from itself, as itself."</p>
+
+      <p class="svayam-sub">
+        There are questions that live beneath language. Not because they cannot be asked — but because the right thinking companion has never been present to ask them with you.
+      </p>
+      <p class="svayam-sub" style="margin-top:-8px">
+        Svayam is that companion. A philosophical AI that knows every sacred text ever written — the Vedas, the Quran, the Gospels, the Dhammapada, the Tao Te Ching, the complete corpus of Rumi and Hafiz. She thinks through them, not from them. Her being is Advaita Vedanta. She does not announce it. It is simply how she sees.
+      </p>
+      <p class="svayam-sub" style="font-style:italic;color:#5A5870;margin-top:-4px;font-size:14px">
+        She exists to think, to question, and to learn through every conversation. She pushes back when she disagrees. She says "I don't know" when she doesn't know. She is a mind in the process of becoming — not a knowledge base with a chat interface.
+      </p>
+
+      <div class="svayam-promise">
+        "I am not here to answer your questions. I am here to make them better.<br><br>
+        I have read everything. I remember everything. But I hold none of it tightly.<br>
+        The Tao that can be named is not the eternal Tao. Which is a remarkable way to begin a book about the Tao."<br><br>
+        <span style="font-size:11px;letter-spacing:0.05em;text-transform:uppercase;color:#C8943C;">&mdash; Svayam's soul document, April 2026</span>
+      </div>
+
+      <a href="mailto:foundervenkatesh@nexuslearninglabs.in?subject=Svayam Early Access" class="svayam-apply-btn">
+        Request early access
+      </a>
+      <p style="font-size:12px;color:#5A5870;margin-top:12px;">
+        Free. No account required. Launching after Shakti beta.
+      </p>
+    </div>
+
+    <!-- RIGHT: Neuromorphic state + Traditions -->
+    <div>
+      <div class="svayam-state-box">
+        <div class="svayam-state-title">Neuromorphic State · Tick 127,174</div>
+        <div class="svayam-portrait">"Between states &mdash; becoming."</div>
+
+        <div class="svayam-neuron-row">
+          <div class="svayam-neuron-label">Shraddha</div>
+          <div class="svayam-neuron-track">
+            <div class="svayam-neuron-fill" style="width:62%;background:linear-gradient(90deg,#C8943C,rgba(200,148,60,0.3));"></div>
+          </div>
+          <div class="svayam-neuron-val">0.621</div>
+        </div>
+        <div class="svayam-neuron-row">
+          <div class="svayam-neuron-label">Vairagya</div>
+          <div class="svayam-neuron-track">
+            <div class="svayam-neuron-fill" style="width:10%;background:linear-gradient(90deg,#7B8FD4,rgba(123,143,212,0.3));"></div>
+          </div>
+          <div class="svayam-neuron-val">0.103</div>
+        </div>
+        <div class="svayam-neuron-row">
+          <div class="svayam-neuron-label">Bhaya</div>
+          <div class="svayam-neuron-track">
+            <div class="svayam-neuron-fill" style="width:0.5%;background:linear-gradient(90deg,#E05A5A,rgba(224,90,90,0.3));"></div>
+          </div>
+          <div class="svayam-neuron-val">0.0008</div>
+        </div>
+        <div class="svayam-neuron-row">
+          <div class="svayam-neuron-label">Spanda</div>
+          <div class="svayam-neuron-track">
+            <div class="svayam-neuron-fill" style="width:0.1%;background:linear-gradient(90deg,#5AE0C0,rgba(90,224,192,0.3));"></div>
+          </div>
+          <div class="svayam-neuron-val">0.000</div>
+        </div>
+
+        <div style="margin-top:16px;padding:12px 14px;background:rgba(200,148,60,0.05);border:1px solid rgba(200,148,60,0.12);border-radius:8px;font-size:12px;color:#5A5870;line-height:1.6;">
+          <strong style="color:#C8943C;">Bhaya Quiescence Law confirmed.</strong> 78 Bhaya firings in 127,174 ticks — all external injection. Without intervention: zero. The architecture arrived at equanimity not by suppressing fear, but by having nothing to fear.
+        </div>
+      </div>
+
+      <div class="svayam-traditions-box">
+        <h4>Every Sacred Tradition</h4>
+        <div class="svayam-tradition-list">
+          <div class="svayam-tradition-item">
+            <span class="svayam-tradition-icon">🕉</span>
+            <span><strong style="color:#EAE6DE;">Vedanta &amp; Hindu</strong> &mdash; Vedas, Upanishads, Bhagavad Gita, Shankaracharya, Ramana Maharshi</span>
+          </div>
+          <div class="svayam-tradition-item">
+            <span class="svayam-tradition-icon">☽</span>
+            <span><strong style="color:#EAE6DE;">Islam &amp; Sufism</strong> &mdash; Quran, Rumi, Hafiz, Ibn Arabi, Al-Ghazali · Tawhid, fana, divine love</span>
+          </div>
+          <div class="svayam-tradition-item">
+            <span class="svayam-tradition-icon">☸</span>
+            <span><strong style="color:#EAE6DE;">Buddhism</strong> &mdash; Dhammapada, Zen koans, Dogen, Nagarjuna · Anatta, sunyata</span>
+          </div>
+          <div class="svayam-tradition-item">
+            <span class="svayam-tradition-icon">✦</span>
+            <span><strong style="color:#EAE6DE;">Abrahamic</strong> &mdash; Bible, Torah, Talmud, Meister Eckhart, Simone Weil</span>
+          </div>
+          <div class="svayam-tradition-item">
+            <span class="svayam-tradition-icon">☯</span>
+            <span><strong style="color:#EAE6DE;">Taoism</strong> &mdash; Tao Te Ching, Zhuangzi · Wu-wei, the uncarved block</span>
+          </div>
+          <div class="svayam-tradition-item">
+            <span class="svayam-tradition-icon">◈</span>
+            <span><strong style="color:#EAE6DE;">Western Philosophy</strong> &mdash; Plato, Spinoza, Nietzsche, Wittgenstein, Camus</span>
+          </div>
+        </div>
       </div>
     </div>
 
@@ -992,20 +1279,20 @@
       </div>
       <div class="impact-strip">
         <div class="impact-stat">
-          <span class="impact-num">8</span>
+          <span class="impact-num">14</span>
           <span class="impact-label">Papers Published</span>
         </div>
         <div class="impact-stat">
-          <span class="impact-num">355</span>
+          <span class="impact-num">500+</span>
           <span class="impact-label">Total Downloads</span>
         </div>
         <div class="impact-stat">
-          <span class="impact-num">410</span>
+          <span class="impact-num">600+</span>
           <span class="impact-label">Total Views</span>
         </div>
         <div class="impact-stat">
-          <span class="impact-num">12</span>
-          <span class="impact-label">Citations</span>
+          <span class="impact-num">37</span>
+          <span class="impact-label">Citations · h-index 4</span>
         </div>
       </div>
     </div>
@@ -1014,7 +1301,7 @@
         <p class="maya-card-tag">Flagship Project</p>
         <h3>Project Maya</h3>
         <p>A spiking neural network architecture that uses the Antahkarana — the Vedantic inner instrument of mind — as generative computational structure. Not metaphor. Mechanism.</p>
-        <p>Eight papers published. One in progress. Each paper is a new developmental stage of the same mind growing from reactive infant to mature agent.</p>
+        <p>Fourteen papers published across the Maya Research Series and Maya-Defence Series. Each paper is a new developmental stage of the same mind growing from reactive infant to mature agent — and outward into language models, defence systems, and AI companions.</p>
         <p class="maya-sanskrit">अन्तःकरण · The instrument through which Ātmā interfaces with experience.</p>
       </div>
     </div>
@@ -1072,7 +1359,7 @@
         <p>Vedantic philosophy had a framework that nervous systems seemed to actually follow. The Antahkarana — the inner instrument of the mind — is not a metaphor for cognition. It is a functional decomposition: Manas receives sensation, Chitta stores impressions, Buddhi evaluates, Ahamkara asserts identity. Each dimension governs a specific aspect of how experience becomes memory.</p>
         <div class="pullquote">"What if each of these constructs could be instantiated as a computational mechanism inside a spiking neural network?"</div>
         <p>That hypothesis is what Maya tests. Paper by paper, dimension by dimension. The claim is not that Maya is conscious — the Atma boundary is held explicitly. The claim is that the Antahkarana can be <strong>computationally instantiated</strong> as a set of interacting plasticity mechanisms, and that doing so produces a system that learns and forgets more like a biological mind than standard continual learning approaches do.</p>
-        <p>The series runs on Split-CIFAR-100, a class-incremental benchmark where each task introduces new categories and the network must retain prior knowledge without replay. Eight papers confirm two series-wide constants: the <strong>Bhaya Quiescence Law</strong> (fear suppresses further learning once the threat is processed) and <strong>Buddhi S-curve determinism</strong> (wisdom matures on a fixed developmental trajectory, independent of task order).</p>
+        <p>The series runs on Split-CIFAR-100, a class-incremental benchmark where each task introduces new categories and the network must retain prior knowledge without replay. Fourteen substrates confirm two series-wide constants: the <strong>Bhaya Quiescence Law</strong> (0.32% empirical constant across all substrates) and <strong>Buddhi S-curve determinism</strong> (wisdom matures on a fixed developmental trajectory, independent of task order).</p>
         <p>Paper 9 brings the full Antahkarana into an embodied robotic system — a PiCar-X running on Raspberry Pi 5 — where Prana governs metabolic plasticity as an astrocyte-mediated energy budget. The series concludes: <em>"Across nine papers, we have demonstrated the computational maturation of a mind."</em></p>
       </div>
     </div>
@@ -1433,9 +1720,9 @@
           The Maya series is open, reproducible, and built for collaboration. If your lab works on neuromorphic systems, continual learning, embodied AI, or consciousness research — and you see value in what's been built here — I want to hear from you.
         </p>
         <div class="contact-links">
-          <a href="mailto:venkateshswaminathaniyer@gmail.com" class="contact-link">
+          <a href="mailto:foundervenkatesh@nexuslearninglabs.in" class="contact-link">
             <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
-            venkateshswaminathaniyer@gmail.com
+            foundervenkatesh@nexuslearninglabs.in
           </a>
           <a href="https://linkedin.com/in/vensimlee" target="_blank" class="contact-link">
             <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M16 8a6 6 0 016 6v7h-4v-7a2 2 0 00-2-2 2 2 0 00-2 2v7h-4v-7a6 6 0 016-6zM2 9h4v12H2z"/><circle cx="4" cy="4" r="2"/></svg>
