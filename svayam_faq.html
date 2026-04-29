@@ -8,23 +8,26 @@
 <link href="https://fonts.googleapis.com/css2?family=Crimson+Pro:ital,wght@0,300;0,400;0,500;1,300;1,400&family=DM+Mono:wght@300;400;500&display=swap" rel="stylesheet">
 <style>
 :root{
-  --cream:#F7F3EC;--warm:#EFE8D8;--ink:#2A2118;--ink-mid:#5A4E3A;--ink-muted:#8A7E6A;
-  --gold:#C8943C;--gold-light:rgba(200,148,60,0.12);--gold-border:rgba(200,148,60,0.25);
-  --teal:#3C6858;--surface:#FFFFFF;--border:#E0D8C8;--border-strong:#C8B898;
+  --bg:#0F0F18;--s1:#18181F;--s2:#12121A;--s3:#1E1E2A;
+  --b1:rgba(200,148,60,0.15);--b2:rgba(200,148,60,0.25);--b3:rgba(200,148,60,0.4);
+  --gold:#C8943C;--gold-light:rgba(200,148,60,0.08);--gold-border:rgba(200,148,60,0.25);
+  --teal:#3C6858;--indigo:#7B8FD4;
+  --txt:#EAE6DE;--txt-mid:#9A96A6;--txt-muted:#5A5870;
+  --surface:#18181F;--border:rgba(200,148,60,0.12);--border-strong:rgba(200,148,60,0.25);
   --radius:10px;--max:820px;
 }
 *{box-sizing:border-box;margin:0;padding:0}
 html{scroll-behavior:smooth}
-body{background:var(--cream);color:var(--ink);font-family:'Crimson Pro',Georgia,serif;font-size:18px;line-height:1.7}
+body{background:var(--bg);color:var(--txt);font-family:'Crimson Pro',Georgia,serif;font-size:18px;line-height:1.7}
 
 /* ── HEADER ── */
-header{background:var(--surface);border-bottom:1px solid var(--border);padding:32px 2rem 28px}
+header{background:var(--s1);border-bottom:1px solid var(--b1);border-top:3px solid var(--gold);padding:32px 2rem 28px}
 .hdr-inner{max-width:var(--max);margin:0 auto}
 .hdr-tag{font-family:'DM Mono',monospace;font-size:10px;letter-spacing:.14em;text-transform:uppercase;color:var(--gold);margin-bottom:14px}
-header h1{font-size:clamp(2rem,5vw,3rem);font-weight:300;color:var(--ink);line-height:1.2;margin-bottom:10px}
+header h1{font-size:clamp(2rem,5vw,3rem);font-weight:300;color:var(--txt);line-height:1.2;margin-bottom:10px}
 header h1 em{font-style:italic;color:var(--gold)}
-.hdr-sub{font-size:16px;color:var(--ink-mid);line-height:1.6;max-width:560px;margin-bottom:20px}
-.hdr-note{display:inline-flex;align-items:center;gap:8px;font-family:'DM Mono',monospace;font-size:11px;color:var(--ink-muted);letter-spacing:.06em}
+.hdr-sub{font-size:16px;color:var(--txt-mid);line-height:1.6;max-width:560px;margin-bottom:20px}
+.hdr-note{display:inline-flex;align-items:center;gap:8px;font-family:'DM Mono',monospace;font-size:11px;color:var(--txt-muted);letter-spacing:.06em}
 .hdr-dot{width:6px;height:6px;border-radius:50%;background:var(--teal)}
 
 /* ── SEARCH ── */
@@ -34,19 +37,19 @@ header h1 em{font-style:italic;color:var(--gold)}
 #search-input{
   width:100%;padding:13px 16px 13px 44px;
   border:1px solid var(--border-strong);border-radius:var(--radius);
-  background:var(--surface);color:var(--ink);
+  background:var(--s2);color:var(--txt);
   font-family:'Crimson Pro',serif;font-size:17px;outline:none;
   transition:border-color .15s;
 }
 #search-input:focus{border-color:var(--gold)}
-#search-input::placeholder{color:var(--ink-muted)}
+#search-input::placeholder{color:var(--txt-muted)}
 
 /* ── FILTERS ── */
 .filters{max-width:var(--max);margin:20px auto 0;padding:0 2rem;display:flex;flex-wrap:wrap;gap:8px}
 .filter-btn{
   padding:6px 16px;border-radius:20px;
   font-family:'DM Mono',monospace;font-size:10px;letter-spacing:.08em;text-transform:uppercase;
-  border:1px solid var(--border-strong);background:transparent;color:var(--ink-muted);
+  border:1px solid var(--b1);background:transparent;color:var(--txt-muted);
   cursor:pointer;transition:all .15s;
 }
 .filter-btn:hover{border-color:var(--gold);color:var(--gold)}
@@ -54,14 +57,14 @@ header h1 em{font-style:italic;color:var(--gold)}
 
 /* ── FAQ LIST ── */
 .faq-wrap{max-width:var(--max);margin:28px auto 0;padding:0 2rem 80px}
-.count-label{font-family:'DM Mono',monospace;font-size:11px;color:var(--ink-muted);letter-spacing:.06em;margin-bottom:18px}
-.faq-item{background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);margin-bottom:8px;overflow:hidden;transition:border-color .2s}
+.count-label{font-family:'DM Mono',monospace;font-size:11px;color:var(--txt-muted);letter-spacing:.06em;margin-bottom:18px}
+.faq-item{background:var(--s1);border:1px solid var(--b1);border-radius:var(--radius);margin-bottom:8px;overflow:hidden;transition:border-color .2s}
 .faq-item:hover{border-color:var(--gold-border)}
 .faq-item.open{border-color:var(--gold-border)}
 .faq-q{
   padding:18px 22px;cursor:pointer;
   display:flex;justify-content:space-between;align-items:flex-start;gap:16px;
-  font-size:18px;font-weight:400;line-height:1.4;color:var(--ink);
+  font-size:18px;font-weight:400;line-height:1.4;color:var(--txt);
 }
 .faq-q:hover{color:var(--gold)}
 .faq-item.open .faq-q{color:var(--gold)}
@@ -69,12 +72,12 @@ header h1 em{font-style:italic;color:var(--gold)}
 .faq-item.open .faq-arrow{transform:rotate(180deg);color:var(--gold)}
 .faq-a{max-height:0;overflow:hidden;transition:max-height .4s ease}
 .faq-a-inner{
-  padding:0 22px 20px;font-size:17px;line-height:1.8;color:var(--ink-mid);
-  border-top:1px solid var(--border);
+  padding:0 22px 20px;font-size:17px;line-height:1.8;color:var(--txt-mid);
+  border-top:1px solid var(--b1);
 }
-.faq-a-inner strong{color:var(--ink);font-weight:500}
+.faq-a-inner strong{color:var(--txt);font-weight:500}
 .faq-a-inner em{color:var(--gold);font-style:italic}
-.faq-a-inner code{font-family:'DM Mono',monospace;font-size:12px;background:var(--warm);padding:2px 7px;border-radius:4px;color:var(--teal)}
+.faq-a-inner code{font-family:'DM Mono',monospace;font-size:12px;background:var(--s3);padding:2px 7px;border-radius:4px;color:var(--indigo)}
 .faq-a-inner a{color:var(--gold);text-decoration:none}
 .faq-a-inner a:hover{text-decoration:underline}
 .tag-pill{
@@ -89,11 +92,11 @@ header h1 em{font-style:italic;color:var(--gold)}
 .tag-pill.technical{background:rgba(60,80,80,0.08);color:#3C5050}
 .tag-pill.privacy{background:rgba(200,148,60,0.08);color:#A07830}
 .tag-pill.about{background:rgba(42,33,24,0.06);color:var(--ink-muted)}
-.no-results{text-align:center;padding:48px;color:var(--ink-muted);font-style:italic}
+.no-results{text-align:center;padding:48px;color:var(--txt-muted);font-style:italic}
 
 /* ── FOOTER ── */
-footer{background:var(--warm);border-top:1px solid var(--border);padding:32px 2rem;text-align:center}
-footer p{font-size:14px;color:var(--ink-muted);font-family:'DM Mono',monospace;letter-spacing:.04em}
+footer{background:var(--s1);border-top:1px solid var(--b1);padding:32px 2rem;text-align:center}
+footer p{font-size:14px;color:var(--txt-muted);font-family:'DM Mono',monospace;letter-spacing:.04em}
 footer a{color:var(--gold);text-decoration:none}
 footer a:hover{text-decoration:underline}
 </style>
