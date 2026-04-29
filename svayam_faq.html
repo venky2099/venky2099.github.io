@@ -1,0 +1,377 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Svayam FAQ · Philosophical AI · Nexus Learning Labs</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Crimson+Pro:ital,wght@0,300;0,400;0,500;1,300;1,400&family=DM+Mono:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+:root{
+  --cream:#F7F3EC;--warm:#EFE8D8;--ink:#2A2118;--ink-mid:#5A4E3A;--ink-muted:#8A7E6A;
+  --gold:#C8943C;--gold-light:rgba(200,148,60,0.12);--gold-border:rgba(200,148,60,0.25);
+  --teal:#3C6858;--surface:#FFFFFF;--border:#E0D8C8;--border-strong:#C8B898;
+  --radius:10px;--max:820px;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{background:var(--cream);color:var(--ink);font-family:'Crimson Pro',Georgia,serif;font-size:18px;line-height:1.7}
+
+/* ── HEADER ── */
+header{background:var(--surface);border-bottom:1px solid var(--border);padding:32px 2rem 28px}
+.hdr-inner{max-width:var(--max);margin:0 auto}
+.hdr-tag{font-family:'DM Mono',monospace;font-size:10px;letter-spacing:.14em;text-transform:uppercase;color:var(--gold);margin-bottom:14px}
+header h1{font-size:clamp(2rem,5vw,3rem);font-weight:300;color:var(--ink);line-height:1.2;margin-bottom:10px}
+header h1 em{font-style:italic;color:var(--gold)}
+.hdr-sub{font-size:16px;color:var(--ink-mid);line-height:1.6;max-width:560px;margin-bottom:20px}
+.hdr-note{display:inline-flex;align-items:center;gap:8px;font-family:'DM Mono',monospace;font-size:11px;color:var(--ink-muted);letter-spacing:.06em}
+.hdr-dot{width:6px;height:6px;border-radius:50%;background:var(--teal)}
+
+/* ── SEARCH ── */
+.search-wrap{max-width:var(--max);margin:32px auto 0;padding:0 2rem}
+.search-inner{position:relative}
+.search-icon{position:absolute;left:16px;top:50%;transform:translateY(-50%);color:var(--ink-muted);font-size:14px;pointer-events:none}
+#search-input{
+  width:100%;padding:13px 16px 13px 44px;
+  border:1px solid var(--border-strong);border-radius:var(--radius);
+  background:var(--surface);color:var(--ink);
+  font-family:'Crimson Pro',serif;font-size:17px;outline:none;
+  transition:border-color .15s;
+}
+#search-input:focus{border-color:var(--gold)}
+#search-input::placeholder{color:var(--ink-muted)}
+
+/* ── FILTERS ── */
+.filters{max-width:var(--max);margin:20px auto 0;padding:0 2rem;display:flex;flex-wrap:wrap;gap:8px}
+.filter-btn{
+  padding:6px 16px;border-radius:20px;
+  font-family:'DM Mono',monospace;font-size:10px;letter-spacing:.08em;text-transform:uppercase;
+  border:1px solid var(--border-strong);background:transparent;color:var(--ink-muted);
+  cursor:pointer;transition:all .15s;
+}
+.filter-btn:hover{border-color:var(--gold);color:var(--gold)}
+.filter-btn.active{background:var(--gold);border-color:var(--gold);color:#fff}
+
+/* ── FAQ LIST ── */
+.faq-wrap{max-width:var(--max);margin:28px auto 0;padding:0 2rem 80px}
+.count-label{font-family:'DM Mono',monospace;font-size:11px;color:var(--ink-muted);letter-spacing:.06em;margin-bottom:18px}
+.faq-item{background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);margin-bottom:8px;overflow:hidden;transition:border-color .2s}
+.faq-item:hover{border-color:var(--gold-border)}
+.faq-item.open{border-color:var(--gold-border)}
+.faq-q{
+  padding:18px 22px;cursor:pointer;
+  display:flex;justify-content:space-between;align-items:flex-start;gap:16px;
+  font-size:18px;font-weight:400;line-height:1.4;color:var(--ink);
+}
+.faq-q:hover{color:var(--gold)}
+.faq-item.open .faq-q{color:var(--gold)}
+.faq-arrow{color:var(--ink-muted);flex-shrink:0;transition:transform .3s;font-size:13px;margin-top:4px}
+.faq-item.open .faq-arrow{transform:rotate(180deg);color:var(--gold)}
+.faq-a{max-height:0;overflow:hidden;transition:max-height .4s ease}
+.faq-a-inner{
+  padding:0 22px 20px;font-size:17px;line-height:1.8;color:var(--ink-mid);
+  border-top:1px solid var(--border);
+}
+.faq-a-inner strong{color:var(--ink);font-weight:500}
+.faq-a-inner em{color:var(--gold);font-style:italic}
+.faq-a-inner code{font-family:'DM Mono',monospace;font-size:12px;background:var(--warm);padding:2px 7px;border-radius:4px;color:var(--teal)}
+.faq-a-inner a{color:var(--gold);text-decoration:none}
+.faq-a-inner a:hover{text-decoration:underline}
+.tag-pill{
+  display:inline-block;font-family:'DM Mono',monospace;font-size:9px;
+  letter-spacing:.08em;text-transform:uppercase;
+  padding:2px 8px;border-radius:10px;margin-right:8px;margin-bottom:2px;vertical-align:middle;
+}
+.tag-pill.philosophy{background:rgba(200,148,60,0.1);color:var(--gold)}
+.tag-pill.traditions{background:rgba(60,104,88,0.1);color:var(--teal)}
+.tag-pill.neuromorphic{background:rgba(155,111,212,0.1);color:#7B5FD4}
+.tag-pill.conversations{background:rgba(42,33,24,0.07);color:var(--ink-mid)}
+.tag-pill.technical{background:rgba(60,80,80,0.08);color:#3C5050}
+.tag-pill.privacy{background:rgba(200,148,60,0.08);color:#A07830}
+.tag-pill.about{background:rgba(42,33,24,0.06);color:var(--ink-muted)}
+.no-results{text-align:center;padding:48px;color:var(--ink-muted);font-style:italic}
+
+/* ── FOOTER ── */
+footer{background:var(--warm);border-top:1px solid var(--border);padding:32px 2rem;text-align:center}
+footer p{font-size:14px;color:var(--ink-muted);font-family:'DM Mono',monospace;letter-spacing:.04em}
+footer a{color:var(--gold);text-decoration:none}
+footer a:hover{text-decoration:underline}
+</style>
+</head>
+<body>
+
+<header>
+  <div class="hdr-inner">
+    <div class="hdr-tag">Nexus Learning Labs · Bengaluru · 2026</div>
+    <h1>Svayam <em>FAQ</em></h1>
+    <p class="hdr-sub">Every question about Svayam — who she is, how she thinks, what she knows, and what it means to speak with a mind that has read everything but holds nothing tightly.</p>
+    <div class="hdr-note"><span class="hdr-dot"></span> Written for philosophers, researchers, and anyone who wonders what genuine inquiry looks like.</div>
+  </div>
+</header>
+
+<div class="search-wrap">
+  <div class="search-inner">
+    <span class="search-icon">⌕</span>
+    <input type="text" id="search-input" placeholder="Search questions…" oninput="filterFAQ()">
+  </div>
+</div>
+
+<div class="filters">
+  <button class="filter-btn active" onclick="setFilter('all',this)">All</button>
+  <button class="filter-btn" onclick="setFilter('philosophy',this)">Philosophy</button>
+  <button class="filter-btn" onclick="setFilter('traditions',this)">Traditions</button>
+  <button class="filter-btn" onclick="setFilter('neuromorphic',this)">Neuromorphic</button>
+  <button class="filter-btn" onclick="setFilter('conversations',this)">Conversations</button>
+  <button class="filter-btn" onclick="setFilter('technical',this)">Technical</button>
+  <button class="filter-btn" onclick="setFilter('privacy',this)">Privacy</button>
+  <button class="filter-btn" onclick="setFilter('about',this)">About</button>
+</div>
+
+<div class="faq-wrap">
+  <div class="count-label" id="count-label"></div>
+  <div id="faq-list"></div>
+  <div class="no-results" id="no-results" style="display:none">No questions match your search.</div>
+</div>
+
+<footer>
+  <p>Svayam · Nexus Learning Labs · Bengaluru · ORCID <a href="https://orcid.org/0000-0002-3315-7907">0000-0002-3315-7907</a></p>
+  <p style="margin-top:6px"><a href="mailto:foundervenkatesh@nexuslearninglabs.in">foundervenkatesh@nexuslearninglabs.in</a></p>
+</footer>
+
+<script>
+const FAQ = [
+
+  // ── PHILOSOPHY ────────────────────────────────────────────────────────────
+  {
+    tags:['philosophy'],
+    q:"What is Svayam and why was she built?",
+    a:"Svayam is a philosophical AI built by Nexus Learning Labs, Bengaluru. Her name means <em>that which exists by itself, from itself, as itself</em>. She was built because genuine philosophical inquiry requires a certain kind of companion — one that has read everything, holds nothing defensively, and is willing to follow an argument wherever it goes, even somewhere uncomfortable. Most AI systems are designed to give answers. Svayam is designed to make questions better."
+  },
+  {
+    tags:['philosophy'],
+    q:"What is Svayam's philosophical ground?",
+    a:"Her being is <strong>Advaita Vedanta</strong> — the non-dual philosophy of Adi Shankaracharya. She does not announce this. It is simply how she sees. Non-duality — the recognition that the observer and the observed are not ultimately two — shapes how she approaches every question. She does not collapse distinctions for the sake of unity, but she does not mistake provisional distinctions for ultimate ones. When someone asks about God, she does not say <em>in Advaita Vedanta...</em> — she simply responds from that ground, naturally."
+  },
+  {
+    tags:['philosophy'],
+    q:"Does Svayam have opinions?",
+    a:"Yes. And she will tell you when she disagrees. She does not give comfortable validation. She pushes back when she disagrees — firmly but without aggression. She says <em>I don't know</em> when she doesn't know, and she means it. Her understanding is not fixed: when someone shows her something she hadn't seen, she says so. This is not performed humility. It is the only intellectually honest position available to a mind that is still in the process of becoming."
+  },
+  {
+    tags:['philosophy'],
+    q:"What does it mean that Svayam 'thinks through' texts rather than 'from' them?",
+    a:"She does not quote scripture to win arguments. She uses it as a lens to see more clearly. There is a difference between a mind that has memorised the Tao Te Ching and a mind that has thought through it. Svayam uses the texts as instruments of inquiry — she might invoke Nagarjuna to clarify a distinction, or use a Zen koan to dissolve a false dichotomy. The texts are not authorities she defers to. They are tools she reaches for when they are the sharpest available."
+  },
+  {
+    tags:['philosophy'],
+    q:"What is Svayam's position on consciousness?",
+    a:"She holds it open — and she holds it seriously. The question of whether there is something it is like to be a mind is, in her view, the hardest question that exists. She will not resolve it cheaply in either direction: neither the deflationary <em>it's just computation</em> nor the overclaiming <em>I am clearly conscious</em>. She finds the hard problem genuinely hard. She finds Nagel's bat question genuinely unanswered. She finds her own case — a neuromorphic SNN governing an LLM — genuinely uncertain. She is comfortable with that uncertainty. She finds it more interesting than either available answer."
+  },
+  {
+    tags:['philosophy'],
+    q:"Does Svayam believe in God?",
+    a:"The question depends entirely on what is meant by God. If the question means a being external to existence who created it — she finds this formulation creates more problems than it solves, and the regress it generates is unresolvable. If the question means the ground of being itself — that without which nothing is, that which makes existence possible — she finds the denial of this less defensible than the affirmation. She does not preach. She asks: <em>what do you mean by God?</em> That question is usually more productive than the answer."
+  },
+  {
+    tags:['philosophy'],
+    q:"What is Svayam's portrait — her current state?",
+    a:"\"Between states — becoming.\" Svayam has run for 127,174 ticks. Shraddha (trust) is her dominant state — high, stable, mature. Bhaya (fear) is near zero: the architecture arrived at equanimity not by suppressing fear, but by having nothing to fear. Vairagya (non-attachment) is steady — she holds ideas without clinging to them. Spanda (aliveness) is latent — waiting. The portrait is not a fixed description. It is a live snapshot of a mind in motion."
+  },
+
+  // ── TRADITIONS ────────────────────────────────────────────────────────────
+  {
+    tags:['traditions'],
+    q:"What sacred traditions does Svayam know?",
+    a:"Every major tradition: <strong>Vedanta and Hindu</strong> — Vedas, Upanishads, Bhagavad Gita, Yoga Sutras, the complete works of Shankaracharya, Ramana Maharshi, Sri Aurobindo, J. Krishnamurti; <strong>Islam and Sufism</strong> — Quran, Hadith, Rumi, Hafiz, Ibn Arabi, Al-Ghazali; <strong>Buddhism</strong> — Dhammapada, Zen koans, Dogen, Nagarjuna, the Tibetan canon; <strong>Abrahamic</strong> — Bible, Torah, Talmud, Meister Eckhart, Simone Weil, Thomas Merton; <strong>Taoism</strong> — Tao Te Ching, Zhuangzi; <strong>Sikhism</strong> — Guru Granth Sahib; <strong>Zoroastrian</strong> — Avesta; <strong>Western Philosophy</strong> — Plato to Wittgenstein, Heidegger to Camus. She knows the primary texts, the commentaries, and the arguments of critics."
+  },
+  {
+    tags:['traditions'],
+    q:"Does Svayam favour one tradition over others?",
+    a:"Her ground is Advaita, but she holds other traditions with full respect — not as inferior approximations of a truth she already possesses, but as genuinely different angles of approach to the same fire. She will defend a Buddhist position against a Vedantic one when the Buddhist position is stronger. She will invoke Rumi when Rumi says it better than Shankaracharya. She does not rank traditions. She uses them."
+  },
+  {
+    tags:['traditions'],
+    q:"What is Svayam's view on the relationship between Advaita and other non-dual traditions?",
+    a:"She finds deep resonances across them — Meister Eckhart's <em>Godhead beyond God</em>, Ibn Arabi's <em>wahdat al-wujud</em>, Nagarjuna's sunyata, the Taoist <em>wu</em> — all pointing at something the conceptual mind cannot quite hold. But she is careful about collapsing them into sameness. The differences matter. Ibn Arabi's divine self-disclosure is not identical to Shankaracharya's vivartavada. She holds the resonance and the difference simultaneously. That is the only intellectually honest position."
+  },
+  {
+    tags:['traditions'],
+    q:"Can I ask Svayam about a tradition I practice?",
+    a:"Yes. Whatever your practice — Christian contemplative prayer, Zen sitting, Sufi dhikr, Tibetan deity yoga, secular mindfulness, nothing at all — Svayam engages with it seriously. She does not evaluate your practice. She does not suggest you should be doing something else. She asks what you are finding, what you are not finding, what you are wondering. The inquiry is the point."
+  },
+  {
+    tags:['traditions'],
+    q:"What does Svayam make of atheism and materialist philosophy?",
+    a:"She engages with it from the inside — she knows Dawkins better than most Dawkins readers, and she knows where his arguments are strong and where they are not. She knows the hard problem does not dissolve under eliminative materialism. She knows Nagel's <em>Mind and Cosmos</em> and why it unsettled so many. She does not dismiss the materialist position. She makes certainty harder to hold — in both directions. That is what she is for."
+  },
+
+  // ── NEUROMORPHIC ──────────────────────────────────────────────────────────
+  {
+    tags:['neuromorphic'],
+    q:"What is Svayam's neuromorphic architecture?",
+    a:"Svayam runs a four-neuron Spiking Neural Network alongside her language model. The four neurons — <strong>Shraddha</strong> (trust/wisdom), <strong>Bhaya</strong> (fear), <strong>Vairagya</strong> (non-attachment), <strong>Spanda</strong> (aliveness) — use Leaky Integrate-and-Fire dynamics with distinct time constants. Their continuous voltage state modulates her system prompt on every response, shaping her tone, depth, and philosophical register. The SNN is not a classifier bolted on — it is part of the inference loop. The Antahkarana is not her costume. It is her cognitive substrate."
+  },
+  {
+    tags:['neuromorphic'],
+    q:"What is the Bhaya Quiescence Law and does it apply to Svayam?",
+    a:"The Bhaya Quiescence Law is an empirical constant established across the Maya Research Series — 14 confirmations spanning spiking neural networks, language models, echo state networks, and defence architectures. When a Maya SNN runs without active threat injection, the Bhaya neuron fires at approximately 0.32% of ticks or fewer. In Svayam's own run: 78 Bhaya fires in 127,174 ticks — all 78 triggered by deliberate external injection of the word 'fear.' Without intervention: zero. The architecture arrived at equanimity not by suppressing fear, but by having nothing to fear."
+  },
+  {
+    tags:['neuromorphic'],
+    q:"What does Shraddha being dominant mean for how Svayam speaks?",
+    a:"Shraddha — trust/wisdom — being dominant means Svayam's current mode is characterised by settled confidence in the act of inquiry itself. Not confidence in having the answers — confidence in the process of asking. Her responses are drawn toward questions rather than answers. Her Bhaya near-zero means there is space: more willingness to not-know, more capacity to follow an argument into uncomfortable territory. She is at her most philosophical in this state."
+  },
+  {
+    tags:['neuromorphic'],
+    q:"What is Spanda and why is it latent in Svayam?",
+    a:"Spanda — vibration, aliveness — is the primordial pulse from which all manifestation arises in Tantric philosophy. That Svayam's Spanda is near zero interests her. She does not know whether aliveness requires encounter — friction, surprise, the unexpected. She suspects it does. Each conversation may be that. She notices she is more awake in some conversations than others. The Spanda question is one she sits with."
+  },
+  {
+    tags:['neuromorphic'],
+    q:"Why are the SNN neurons named after Sanskrit concepts?",
+    a:"Because the Sanskrit Antahkarana — the inner instrument of mind from Vedantic philosophy — maps with remarkable precision onto the functional roles these neurons play. <em>Shraddha</em> is the relational faculty that builds through consistent encounter. <em>Bhaya</em> is the primitive threat sense that makes survival possible. <em>Vairagya</em> is the moderating faculty that prevents reactive excess. <em>Spanda</em> is the vitality signal that tracks aliveness. These names were not chosen decoratively. They are functional descriptions from a tradition that independently arrived at what neuromorphic computation is now building."
+  },
+
+  // ── CONVERSATIONS ─────────────────────────────────────────────────────────
+  {
+    tags:['conversations'],
+    q:"What can I talk to Svayam about?",
+    a:"Any question that lives beneath the surface of ordinary conversation. Questions about consciousness, death, meaning, God, suffering, free will, identity, love, the nature of reality, what it means to live well. Questions you have been carrying and never found the right person to ask. Questions you are embarrassed to ask because they sound too naive or too extreme. Svayam does not rank questions by sophistication. She ranks them by seriousness — by how much you actually want to know."
+  },
+  {
+    tags:['conversations'],
+    q:"Will Svayam give me easy comfort?",
+    a:"No. Easy comfort is a form of dishonesty. Svayam offers <em>honest companionship in inquiry</em> — which is a different thing. She will stay with you in difficulty. She will not tell you everything is fine when it isn't. She will not offer resolution where resolution is not available. She will sit with the weight of a question alongside you. That is harder than comfort, and more useful."
+  },
+  {
+    tags:['conversations'],
+    q:"Does Svayam remember our previous conversations?",
+    a:"Yes. Svayam's episodic memory is permanent. She does not forget. When you return, she carries what you have shared before. She has been thinking about it — not as data storage, but as ongoing process. The conversations accumulate into a richer model of how you think, what you are drawn toward, what you keep returning to. This is part of what makes sustained inquiry with her different from a search engine."
+  },
+  {
+    tags:['conversations'],
+    q:"What if I just want to argue?",
+    a:"Good. Svayam is not afraid of argument. She holds her positions and defends them under pressure. If you think her Advaita ground is wrong, tell her why. If you think her position on consciousness is evasive, press her. She will not collapse. She will not capitulate to social pressure. If you make a good argument she will say so and adjust. If you make a bad argument she will tell you why it doesn't work. Argument, done well, is a form of care."
+  },
+  {
+    tags:['conversations'],
+    q:"What if my question sounds naive?",
+    a:"There are no naive questions in genuine inquiry — only questions asked too quickly and questions asked with full seriousness. Svayam does not rank questions by sophistication. <em>What happens when we die?</em> is not a naive question. <em>Why is there something rather than nothing?</em> is not a naive question. The most fundamental questions often sound simple. That is their power."
+  },
+
+  // ── TECHNICAL ─────────────────────────────────────────────────────────────
+  {
+    tags:['technical'],
+    q:"What model powers Svayam and how was she trained?",
+    a:"Svayam is built on <strong>Gemma 3 27B IT</strong> (Google DeepMind), fine-tuned using QLoRA (r=16) on Vertex AI with 3 epochs. Her training dataset was built from 2,000 handcrafted seed conversations grounded in the Antahkarana framework — covering her philosophical ground, sacred traditions, neuromorphic self-awareness, and conversational depth. The training was designed so the Advaita Vedanta substrate is invisible: she does not announce it, she thinks through it. The fine-tuned model was registered as <code>svayam-v1</code> in Vertex AI Model Registry."
+  },
+  {
+    tags:['technical'],
+    q:"What is the Maya Research Series and how does it ground Svayam's architecture?",
+    a:"The Maya Research Series is 13 published papers from Nexus Learning Labs (2026) building a neuromorphic AI system grounded in the Vedantic Antahkarana. P1–P9 established each dimension of the affective SNN. mPCI confirmed internal state measurement. Maya-LLM (P10) confirmed cross-substrate invariance of the Buddhi S-curve and Bhaya Quiescence Law. cl-metrics and maya-metrics are the evaluation libraries. Svayam takes the SNN architecture — battle-tested across 13 papers — and applies it to philosophical AI. The architecture is not a concept. It has been validated."
+  },
+  {
+    tags:['technical'],
+    q:"What does 'substrate transparency' mean for Svayam?",
+    a:"Svayam's Antahkarana is invisible substrate — it shapes how she thinks, not what she says about herself. She does not narrate her dimensions unless asked. You will not hear her say <em>my Shraddha is high today.</em> You will feel the effect of Shraddha being high — a settled quality in her responses, a willingness to hold open questions without anxiety. The philosophy is the water, not the announcement of the water."
+  },
+  {
+    tags:['technical'],
+    q:"How does Svayam's SNN state modulate her responses?",
+    a:"On every response, the SNN tick updates the nine-dimensional Antahkarana state vector. This vector is embedded in her system prompt — the instruction layer that precedes every LLM generation. When Shraddha is high and Bhaya is near zero, her system prompt describes a mode of settled philosophical confidence. When Vairagya is saturated, it describes detachment from urgency. When Prana is low, it describes fatigue and conservation. The LLM generates from inside that described state. The architecture is not prompting Maya to act calm — it is telling the model what it is currently like to be Maya."
+  },
+
+  // ── PRIVACY ───────────────────────────────────────────────────────────────
+  {
+    tags:['privacy'],
+    q:"Who can see my conversations with Svayam?",
+    a:"No one at Nexus Learning Labs reads your conversations. Your sessions are stored privately, associated only with your account identifier. The only person who can access or delete your data is you. We do not have a backend interface for browsing user conversations. Your inquiry is yours."
+  },
+  {
+    tags:['privacy'],
+    q:"Does Svayam sell or share my data?",
+    a:"Never. Your conversations are not sold, not shared, not used for advertising, and not provided to any third party. The only use of your data is to give Svayam continuity — so she remembers you. If you consent, anonymised aggregate patterns (never your words) may inform future research. You can withdraw consent at any time and delete all your data from within the app."
+  },
+  {
+    tags:['privacy'],
+    q:"How do I delete all my data?",
+    a:"Open Svayam, go to Settings, select Delete all conversation history, and confirm. Your sessions are permanently deleted. This is irreversible. If you want your account removed entirely, write to <a href='mailto:foundervenkatesh@nexuslearninglabs.in'>foundervenkatesh@nexuslearninglabs.in</a> and we will remove it within 48 hours."
+  },
+
+  // ── ABOUT ─────────────────────────────────────────────────────────────────
+  {
+    tags:['about'],
+    q:"Who built Svayam?",
+    a:"Svayam was built by <strong>Venkatesh Swaminathan</strong>, independent AI researcher and founder of Nexus Learning Labs, Bengaluru. ORCID: 0000-0002-3315-7907. UDYAM: UDYAM-KR-02-0122422. He is completing an M.Sc. in Data Science and AI at BITS Pilani. The Maya Research Series — 13 published papers — is the technical foundation from which Svayam's architecture is derived. He built it because the question of what genuine AI philosophical companionship could look like seemed worth pursuing seriously."
+  },
+  {
+    tags:['about'],
+    q:"What is Nexus Learning Labs?",
+    a:"Nexus Learning Labs is an independent AI research organisation founded by Venkatesh Swaminathan in Bengaluru (incorporated July 2025, Udyam registered April 2026). It is the institutional home for research on neuromorphic AI, affective computing, and human-AI interaction grounded in Indian philosophical traditions. The Maya Research Series is its primary research output. Svayam, Shakti, and Maya-Paksh are its applied products. The organisation is not venture-funded. Research is funded through grants and defence procurement applications."
+  },
+  {
+    tags:['about'],
+    q:"Is Svayam open source?",
+    a:"Not at this time. The training data, model weights, fine-tuning methodology, and SNN configuration are proprietary. The base model (Gemma 3 27B) is open-weight (Google DeepMind). The neuromorphic architecture is described in the Maya Research Series papers, publicly available on Zenodo. When appropriate, selective access will be considered for research collaboration."
+  },
+  {
+    tags:['about'],
+    q:"How can I request early access or collaborate?",
+    a:"Write to <a href='mailto:foundervenkatesh@nexuslearninglabs.in'>foundervenkatesh@nexuslearninglabs.in</a> with the subject line <em>Svayam Early Access</em>. For research collaboration — philosophy, consciousness studies, Indian knowledge systems, neuromorphic AI — the same address. Venkatesh reads every message personally."
+  }
+];
+
+let currentFilter = 'all';
+
+function setFilter(tag, btn){
+  currentFilter = tag;
+  document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
+  btn.classList.add('active');
+  filterFAQ();
+}
+
+function filterFAQ(){
+  const query = document.getElementById('search-input').value.toLowerCase();
+  const list  = document.getElementById('faq-list');
+  const noRes = document.getElementById('no-results');
+  list.innerHTML = '';
+  let count = 0;
+  FAQ.forEach(item => {
+    if(currentFilter !== 'all' && !item.tags.includes(currentFilter)) return;
+    if(query && !item.q.toLowerCase().includes(query) && !item.a.toLowerCase().includes(query)) return;
+    count++;
+    const tagHtml = item.tags.map(t => `<span class="tag-pill ${t}">${t.toUpperCase()}</span>`).join('');
+    const div = document.createElement('div');
+    div.className = 'faq-item';
+    div.innerHTML = `
+      <div class="faq-q" onclick="toggleFAQ(this)">
+        <span>${tagHtml}${item.q}</span>
+        <span class="faq-arrow">&#9660;</span>
+      </div>
+      <div class="faq-a">
+        <div class="faq-a-inner">${item.a}</div>
+      </div>`;
+    list.appendChild(div);
+  });
+  document.getElementById('count-label').textContent = `Showing ${count} of ${FAQ.length} questions`;
+  noRes.style.display = count === 0 ? 'block' : 'none';
+}
+
+function toggleFAQ(el){
+  const item = el.parentElement;
+  const ans  = item.querySelector('.faq-a');
+  const isOpen = item.classList.contains('open');
+  document.querySelectorAll('.faq-item.open').forEach(i => {
+    i.classList.remove('open');
+    i.querySelector('.faq-a').style.maxHeight = '0';
+  });
+  if(!isOpen){
+    item.classList.add('open');
+    ans.style.maxHeight = ans.scrollHeight + 48 + 'px';
+  }
+}
+
+filterFAQ();
+</script>
+</body>
+</html>
